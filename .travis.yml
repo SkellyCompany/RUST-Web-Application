@@ -1,0 +1,11 @@
+os:
+ - windows 
+ - osx
+language: csharp
+solution: RUSTWebApplication.sln
+mono: none
+dotnet: 2.2.0
+script:
+ - dotnet restore
+ - dotnet build
+ - dotnet test
