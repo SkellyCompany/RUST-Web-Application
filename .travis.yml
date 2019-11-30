@@ -1,6 +1,3 @@
-os:
- - windows 
- - osx
 language: csharp
 solution: RUSTWebApplication.sln
 mono: none
