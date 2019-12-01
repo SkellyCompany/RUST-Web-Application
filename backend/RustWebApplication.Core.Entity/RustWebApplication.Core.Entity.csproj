@@ -8,5 +8,6 @@
   <ItemGroup>
     <Folder Include="Product\" />
     <Folder Include="Order\" />
+    <Folder Include="Authentication\" />
   </ItemGroup>
 </Project>
