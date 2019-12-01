@@ -1,6 +1,4 @@
-@font-face{font-family:'ui-icons';src:url(https://unboxholics.com/theme/site/fonts/ui-icons.eot?44057230);src:url('https://unboxholics.com/theme/site/fonts/ui-icons.eot?44057230#iefix') format('embedded-opentype'),url(https://unboxholics.com/theme/site/fonts/ui-icons.woff2?44057230) format('woff2'),url(https://unboxholics.com/theme/site/fonts/ui-icons.woff?44057230) format('woff'),url(https://unboxholics.com/theme/site/fonts/ui-icons.ttf?44057230) format('truetype'),url('https://unboxholics.com/theme/site/fonts/ui-icons.svg?44057230#ui-icons') format('svg');font-weight:400;font-style:normal;}
-
-//Default
+/*! Default */
 
 header .flex-parent{
   -webkit-box-align:center;
@@ -101,14 +99,12 @@ header .flex-child{
   transition:all 0.3s ease-in-out;
 }
 .navigation-bar-dropdown>a:after{
-  content:'\f123';
   font-family:'ui-icons';
   margin-left:7px;
   font-size:10px;
   line-height:1;
 }
 .navigation-bar-dropdown .navigation-bar-dropdown>a:after{
-  content:'\e804';
   position:absolute;
   right:20px;
   top:50%;
@@ -116,7 +112,7 @@ header .flex-child{
   transform:translateY(-50%);
 }
 
-//Media
+/*! Media */
 
 @media all{
   .container{
@@ -224,6 +220,9 @@ header .flex-child{
     }
     .navigation-bar-dropdown .navigation-bar-dropdown{
       position:relative;
+    }
+    .navigation-bar-dropdown img{
+      padding: 10px 10px 0px 10px;
     }
   }
 }
