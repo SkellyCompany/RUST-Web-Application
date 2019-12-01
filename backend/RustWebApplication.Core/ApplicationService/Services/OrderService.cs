@@ -9,6 +9,7 @@ namespace RustWebApplication.Core.ApplicationService.Services
     {
         private readonly IOrderRepository _orderRepository;
 
+
         public OrderService(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
