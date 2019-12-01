@@ -7,4 +7,11 @@
   <ItemGroup>
     <Compile Remove="Class1.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DomainService\" />
+    <Folder Include="ApplicationService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RustWebApplication.Core.Entity\RustWebApplication.Core.Entity.csproj" />
+  </ItemGroup>
 </Project>
