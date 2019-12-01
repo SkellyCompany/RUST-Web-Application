@@ -9,6 +9,7 @@ namespace RustWebApplication.Core.ApplicationService.Services
     {
         private readonly IProductTypeRepository _productTypeRepository;
 
+
         public ProductTypeService(IProductTypeRepository productTypeRepository)
         {
             _productTypeRepository = productTypeRepository;
