@@ -1,10 +1,9 @@
-﻿using System;
-using RustWebApplication.Core.Entity;
+﻿using RUSTWebApplication.Core.Entity.Authentication;
 
-namespace RustWebApplication.Core.ApplicationService
+namespace RUSTWebApplication.Core.ApplicationService
 {
-    public interface IUserService
-    {
-        User ValidateUser(LoginInputModel loginInput);
-    }
+	public interface IUserService
+	{
+		User ValidateUser(LoginInputModel loginInput);
+	}
 }

@@ -1,10 +1,9 @@
-﻿using System;
-namespace RustWebApplication.Core.Entity
+﻿namespace RUSTWebApplication.Core.Entity.Product
 {
-    public class ProductSize
-    {
-        public int Id { get; set; }
-        public ProductType ProductType { get; set; }
-        public string Size { get; set; }
-    }
+	public class ProductSize
+	{
+		public int Id { get; set; }
+		public ProductType ProductType { get; set; }
+		public string Size { get; set; }
+	}
 }

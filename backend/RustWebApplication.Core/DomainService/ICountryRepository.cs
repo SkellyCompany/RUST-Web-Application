@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using RustWebApplication.Core.Entity;
+﻿using System.Collections.Generic;
+using RUSTWebApplication.Core.Entity.Order;
 
-namespace RustWebApplication.Core.DomainService
+namespace RUSTWebApplication.Core.DomainService
 {
-    public interface ICountryRepository
-    {
-        Country Create(Country newCountry);
+	public interface ICountryRepository
+	{
+		Country Create(Country newCountry);
 
-        Country Read(int countryId);
+		Country Read(int countryId);
 
-        IEnumerable<Country> ReadAll();
+		IEnumerable<Country> ReadAll();
 
-        Country Update(Country updatedCountry);
+		Country Update(Country updatedCountry);
 
-        Country Delete(int countryId);
-
-    }
+		Country Delete(int countryId);
+	}
 }

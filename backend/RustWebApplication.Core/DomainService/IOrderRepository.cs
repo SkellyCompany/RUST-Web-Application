@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using RustWebApplication.Core.Entity;
+﻿using System.Collections.Generic;
+using RUSTWebApplication.Core.Entity.Order;
 
-namespace RustWebApplication.Core.DomainService
+namespace RUSTWebApplication.Core.DomainService
 {
-    public interface IOrderRepository
-    {
-        Order Create(Order newOrder);
+	public interface IOrderRepository
+	{
+		Order Create(Order newOrder);
 
-        Order Read(int orderId);
+		Order Read(int orderId);
 
-        IEnumerable<Order> ReadAll();
+		IEnumerable<Order> ReadAll();
 
-        Order Update(Order updatedOrder);
+		Order Update(Order updatedOrder);
 
-        Order Delete(int orderId);
-    }
+		Order Delete(int orderId);
+	}
 }

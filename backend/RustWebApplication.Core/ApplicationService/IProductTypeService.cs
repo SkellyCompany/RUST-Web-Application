@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using RustWebApplication.Core.Entity;
+﻿using System.Collections.Generic;
+using RUSTWebApplication.Core.Entity.Product
 
-namespace RustWebApplication.Core.ApplicationService
+namespace RUSTWebApplication.Core.ApplicationService
 {
-    public interface IProductTypeService
-    {
-        ProductType Create(ProductType newProductType);
+	public interface IProductTypeService
+	{
+		ProductType Create(ProductType newProductType);
 
-        ProductType Read(int productTypeId);
+		ProductType Read(int productTypeId);
 
-        List<ProductType> ReadAll();
+		List<ProductType> ReadAll();
 
-        ProductType Update(ProductType updatedProductType);
+		ProductType Update(ProductType updatedProductType);
 
-        ProductType Delete(int productTypeId);
-    }
+		ProductType Delete(int productTypeId);
+	}
 }

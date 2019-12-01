@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using RustWebApplication.Core.Entity;
+﻿using System.Collections.Generic;
+using RUSTWebApplication.Core.Entity.Product;
 
-namespace RustWebApplication.Core.ApplicationService
+namespace RUSTWebApplication.Core.ApplicationService
 {
-    public interface IProductSizeService
-    {
-        ProductSize Create(ProductSize newProductSize);
+	public interface IProductSizeService
+	{
+		ProductSize Create(ProductSize newProductSize);
 
-        ProductSize Read(int productSizeId);
+		ProductSize Read(int productSizeId);
 
-        List<ProductSize> ReadAll();
+		List<ProductSize> ReadAll();
 
-        ProductSize Update(ProductSize updatedProductSize);
+		ProductSize Update(ProductSize updatedProductSize);
 
-        ProductSize Delete(int productSizeId);
-    }
+		ProductSize Delete(int productSizeId);
+	}
 }

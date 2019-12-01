@@ -1,9 +1,8 @@
-﻿using System;
-namespace RustWebApplication.Core.Entity
+﻿namespace RUSTWebApplication.Core.Entity.Order
 {
-    public class Country
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+	public class Country
+	{
+		public int Id { get; set; }
+		public string Name { get; set; }
+	}
 }

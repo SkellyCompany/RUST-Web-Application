@@ -1,8 +1,6 @@
-﻿using System;
-namespace RustWebApplication.Core.Entity
+﻿namespace RUSTWebApplication.Core.Entity.Authentication
 {
-    public class LoginInputModel
-    {
-        
-    }
+	public class LoginInputModel
+	{
+	}
 }

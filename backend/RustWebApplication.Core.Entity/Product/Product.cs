@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace RustWebApplication.Core.Entity
+namespace RUSTWebApplication.Core.Entity.Product
 {
-    public class Product
-    {
-        public int Id { get; set; }
-        public ProductModel ProductModel { get; set; }
-        public List<ProductStock> ProductStocks { get; set; }
-        public string Color { get; set; }
-    }
+	public class Product
+	{
+		public int Id { get; set; }
+		public ProductModel ProductModel { get; set; }
+		public List<ProductStock> ProductStocks { get; set; }
+		public string Color { get; set; }
+	}
 }

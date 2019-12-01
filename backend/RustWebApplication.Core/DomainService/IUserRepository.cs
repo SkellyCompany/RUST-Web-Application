@@ -1,10 +1,9 @@
-﻿using System;
-using RustWebApplication.Core.Entity;
+﻿using RUSTWebApplication.Core.Entity.Authentication;
 
-namespace RustWebApplication.Core.DomainService
+namespace RUSTWebApplication.Core.DomainService
 {
-    public interface IUserRepository
-    {
-        User Read(string username);
-    }
+	public interface IUserRepository
+	{
+		User Read(string username);
+	}
 }
