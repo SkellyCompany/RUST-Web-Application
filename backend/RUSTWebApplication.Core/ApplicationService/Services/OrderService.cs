@@ -21,11 +21,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             return _orderRepository.Create(newOrder);
         }
 
-		public Order Delete(int orderId)
-        {
-            return _orderRepository.Delete(orderId);
-        }
-
 		public Order Read(int orderId)
         {
             return _orderRepository.Read(orderId);
@@ -40,5 +35,10 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _orderRepository.Update(updatedOrder);
         }
-	}
+
+        public Order Delete(int orderId)
+        {
+            return _orderRepository.Delete(orderId);
+        }
+    }
 }

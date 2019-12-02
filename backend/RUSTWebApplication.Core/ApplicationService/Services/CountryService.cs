@@ -21,11 +21,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             return _countryRepository.Create(newCountry);
         }
 
-        public Country Delete(int countryId)
-        {
-            return _countryRepository.Delete(countryId);
-        }
-
         public Country Read(int countryId)
         {
             return _countryRepository.Read(countryId);
@@ -39,6 +34,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         public Country Update(Country updatedCountry)
         {
             return _countryRepository.Update(updatedCountry);
+        }
+
+        public Country Delete(int countryId)
+        {
+            return _countryRepository.Delete(countryId);
         }
 
     }
