@@ -39,10 +39,5 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 		{
 			throw new NotImplementedException();
 		}
-
-		List<Country> ICountryService.ReadAll()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
