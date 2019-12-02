@@ -36,8 +36,9 @@ header .flex-child{
 .navigation-bar{
   display:block;
   min-height:60px;
-  z-index:120;
-  position:relative;
+  width: 100%;
+  z-index:1200;
+  position:fixed;
   -webkit-transition:height 0.3s ease-in-out;
   transition:height 0.3s ease-in-out;
 }
@@ -53,6 +54,7 @@ header .flex-child{
 .navigation-bar-menu,.navigation-bar-dropdown-menu{
   cursor: pointer;
   list-style:none;
+  z-index: 1400;
 }
 .navigation-bar-menu{
   position:relative;
@@ -226,3 +228,4 @@ header .flex-child{
     }
   }
 }
+
