@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using RUSTWebApplication.Core.Entity.Product
+using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.Core.ApplicationService
 {
