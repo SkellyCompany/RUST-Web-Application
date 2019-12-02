@@ -2,7 +2,7 @@
 //Parallax
 .parallax{
   background-image: url("https://images.wallpaperscraft.com/image/skateboard_skateboarder_hobby_116485_1920x1080.jpg");
-  min-height: 1000px; 
+  min-height: 1100px; 
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -27,6 +27,12 @@
 }
 
 //General
+.content-inner{
+  background-color:#fff;
+  max-width:960px;
+  margin:0 auto;
+  padding:100px 8%;
+}
 .content-row:before,.content-row:after{
   content:"";
   display:table;
@@ -119,15 +125,7 @@
   text-align:left;
   line-height:0px!important;
 }
-.content-inner .title-desc-wrapper{
-  display:none;
-}
-.content-inner{
-  background-color:#fff;
-  max-width:960px;
-  margin:0 auto;
-  padding:100px 8%;
-}
+
 p{
   font-family:'BrownStd-Light'!important;
   font-size:16px!important;
@@ -146,9 +144,9 @@ p{
   align-items: center;
   text-align: center;
   display:inline-block;
-  background:#fff;
+  background:#000;
   border-radius:50%;
-  border:2px solid #fff;
+  border:2px solid #000;
   padding-right: 38%;
   padding-left: 38%;
 }
@@ -157,11 +155,20 @@ p{
   align-items: center;
   text-align: center;
   display:inline-block;
-  background:#fff;
+  background:#000;
   border-radius:50%;
-  border:2px solid #fff;
+  border:2px solid #000;
   padding-right: 5%;
   padding-left: 5%;
+}
+.content-outer, .dark{
+  background-color:#000;
+}
+.h1, .dark{
+  color:#fff !important;
+}
+.p, .dark{
+  color:#fff !important;
 }
 
 //Contact
