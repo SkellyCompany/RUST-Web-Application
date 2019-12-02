@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -16,28 +17,28 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 		}
 
 		public ProductSize Create(ProductSize newProductSize)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _productSizeRepository.Create(newProductSize);
+        }
 
 		public ProductSize Delete(int productSizeId)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _productSizeRepository.Delete(productSizeId);
+        }
 
 		public ProductSize Read(int productSizeId)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _productSizeRepository.Read(productSizeId);
+        }
 
 		public List<ProductSize> ReadAll()
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _productSizeRepository.ReadAll().ToList();
+        }
 
 		public ProductSize Update(ProductSize updatedProductSize)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _productSizeRepository.Update(updatedProductSize);
+        }
 	}
 }

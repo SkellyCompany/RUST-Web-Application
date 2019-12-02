@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RUSTWebApplication.Core.Entity.Order;
 using RUSTWebApplication.Core.DomainService;
 
@@ -16,28 +17,28 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 		}
 
 		public Order Create(Order newOrder)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _orderRepository.Create(newOrder);
+        }
 
 		public Order Delete(int orderId)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _orderRepository.Delete(orderId);
+        }
 
 		public Order Read(int orderId)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _orderRepository.Read(orderId);
+        }
 
 		public List<Order> ReadAll()
 		{
-			throw new NotImplementedException();
-		}
+			return _orderRepository.ReadAll().ToList();
+        }
 
 		public Order Update(Order updatedOrder)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return _orderRepository.Update(updatedOrder);
+        }
 	}
 }
