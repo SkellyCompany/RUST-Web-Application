@@ -36,14 +36,15 @@ header .flex-child{
 .navigation-bar{
   display:block;
   min-height:60px;
-  z-index:120;
-  position:relative;
+  width: 100%;
+  z-index:1200;
+  position:fixed;
   -webkit-transition:height 0.3s ease-in-out;
   transition:height 0.3s ease-in-out;
 }
 .navigation-bar-holder{
   min-height:20px;
-  background-color:#fff;
+  background-color:#000;
   -webkit-box-shadow:0 2px 10px rgba(0,0,0,.1);
   box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
@@ -53,6 +54,7 @@ header .flex-child{
 .navigation-bar-menu,.navigation-bar-dropdown-menu{
   cursor: pointer;
   list-style:none;
+  z-index: 1400;
 }
 .navigation-bar-menu{
   position:relative;
@@ -71,7 +73,7 @@ header .flex-child{
 }
 .navigation-bar-menu>li>a{
   font-family:"Source Sans Pro",sans-serif;
-  color:#000;
+  color:#fff;
   font-size:18px;
   font-weight:700;
   text-transform:uppercase;
@@ -81,7 +83,7 @@ header .flex-child{
   line-height:80px;
 }
 .navigation-bar-menu>li>a:hover{
-  color:#000;
+  color:#fff;
   text-decoration:none;
 }
 .navigation-bar-menu>li>a:before{
@@ -94,7 +96,7 @@ header .flex-child{
   left:0;
   right:0;
   margin:0 auto;
-  background-color:#000;
+  background-color:#fff;
   -webkit-transition:all 0.3s ease-in-out;
   transition:all 0.3s ease-in-out;
 }
@@ -191,7 +193,7 @@ header .flex-child{
       text-align:left;
       list-style:none;
       white-space:nowrap;
-      background-color:#fff;
+      background-color:#000;
       -webkit-box-shadow:0 8  px 20px rgba(0,0,0,.1);
       box-shadow:0 8px 20px rgba(0,0,0,.1);
       background-clip:padding-box;
@@ -202,12 +204,12 @@ header .flex-child{
       transition:all 0.1s ease-in-out;
     }
     .navigation-bar-dropdown-menu>li>a{
-      color:#54555E;padding:8px 22px;
+      color:#E5E5E5;padding:8px 22px;
       font-size:14px;
       display:block;
     }
     .navigation-bar-dropdown-menu>li>a:hover{
-      color:#000;
+      color:#fff;
       font-weight: 600;
     }
     .navigation-bar-dropdown:hover>.navigation-bar-dropdown-menu{
@@ -226,3 +228,4 @@ header .flex-child{
     }
   }
 }
+

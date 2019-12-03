@@ -155,11 +155,7 @@ namespace RUSTWebApplication.UnitTests.Core
         public void Update_CountryValid_ReturnsUpdatedCountry()
         {
             //Arrange
-            Country validCountry = new Country
-            {
-                Id = 4,
-                Name = "Poland"
-            };
+            Country validCountry = new Country{Id = 4, Name = "Poland" };
             Country expected = validCountry;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -197,11 +193,7 @@ namespace RUSTWebApplication.UnitTests.Core
         public void Update_NonExistingId_ReturnsNull()
         {
             //Arrange
-            Country nonExistingCountry = new Country
-            {
-                Id = 4,
-                Name = "Greece"
-            };
+            Country nonExistingCountry = new Country{ Id = 4, Name = "Greece" };
             Country expected = null;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -221,11 +213,7 @@ namespace RUSTWebApplication.UnitTests.Core
         public void Update_NameNull_ThrowsArgumentException()
         {
             //Arrange
-            Country invalidCountry = new Country
-            {
-                Id = 4,
-                Name = null
-            };
+            Country invalidCountry = new Country{ Id = 4, Name = null };
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
 
@@ -242,11 +230,7 @@ namespace RUSTWebApplication.UnitTests.Core
         public void Update_NameEmpty_ThrowsArgumentException()
         {
             //Arrange
-            Country invalidCountry = new Country
-            {
-                Id = 4,
-                Name = ""
-            };
+            Country invalidCountry = new Country{Id = 4, Name = "" };
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
 
