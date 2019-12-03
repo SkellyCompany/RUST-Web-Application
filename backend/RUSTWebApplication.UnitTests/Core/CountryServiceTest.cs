@@ -12,7 +12,7 @@ namespace RUSTWebApplication.UnitTests.Core
     {
 
         [Fact]
-        public void Create_InputValid_ReturnsCreatedCountryWithId()
+        public void Create_CountryValid_ReturnsCreatedCountryWithId()
         {
             //Arange
             Country validCountry = new Country { Name = "Netherlands" };
@@ -109,6 +109,191 @@ namespace RUSTWebApplication.UnitTests.Core
 
             //Assert
             Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Read_ExistingId_ReturnsCountryWithSpecifiedId()
+        {
+            //Arrange
+            int existingId = 12;
+            Country expected = new Country { Id = existingId, Name = "Denmark" };
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+            countryRepository.Setup(repo => repo.Read(existingId)).
+                Returns(expected);
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Country actual = countryService.Read(existingId);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Read_NonExistingId_ReturnsNull()
+        {
+            //Arrange
+            int nonExistingId = 12;
+            Country expected = null;
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+            countryRepository.Setup(repo => repo.Read(nonExistingId)).
+                Returns(expected);
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Country actual = countryService.Read(nonExistingId);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Update_CountryValid_ReturnsUpdatedCountry()
+        {
+            //Arrange
+            Country validCountry = new Country
+            {
+                Id = 4,
+                Name = "Poland"
+            };
+            Country expected = validCountry;
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+            countryRepository.Setup(repo => repo.Read(4)).
+                Returns(validCountry);
+            countryRepository.Setup(repo => repo.Update(validCountry)).
+                Returns(expected);
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Country actual = countryService.Update(validCountry);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Update_CountryNull_ThrowsArgumentNullException()
+        {
+            //Arrange
+            Country invalidCountry = null;
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Action actual = () => countryService.Update(invalidCountry);
+
+            //Assert
+            Assert.Throws<ArgumentNullException>(actual);
+        }
+
+        [Fact]
+        public void Update_NonExistingId_ThrowsArgumentException()
+        {
+            Country nonExistingCountry = new Country
+            {
+                Id = 4,
+                Name = "Greece"
+            };
+            Country nullCountry = null;
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+            countryRepository.Setup(repo => repo.Read(4)).
+                Returns(nullCountry);
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Action actual = () => countryService.Update(nonExistingCountry);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Update_NameNull_ThrowsArgumentException()
+        {
+            Country invalidCountry = new Country
+            {
+                Id = 4,
+                Name = null
+            };
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Action actual = () => countryService.Update(invalidCountry);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Update_NameEmpty_ThrowsArgumentException()
+        {
+            Country invalidCountry = new Country
+            {
+                Id = 4,
+                Name = ""
+            };
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Action actual = () => countryService.Update(invalidCountry);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Delete_ExistingId_ReturnsDeletedCountryWithSpecifiedId()
+        {
+            //Arrange
+            int existingId = 12;
+            Country expected = new Country { Id = existingId, Name = "Denmark" };
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+            countryRepository.Setup(repo => repo.Delete(existingId)).
+                Returns(expected);
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Country actual = countryService.Delete(existingId);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Delete_NonExistingId_ReturnsNull()
+        {
+            //Arrange
+            int nonExistingId = 12;
+            Country expected = null;
+
+            Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
+            countryRepository.Setup(repo => repo.Delete(nonExistingId)).
+                Returns(expected);
+
+            ICountryService countryService = new CountryService(countryRepository.Object);
+
+            //Act
+            Country actual = countryService.Delete(nonExistingId);
+
+            //Assert
+            Assert.Equal(expected, actual);
         }
     }
 }
