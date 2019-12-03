@@ -99,7 +99,7 @@ namespace RUSTWebApplication.UnitTests.Core
         {
             //Arrange
             int existingId = 12;
-            ProductType expected = new ProductType { Id = existingId, Name = "Accesories" };
+            ProductType expected = new ProductType { Id = existingId, Name = "Accessories" };
 
             Mock<IProductTypeRepository> productTypeRepository = new Mock<IProductTypeRepository>();
             productTypeRepository.Setup(repo => repo.Read(existingId)).
@@ -138,7 +138,7 @@ namespace RUSTWebApplication.UnitTests.Core
         public void Update_ProductTypeValid_ReturnsUpdatedProductType()
         {
             //Arrange
-            ProductType validProductType = new ProductType { Id = 4, Name = "Accesories" };
+            ProductType validProductType = new ProductType { Id = 4, Name = "Accessories" };
 
             ProductType expected = validProductType;
 
