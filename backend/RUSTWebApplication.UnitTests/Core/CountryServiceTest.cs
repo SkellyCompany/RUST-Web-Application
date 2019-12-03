@@ -14,7 +14,7 @@ namespace RUSTWebApplication.UnitTests.Core
         [Fact]
         public void Create_CountryValid_ReturnsCreatedCountryWithId()
         {
-            //Arange
+            //Arrange
             Country validCountry = new Country { Name = "Netherlands" };
             Country expected = new Country { Id = 1, Name = validCountry.Name };
 
@@ -34,7 +34,7 @@ namespace RUSTWebApplication.UnitTests.Core
         [Fact]
         public void Create_IdSpecified_ThrowsArgumentException()
         {
-            //Arange
+            //Arrange
             Country invalidCountry = new Country { Id = 1, Name = "Netherlands" };
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -50,7 +50,7 @@ namespace RUSTWebApplication.UnitTests.Core
         [Fact]
         public void Create_CountryNull_ThrowsArgumentNullException()
         {
-            //Arange
+            //Arrange
             Country invalidCountry = null;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -66,7 +66,7 @@ namespace RUSTWebApplication.UnitTests.Core
         [Fact]
         public void Create_NameNull_ThrowsArgumentException()
         {
-            //Arange
+            //Arrange
             Country invalidCountry = new Country { };
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -82,7 +82,7 @@ namespace RUSTWebApplication.UnitTests.Core
         [Fact]
         public void Create_NameEmpty_ThrowsArgumentException()
         {
-            //Arange
+            //Arrange
             Country invalidCountry = new Country { Name = ""};
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -98,7 +98,7 @@ namespace RUSTWebApplication.UnitTests.Core
         [Fact]
         public void Create_NameLowerCased_ThrowsArgumentException()
         {
-            //Arange
+            //Arrange
             Country invalidCountry = new Country { Name = "netherlands" };
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -190,27 +190,29 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_NonExistingId_ThrowsArgumentException()
+        public void Update_NonExistingId_ReturnsNull()
         {
+            //Arrange
             Country nonExistingCountry = new Country{ Id = 4, Name = "Greece" };
-            Country nullCountry = null;
+            Country expected = null;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
             countryRepository.Setup(repo => repo.Read(4)).
-                Returns(nullCountry);
+                Returns(expected);
 
             ICountryService countryService = new CountryService(countryRepository.Object);
 
             //Act
-            Action actual = () => countryService.Update(nonExistingCountry);
+            Country actual = countryService.Update(nonExistingCountry);
 
             //Assert
-            Assert.Throws<ArgumentException>(actual);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void Update_NameNull_ThrowsArgumentException()
         {
+            //Arrange
             Country invalidCountry = new Country{ Id = 4, Name = null };
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
@@ -227,6 +229,7 @@ namespace RUSTWebApplication.UnitTests.Core
         [Fact]
         public void Update_NameEmpty_ThrowsArgumentException()
         {
+            //Arrange
             Country invalidCountry = new Country{Id = 4, Name = "" };
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
