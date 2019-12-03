@@ -7,6 +7,7 @@ import { NavigationBarComponent } from './shared/navigation-bar/navigation-bar.c
 import { FooterComponent } from './shared/footer/footer.component';
 import { VisionComponent } from './main/vision/vision.component';
 import { ProductListComponent } from './main/shop/product-list/product-list.component';
+import { ProductDetailsComponent } from './main/shop/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ProductListComponent } from './main/shop/product-list/product-list.comp
     NavigationBarComponent,
     FooterComponent,
     VisionComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
