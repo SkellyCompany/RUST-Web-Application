@@ -1,6 +1,6 @@
 ﻿namespace RUSTWebApplication.Core.Entity.Product
 {
-	public class ProductType
+	public class ProductCategory
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

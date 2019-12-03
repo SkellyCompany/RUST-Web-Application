@@ -4,29 +4,29 @@ using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.Infrastructure.Repositories
 {
-    public class ProductTypeRepository: IProductTypeRepository
+    public class ProductCategoryRepository: IProductCategoryRepository
     {
-        public ProductType Create(ProductType newProductType)
+        public ProductCategory Create(ProductCategory newProductCategory)
         {
             throw new System.NotImplementedException();
         }
 
-        public ProductType Read(int productTypeId)
+        public ProductCategory Read(int productCategoryId)
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<ProductType> ReadAll()
+        public IEnumerable<ProductCategory> ReadAll()
         {
             throw new System.NotImplementedException();
         }
 
-        public ProductType Update(ProductType updatedProductType)
+        public ProductCategory Update(ProductCategory updatedProductCategory)
         {
             throw new System.NotImplementedException();
         }
 
-        public ProductType Delete(int productTypeId)
+        public ProductCategory Delete(int productCategoryId)
         {
             throw new System.NotImplementedException();
         }
