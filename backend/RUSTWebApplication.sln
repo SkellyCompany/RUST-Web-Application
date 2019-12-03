@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUSTWebApplication.Infrastr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUSTWebApplication.UI.RestAPI", "RUSTWebApplication.UI.RestAPI\RUSTWebApplication.UI.RestAPI.csproj", "{D9E07E00-22FF-450E-9F48-F120ED1E394D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RUSTWebApplication.UnitTests", "RUSTWebApplication.UnitTests\RUSTWebApplication.UnitTests.csproj", "{189104AB-5042-4F3A-A19C-1C9B6E51D45C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{D9E07E00-22FF-450E-9F48-F120ED1E394D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9E07E00-22FF-450E-9F48-F120ED1E394D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9E07E00-22FF-450E-9F48-F120ED1E394D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189104AB-5042-4F3A-A19C-1C9B6E51D45C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189104AB-5042-4F3A-A19C-1C9B6E51D45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189104AB-5042-4F3A-A19C-1C9B6E51D45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189104AB-5042-4F3A-A19C-1C9B6E51D45C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{A0854A2F-0377-4EF9-88C9-07DC68D96870} = {63708FFA-404C-47B9-A53D-15C5C761E32A}
 		{39E8040E-26AC-4C92-B88A-BCA97F61B82B} = {C146DC69-AB86-4C8F-98D4-C6A7F1E1AF50}
 		{D9E07E00-22FF-450E-9F48-F120ED1E394D} = {EBDBF2C7-E398-4EB0-8FEE-5F629F7EC5E3}
+		{189104AB-5042-4F3A-A19C-1C9B6E51D45C} = {D10BEC94-B2F9-4F44-9130-5BF7EAB8836B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {459A7837-0B64-4C86-B8DF-9E92CC9A201F}

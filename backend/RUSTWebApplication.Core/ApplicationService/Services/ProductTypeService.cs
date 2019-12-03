@@ -21,11 +21,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             return _productTypeRepository.Create(newProductType);
         }
 
-		public ProductType Delete(int productTypeId)
-        {
-            return _productTypeRepository.Delete(productTypeId);
-        }
-
 		public ProductType Read(int productTypeId)
         {
             return _productTypeRepository.Read(productTypeId);
@@ -40,5 +35,10 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productTypeRepository.Update(updatedProductType);
         }
-	}
+
+        public ProductType Delete(int productTypeId)
+        {
+            return _productTypeRepository.Delete(productTypeId);
+        }
+    }
 }

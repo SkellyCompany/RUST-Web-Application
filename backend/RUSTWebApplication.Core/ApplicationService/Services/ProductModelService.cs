@@ -21,11 +21,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             return _productModelRepository.Create(newProductModel);
         }
 
-		public ProductModel Delete(int productModelId)
-        {
-            return _productModelRepository.Delete(productModelId);
-        }
-
 		public ProductModel Read(int productModelId)
         {
             return _productModelRepository.Read(productModelId);
@@ -40,5 +35,10 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productModelRepository.Update(updatedProductModel);
         }
-	}
+
+        public ProductModel Delete(int productModelId)
+        {
+            return _productModelRepository.Delete(productModelId);
+        }
+    }
 }
