@@ -243,7 +243,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Read_ExistingId_ReturnsCountryWithSpecifiedId()
+        public void Read_ExistingId_ReturnsProductSizeWithSpecifiedId()
         {
             //Arrange
             int existingId = 12;
@@ -303,8 +303,8 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductStock validProductStock = new ProductStock
             {
                 Id = 10,
-                Product = new Product { Id = 5 },
-                ProductSize = new ProductSize { Id = 3 },
+                Product = null,
+                ProductSize = null,
                 Quantity = 120
             };
             ProductStock expected = validProductStock;
@@ -359,8 +359,8 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductStock nonExistingProductStock = new ProductStock
             {
                 Id = 10,
-                Product = new Product { Id = 5 },
-                ProductSize = new ProductSize { Id = 3 },
+                Product = null,
+                ProductSize = null,
                 Quantity = 120
             };
 
@@ -370,11 +370,7 @@ namespace RUSTWebApplication.UnitTests.Core
             productStockRepository.Setup(repo => repo.Read(nonExistingProductStock.Id)).
                 Returns(expected);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
-                Returns(nonExistingProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
-                Returns(nonExistingProductStock.ProductSize);
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
                 productSizeRepository.Object);
@@ -387,14 +383,14 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_ProductNull_ThrowsArgumentException()
+        public void Update_ProductNotNull_ThrowsArgumentException()
         {
             //Arrange
             ProductStock invalidProductStock = new ProductStock
             {
                 Id = 5,
-                Product = null,
-                ProductSize = new ProductSize { Id = 3 },
+                Product = new Product { Id = 3 },
+                ProductSize = null,
                 Quantity = 120
             };
 
@@ -403,42 +399,6 @@ namespace RUSTWebApplication.UnitTests.Core
                 Returns(invalidProductStock);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
-                Returns(invalidProductStock.ProductSize);
-            IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
-                productRepository.Object,
-                productSizeRepository.Object);
-
-            //Act
-            Action actual = () => productStockService.Update(invalidProductStock);
-
-            //Assert
-            Assert.Throws<ArgumentException>(actual);
-        }
-
-        [Fact]
-        public void Update_NonExistingProduct_ThrowsArgumentException()
-        {
-            //Arrange
-            ProductStock invalidProductStock = new ProductStock
-            {
-                Id = 5,
-                Product = new Product { Id = 5 },
-                ProductSize = new ProductSize { Id = 3 },
-                Quantity = 120
-            };
-
-            Product nullProduct = null;
-
-            Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
-            productStockRepository.Setup(repo => repo.Read(invalidProductStock.Id)).
-                Returns(invalidProductStock);
-            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
-                Returns(nullProduct);
-            Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
-                Returns(invalidProductStock.ProductSize);
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
                 productSizeRepository.Object);
@@ -478,14 +438,14 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_ProductSizeNull_ThrowsArgumentException()
+        public void Update_ProductSizeNotNull_ThrowsArgumentException()
         {
             //Arrange
             ProductStock invalidProductStock = new ProductStock
             {
                 Id = 5,
-                Product = new Product { Id = 5 },
-                ProductSize = null,
+                Product = null,
+                ProductSize = new ProductSize { Id = 5 },
                 Quantity = 120
             };
 
@@ -493,8 +453,6 @@ namespace RUSTWebApplication.UnitTests.Core
             productStockRepository.Setup(repo => repo.Read(invalidProductStock.Id)).
                 Returns(invalidProductStock);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
-                Returns(invalidProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
@@ -507,39 +465,58 @@ namespace RUSTWebApplication.UnitTests.Core
             Assert.Throws<ArgumentException>(actual);
         }
 
-
         [Fact]
-        public void Update_NonExistingProductSize_ThrowsArgumentException()
+        public void Delete_ExistingId_ReturnsDeletedProductStockWithSpecifiedId()
         {
             //Arrange
-            ProductStock invalidProductStock = new ProductStock
+            int existingId = 12;
+            ProductStock expected = new ProductStock
             {
-                Id = 5,
+                Id = existingId,
                 Product = new Product { Id = 5 },
                 ProductSize = new ProductSize { Id = 3 },
-                Quantity = 120
+                Quantity = 94
             };
 
-            ProductSize nullProductSize = null;
-
             Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
-            productStockRepository.Setup(repo => repo.Read(invalidProductStock.Id)).
-                Returns(invalidProductStock);
+            productStockRepository.Setup(repo => repo.Delete(existingId)).
+                Returns(expected);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
-                Returns(invalidProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
-                Returns(nullProductSize);
+
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
                 productSizeRepository.Object);
 
             //Act
-            Action actual = () => productStockService.Update(invalidProductStock);
+            ProductStock actual = productStockService.Delete(existingId);
 
             //Assert
-            Assert.Throws<ArgumentException>(actual);
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Delete_NonExistingId_ReturnsNull()
+        {
+            //Arrange
+            int nonExistingId = 12;
+            ProductStock expected = null;
+
+            Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
+            productStockRepository.Setup(repo => repo.Delete(nonExistingId)).
+                Returns(expected);
+            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
+            Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
+
+            IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
+                productRepository.Object,
+                productSizeRepository.Object);
+
+            //Act
+            ProductStock actual = productStockService.Delete(nonExistingId);
+
+            //Assert
+            Assert.Equal(expected, actual);
         }
 
     }
