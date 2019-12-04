@@ -9,11 +9,14 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 	public class ProductModelService : IProductModelService
 	{
 		private readonly IProductModelRepository _productModelRepository;
+        private readonly IProductCategoryRepository _productCategoryRepository;
 
 
-		public ProductModelService(IProductModelRepository productModelRepository)
+        public ProductModelService(IProductModelRepository productModelRepository,
+            IProductCategoryRepository productCategoryRepository)
 		{
 			_productModelRepository = productModelRepository;
+            _productCategoryRepository = productCategoryRepository;
 		}
 
 		public ProductModel Create(ProductModel newProductModel)

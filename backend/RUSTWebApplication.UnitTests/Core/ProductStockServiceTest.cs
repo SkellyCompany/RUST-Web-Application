@@ -359,11 +359,11 @@ namespace RUSTWebApplication.UnitTests.Core
                 Quantity = 120
             };
 
-            ProductStock productStockNotFound = null;
+            ProductStock nullProductStock = null;
 
             Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
             productStockRepository.Setup(repo => repo.Read(nonExistingProductStock.Id)).
-                Returns(productStockNotFound);
+                Returns(nullProductStock);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,

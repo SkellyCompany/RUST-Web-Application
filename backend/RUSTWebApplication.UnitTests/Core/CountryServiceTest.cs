@@ -194,11 +194,11 @@ namespace RUSTWebApplication.UnitTests.Core
         {
             //Arrange
             Country nonExistingCountry = new Country{ Id = 4, Name = "Greece" };
-            Country countryNotFound = null;
+            Country nullProductCategory = null;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
             countryRepository.Setup(repo => repo.Read(4)).
-                Returns(countryNotFound);
+                Returns(nullProductCategory);
 
             ICountryService countryService = new CountryService(countryRepository.Object);
 
