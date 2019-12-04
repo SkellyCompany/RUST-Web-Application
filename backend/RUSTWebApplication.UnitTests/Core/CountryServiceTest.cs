@@ -190,7 +190,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_NonExistingId_ReturnsNull()
+        public void Update_NonExistingId_ThrowsArgumentException()
         {
             //Arrange
             Country nonExistingCountry = new Country{ Id = 4, Name = "Greece" };
@@ -203,10 +203,10 @@ namespace RUSTWebApplication.UnitTests.Core
             ICountryService countryService = new CountryService(countryRepository.Object);
 
             //Act
-            Country actual = countryService.Update(nonExistingCountry);
+            Action actual = () => countryService.Update(nonExistingCountry);
 
             //Assert
-            Assert.Equal(expected, actual);
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]
