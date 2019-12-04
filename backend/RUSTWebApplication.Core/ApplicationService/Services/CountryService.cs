@@ -45,45 +45,45 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             return _countryRepository.Delete(countryId);
         }
 
-        /*   private void ValidateCountryId(int countryId)
-           {
-                if (countryId < 1)
-                {
-                    throw new InvalidDataException("ID must be over zero.");
-                } 
-
-            } */
-
         private void ValidateCountryName(Country country)
         {
             if (string.IsNullOrEmpty(country.Name))
             {
-                throw new InvalidDataException("You need to specify a name for the Country.");
+                throw new ArgumentException("You need to specify a name for the Country.");
             }
 
-            if (char.IsUpper(country.Name[0]))
+            if (!char.IsUpper(country.Name[0]))
             {
-                throw new InvalidDataContractException("The countries name must start with an uppercase letter.");
+                throw new ArgumentException("The countries name must start with an uppercase letter.");
             }
         }
 
         private void ValidateCreateCountry(Country country)
         {
+            ValidateCountry(country);
             if (country.Id != default)
             {
-                throw new InvalidDataException("You are not allowed to specify an ID when creating a country.");
+                throw new ArgumentException("You are not allowed to specify an ID when creating a country.");
             }
             ValidateCountryName(country);
         }
 
         private void ValidateUpdateCountry(Country country)
         {
+            ValidateCountry(country);
             if (_countryRepository.Read(country.Id) == null)
             {
-                throw new InvalidDataException($"Cannot find a country with an ID: {country.Id}");
+                throw new ArgumentException($"Cannot find a country with an ID: {country.Id}");
             }
             ValidateCountryName(country);
         }
 
+        private void ValidateCountry(Country country)
+        {
+            if (country == null)
+            {
+                throw new ArgumentNullException("Country is null");
+            }
+        }
     }
 }
