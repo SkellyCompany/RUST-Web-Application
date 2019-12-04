@@ -50,7 +50,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(country);
             if (country.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a country.");
+                throw new ArgumentException("You are not allowed to specify an ID when creating a Country.");
             }
             ValidateName(country);
         }
@@ -58,11 +58,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         private void ValidateUpdate(Country country)
         {
             ValidateNull(country);
+            ValidateName(country);
             if (_countryRepository.Read(country.Id) == null)
             {
-                throw new ArgumentException($"Cannot find a country with an ID: {country.Id}");
+                throw new ArgumentException($"Cannot find a Country with an ID: {country.Id}");
             }
-            ValidateName(country);
         }
         
         
@@ -82,7 +82,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
             if (!char.IsUpper(country.Name[0]))
             {
-                throw new ArgumentException("The countries name must start with an uppercase letter.");
+                throw new ArgumentException("Country name must start with an uppercase letter.");
             }
         }
     }
