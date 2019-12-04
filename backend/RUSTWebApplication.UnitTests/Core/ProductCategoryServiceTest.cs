@@ -179,11 +179,11 @@ namespace RUSTWebApplication.UnitTests.Core
         {
             //Arrange
             ProductCategory nonExistingProductCategory = new ProductCategory { Id = 4, Name = "Accessories" };
-            ProductCategory productCategoryNotFound = null;
+            ProductCategory nullProductCategory = null;
 
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(4)).
-                Returns(productCategoryNotFound);
+                Returns(nullProductCategory);
 
             IProductCategoryService productCategoryService = new ProductCategoryService(productCategoryRepository.Object);
 

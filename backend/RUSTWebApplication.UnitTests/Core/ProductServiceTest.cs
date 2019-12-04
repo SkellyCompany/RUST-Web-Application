@@ -91,58 +91,6 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Create_ProductModelNull_ThrowsArgumentException()
-        {
-            //Arrange
-            Product invalidProduct = new Product
-            {
-                ProductModel = null,
-                ProductStocks = null,
-                Color = "Black"
-            };
-
-            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-
-            IProductService productService = new ProductService(productRepository.Object,
-                productModelRepository.Object);
-
-            //Act
-            Action actual = () => productService.Create(invalidProduct);
-
-            //Assert
-            Assert.Throws<ArgumentException>(actual);
-        }
-
-        [Fact]
-        public void Create_NonExistingProductModel_ThrowsArgumentException()
-        {
-            //Arrange
-            Product invalidProduct = new Product
-            {
-                ProductModel = new ProductModel { Id = 2 },
-                ProductStocks = null,
-                Color = "Black"
-            };
-
-            ProductModel nullProductModel = null;
-
-            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(2)).
-                Returns(nullProductModel);
-
-            IProductService productService = new ProductService(productRepository.Object,
-                productModelRepository.Object);
-
-            //Act
-            Action actual = () => productService.Create(invalidProduct);
-
-            //Assert
-            Assert.Throws<ArgumentException>(actual);
-        }
-
-        [Fact]
         public void Create_ColorNull_ThrowsArgumentException()
         {
             //Arrange
@@ -179,6 +127,58 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+
+            IProductService productService = new ProductService(productRepository.Object,
+                productModelRepository.Object);
+
+            //Act
+            Action actual = () => productService.Create(invalidProduct);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Create_ProductModelNull_ThrowsArgumentException()
+        {
+            //Arrange
+            Product invalidProduct = new Product
+            {
+                ProductModel = null,
+                ProductStocks = null,
+                Color = "Black"
+            };
+
+            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+
+            IProductService productService = new ProductService(productRepository.Object,
+                productModelRepository.Object);
+
+            //Act
+            Action actual = () => productService.Create(invalidProduct);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Create_ProductModelNonExisting_ThrowsArgumentException()
+        {
+            //Arrange
+            Product invalidProduct = new Product
+            {
+                ProductModel = new ProductModel { Id = 2 },
+                ProductStocks = null,
+                Color = "Black"
+            };
+
+            ProductModel nullProductModel = null;
+
+            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+            productModelRepository.Setup(repo => repo.Read(2)).
+                Returns(nullProductModel);
 
             IProductService productService = new ProductService(productRepository.Object,
                 productModelRepository.Object);
@@ -331,11 +331,11 @@ namespace RUSTWebApplication.UnitTests.Core
                 Color = "Black"
             };
 
-            Product productNotFound = null;
+            Product nullProduct = null;
 
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
             productRepository.Setup(repo => repo.Read(nonExistingProduct.Id)).
-                Returns(productNotFound);
+                Returns(nullProduct);
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
 
             IProductService productService = new ProductService(productRepository.Object,
@@ -343,59 +343,6 @@ namespace RUSTWebApplication.UnitTests.Core
 
             //Act
             Action actual = () => productService.Update(nonExistingProduct);
-
-            //Assert
-            Assert.Throws<ArgumentNullException>(actual);
-        }
-
-        [Fact]
-        public void Update_ProductModelSpecified_ThrowsArgumentException()
-        {
-            //Arrange
-            Product invalidProduct = new Product
-            {
-                Id = 9,
-                ProductModel = new ProductModel { Id = 1},
-                ProductStocks = null,
-                Color = "Black"
-            };
-
-            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-
-            IProductService productService = new ProductService(productRepository.Object,
-                productModelRepository.Object);
-
-            //Act
-            Action actual = () => productService.Update(invalidProduct);
-
-            //Assert
-            Assert.Throws<ArgumentNullException>(actual);
-        }
-
-        [Fact]
-        public void Update_ProductStocksSpecified_ThrowsArgumentException()
-        {
-            //Arrange
-            Product invalidProduct = new Product
-            {
-                Id = 9,
-                ProductModel = null,
-                ProductStocks = new List<ProductStock>
-                {
-                    new ProductStock { Id = 1}
-                },
-                Color = "Black"
-            };
-
-            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-
-            IProductService productService = new ProductService(productRepository.Object,
-                productModelRepository.Object);
-
-            //Act
-            Action actual = () => productService.Update(invalidProduct);
 
             //Assert
             Assert.Throws<ArgumentNullException>(actual);
@@ -449,6 +396,59 @@ namespace RUSTWebApplication.UnitTests.Core
 
             //Assert
             Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Update_ProductModelSpecified_ThrowsArgumentException()
+        {
+            //Arrange
+            Product invalidProduct = new Product
+            {
+                Id = 9,
+                ProductModel = new ProductModel { Id = 1},
+                ProductStocks = null,
+                Color = "Black"
+            };
+
+            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+
+            IProductService productService = new ProductService(productRepository.Object,
+                productModelRepository.Object);
+
+            //Act
+            Action actual = () => productService.Update(invalidProduct);
+
+            //Assert
+            Assert.Throws<ArgumentNullException>(actual);
+        }
+
+        [Fact]
+        public void Update_ProductStocksSpecified_ThrowsArgumentException()
+        {
+            //Arrange
+            Product invalidProduct = new Product
+            {
+                Id = 9,
+                ProductModel = null,
+                ProductStocks = new List<ProductStock>
+                {
+                    new ProductStock { Id = 1}
+                },
+                Color = "Black"
+            };
+
+            Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+
+            IProductService productService = new ProductService(productRepository.Object,
+                productModelRepository.Object);
+
+            //Act
+            Action actual = () => productService.Update(invalidProduct);
+
+            //Assert
+            Assert.Throws<ArgumentNullException>(actual);
         }
 
         [Fact]
