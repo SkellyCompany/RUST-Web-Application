@@ -112,7 +112,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Read_ExistingId_ReturnsCountryWithSpecifiedId()
+        public void Read_IdExisting_ReturnsCountryWithSpecifiedId()
         {
             //Arrange
             int existingId = 12;
@@ -132,7 +132,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Read_NonExistingId_ReturnsNull()
+        public void Read_IdNonExisting_ReturnsNull()
         {
             //Arrange
             int nonExistingId = 12;
@@ -190,15 +190,15 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_NonExistingId_ThrowsArgumentException()
+        public void Update_IdNonExisting_ThrowsArgumentException()
         {
             //Arrange
             Country nonExistingCountry = new Country{ Id = 4, Name = "Greece" };
-            Country expected = null;
+            Country countryNotFound = null;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
             countryRepository.Setup(repo => repo.Read(4)).
-                Returns(expected);
+                Returns(countryNotFound);
 
             ICountryService countryService = new CountryService(countryRepository.Object);
 
@@ -243,7 +243,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Delete_ExistingId_ReturnsDeletedCountryWithSpecifiedId()
+        public void Delete_IdExisting_ReturnsDeletedCountryWithSpecifiedId()
         {
             //Arrange
             int existingId = 12;
@@ -263,7 +263,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Delete_NonExistingId_ReturnsNull()
+        public void Delete_IdNonExisting_ReturnsNull()
         {
             //Arrange
             int nonExistingId = 12;

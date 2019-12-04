@@ -47,7 +47,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productCategory);
             if (productCategory.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a product category.");
+                throw new ArgumentException("You are not allowed to specify an ID when creating a Product Category.");
             }
             ValidateName(productCategory);
         }
@@ -57,7 +57,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productCategory);
             if (_productCategoryRepository.Read(productCategory.Id) == null)
             {
-                throw new ArgumentException($"Cannot find a product category with an ID: {productCategory.Id}");
+                throw new ArgumentException($"Cannot find a Product Category with an ID: {productCategory.Id}");
             }
             ValidateName(productCategory);
         }
@@ -67,7 +67,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productCategory == null)
             {
-                throw new ArgumentNullException("Product category is null");
+                throw new ArgumentNullException("Product Category is null");
             }
         }
 
@@ -75,7 +75,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(productCategory.Name))
             {
-                throw new ArgumentException("You need to specify a name for the product category.");
+                throw new ArgumentException("You need to specify a name for the Product Category.");
             }
         }
     }
