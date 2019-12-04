@@ -174,7 +174,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_NonExistingId_ReturnsNull()
+        public void Update_NonExistingId_ThrowsArgumentException()
         {
             //Arrange
             ProductType nonExistingProductType = new ProductType { Id = 4, Name = "Accessories" };
@@ -187,10 +187,10 @@ namespace RUSTWebApplication.UnitTests.Core
             IProductTypeService productTypeService = new ProductTypeService(productTypeRepository.Object);
 
             //Act
-            ProductType actual = productTypeService.Update(nonExistingProductType);
+            Action actual = () => productTypeService.Update(nonExistingProductType);
 
             //Assert
-            Assert.Equal(expected, actual);
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]
