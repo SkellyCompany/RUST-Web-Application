@@ -78,7 +78,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(country.Name))
             {
-                throw new ArgumentException("You need to specify a name for the Country.");
+                throw new ArgumentException("You need to specify a name for the country.");
             }
             if (!char.IsUpper(country.Name[0]))
             {
