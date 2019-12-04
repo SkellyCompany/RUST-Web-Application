@@ -30,21 +30,6 @@ namespace RUSTWebApplication.UnitTests.Core
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void Create_IdSpecified_ThrowsArgumentException()
-        {
-            //Arrange
-            ProductCategory invalidProductCategory = new ProductCategory { Id = 1, Name = "Accessories" };
-
-            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            IProductCategoryService productCategoryService = new ProductCategoryService(productCategoryRepository.Object);
-
-            //Act
-            Action actual = () => productCategoryService.Create(invalidProductCategory);
-
-            //Assert
-            Assert.Throws<ArgumentException>(actual);
-        }
 
         [Fact]
         public void Create_ProductCategoryNull_ThrowsArgumentNullException()
@@ -60,6 +45,22 @@ namespace RUSTWebApplication.UnitTests.Core
 
             //Assert
             Assert.Throws<ArgumentNullException>(actual);
+        }
+
+        [Fact]
+        public void Create_IdSpecified_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductCategory invalidProductCategory = new ProductCategory { Id = 1, Name = "Accessories" };
+
+            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            IProductCategoryService productCategoryService = new ProductCategoryService(productCategoryRepository.Object);
+
+            //Act
+            Action actual = () => productCategoryService.Create(invalidProductCategory);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]
