@@ -20,7 +20,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
         public Country Create(Country newCountry)
         {
-            ValidateCreateCountry(newCountry);
+            ValidateCreate(newCountry);
             return _countryRepository.Create(newCountry);
         }
 
@@ -36,7 +36,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
         public Country Update(Country updatedCountry)
         {
-            ValidateUpdateCountry(updatedCountry);
+            ValidateUpdate(updatedCountry);
             return _countryRepository.Update(updatedCountry);
         }
 
@@ -44,45 +44,45 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _countryRepository.Delete(countryId);
         }
+        
+        private void ValidateCreate(Country country)
+        {
+            ValidateNull(country);
+            if (country.Id != default)
+            {
+                throw new ArgumentException("You are not allowed to specify an ID when creating a country.");
+            }
+            ValidateName(country);
+        }
 
-        private void ValidateCountryName(Country country)
+        private void ValidateUpdate(Country country)
+        {
+            ValidateNull(country);
+            if (_countryRepository.Read(country.Id) == null)
+            {
+                throw new ArgumentException($"Cannot find a country with an ID: {country.Id}");
+            }
+            ValidateName(country);
+        }
+        
+        
+        private void ValidateNull(Country country)
+        {
+            if (country == null)
+            {
+                throw new ArgumentNullException("Country is null");
+            }
+        }
+
+        private void ValidateName(Country country)
         {
             if (string.IsNullOrEmpty(country.Name))
             {
                 throw new ArgumentException("You need to specify a name for the Country.");
             }
-
             if (!char.IsUpper(country.Name[0]))
             {
                 throw new ArgumentException("The countries name must start with an uppercase letter.");
-            }
-        }
-
-        private void ValidateCreateCountry(Country country)
-        {
-            ValidateCountry(country);
-            if (country.Id != default)
-            {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a country.");
-            }
-            ValidateCountryName(country);
-        }
-
-        private void ValidateUpdateCountry(Country country)
-        {
-            ValidateCountry(country);
-            if (_countryRepository.Read(country.Id) == null)
-            {
-                throw new ArgumentException($"Cannot find a country with an ID: {country.Id}");
-            }
-            ValidateCountryName(country);
-        }
-
-        private void ValidateCountry(Country country)
-        {
-            if (country == null)
-            {
-                throw new ArgumentNullException("Country is null");
             }
         }
     }
