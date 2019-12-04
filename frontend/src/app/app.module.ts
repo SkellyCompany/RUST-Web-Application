@@ -8,6 +8,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { VisionComponent } from './main/vision/vision.component';
 import { ProductListComponent } from './main/shop/product-list/product-list.component';
 import { ProductDetailsComponent } from './main/shop/product-details/product-details.component';
+import { CreditsComponent } from './main/credits/credits.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProductDetailsComponent } from './main/shop/product-details/product-det
     FooterComponent,
     VisionComponent,
     ProductListComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CreditsComponent
   ],
   imports: [
     BrowserModule,
