@@ -96,7 +96,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Read_ExistingId_ReturnsProductCategoryWithSpecifiedId()
+        public void Read_IdExisting_ReturnsProductCategoryWithSpecifiedId()
         {
             //Arrange
             int existingId = 12;
@@ -116,7 +116,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Read_NonExistingId_ReturnsNull()
+        public void Read_IdNonExisting_ReturnsNull()
         {
             //Arrange
             int nonExistingId = 12;
@@ -175,15 +175,15 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_NonExistingId_ThrowsArgumentException()
+        public void Update_IdNonExisting_ThrowsArgumentException()
         {
             //Arrange
             ProductCategory nonExistingProductCategory = new ProductCategory { Id = 4, Name = "Accessories" };
-            ProductCategory expected = null;
+            ProductCategory productCategoryNotFound = null;
 
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(4)).
-                Returns(expected);
+                Returns(productCategoryNotFound);
 
             IProductCategoryService productCategoryService = new ProductCategoryService(productCategoryRepository.Object);
 
@@ -229,7 +229,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Delete_ExistingId_ReturnsDeletedProductCategoryWithSpecifiedId()
+        public void Delete_IdExisting_ReturnsDeletedProductCategoryWithSpecifiedId()
         {
             //Arrange
             int existingId = 12;
@@ -249,7 +249,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Delete_NonExistingId_ReturnsNull()
+        public void Delete_IdNonExisting_ReturnsNull()
         {
             //Arrange
             int nonExistingId = 12;
