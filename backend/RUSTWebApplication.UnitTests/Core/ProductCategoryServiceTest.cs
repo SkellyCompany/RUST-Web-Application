@@ -174,7 +174,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_NonExistingId_ReturnsNull()
+        public void Update_NonExistingId_ThrowsArgumentException()
         {
             //Arrange
             ProductCategory nonExistingProductCategory = new ProductCategory { Id = 4, Name = "Accessories" };
@@ -187,10 +187,10 @@ namespace RUSTWebApplication.UnitTests.Core
             IProductCategoryService productCategoryService = new ProductCategoryService(productCategoryRepository.Object);
 
             //Act
-            ProductCategory actual = productCategoryService.Update(nonExistingProductCategory);
+            Action actual = () => productCategoryService.Update(nonExistingProductCategory);
 
             //Assert
-            Assert.Equal(expected, actual);
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]
