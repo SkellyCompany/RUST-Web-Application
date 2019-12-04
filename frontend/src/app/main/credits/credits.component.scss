@@ -3,7 +3,7 @@
   background-color:#fff;
   max-width:960px;
   margin:0 auto;
-  padding:100px 8%;
+  padding:125px 10%;
 }
 .content-row:before,.content-row:after{
   content:"";
@@ -14,16 +14,6 @@
 }
 [class*=sqs-col]{
   float:left;
-}
-[class*=sqs-col] .content-block{
-  padding-left:17px;
-  padding-right:17px;
-}
-[class*=sqs-col]:last-child{
-  padding-right:0;
-}
-.sqs-col-10{
-  width:83.3333%;
 }
 .sqs-col-1{
   width:8.3333%;
@@ -96,7 +86,6 @@
   text-align:left;
   line-height:0px!important;
 }
-
 p{
   font-family:'roman'!important;
   font-size:16px!important;
@@ -104,7 +93,7 @@ p{
   text-align:left;
   line-height:40px!important;
 }
-
+//Team
 .founders{
   margin-left:200px;
   margin-right:120px;
