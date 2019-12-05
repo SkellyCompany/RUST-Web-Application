@@ -54,7 +54,7 @@ header .flex-child{
 .navigation-bar-menu,.navigation-bar-dropdown-menu{
   cursor: pointer;
   list-style:none;
-  z-index: 1400;
+  z-index: 1000;
 }
 .navigation-bar-menu{
   position:relative;
@@ -64,6 +64,9 @@ header .flex-child{
   -webkit-box-align:center;
   -ms-flex-align:center;
   align-items:center;
+}
+.navigation-bar-dropdown img{
+  cursor: pointer;
 }
 .navigation-bar-menu>li{
   position:relative;
@@ -225,6 +228,181 @@ header .flex-child{
     .navigation-bar-dropdown img{
       padding: 10px 10px 0px 10px;
     }
+    .navigation-bar-cart-menu{
+      position:relative;
+      top:100%;
+      left:0;
+      z-index:1000;
+      min-width:230px;
+      width:30%;
+      height:100%;
+      text-align:right;
+      list-style:none;
+      white-space:nowrap;
+      background-color:red;
+      -webkit-box-shadow:0 8  px 20px rgba(0,0,0,.1);
+      box-shadow:0 8px 20px rgba(0,0,0,.1);
+      -webkit-transition:all 0.1s ease-in-out;
+      transition:all 0.1s ease-in-out;
+    }
+    .navigation-bar-cart-menu>li>a{
+      color:#E5E5E5;padding:8px 22px;
+      font-size:14px;
+      display:block;
+    }
+    .navigation-bar-cart-menu .navigation-bar-cart-menu{
+      right:100%;
+    }
   }
 }
 
+//Cart
+.checkout-button{
+  height: 4.57143rem;
+  line-height: 3.57143rem;
+  transition: all .15s ease;
+  font-family: "Helvetica Neue";
+  letter-spacing: .07143rem;
+  font-size: 16px;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  margin-top: 7%;
+  padding-right: 5%;
+  padding-left: 5%;
+  text-align: center;
+  color: #000;
+  background: #fff;
+  z-index: 9;
+  width: 100%;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+}
+.checkout-button:hover{
+  color: #fff;
+  background-color: black;
+  cursor: pointer;    
+}
+.sidebar-title{
+  font-size:35px;
+  line-height:1;
+  font-weight: bold;
+  font-family: 'roman';
+  padding-bottom: 5%;
+}
+.over-page{
+  z-index:1001;
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+#cart-total-w{
+  margin-top: 5%;
+  font-family: 'roman';
+  font-weight: bold;
+}
+.sidebar{
+  position:relative;
+  margin:auto;
+  padding-left:17%;
+  padding-right:16%;
+  pointer-events: all;
+
+}
+.sidebar-wide{
+  position:absolute;
+  pointer-events: all;
+
+  z-index: 22500!important;
+  top:0;
+  bottom:0;
+  right:0;
+  background:#fff;
+  font-weight:500;
+  -webkit-transform:translate3d(100%,0,0);
+  transform:translate3d(100%,0,0);
+  transform: translate3d(0%, 0px, 0px);
+  width:620px;
+}
+.cart-list-price-primary{
+  margin:.24vw 0 0;
+  font-family: 'roman';
+  font-weight: bold;
+}
+.cart-list-name-secondary{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size: 16px;
+  font-family: 'roman';
+  font-weight: bold;
+}
+.cart-list-name-secondary{
+  padding:0 .69444vw 0 1.11111vw;
+}
+.cart-list-name-secondary{
+  margin:.33889vw 0 0;
+}
+.cart-list{
+  padding-top: 12%;
+  overflow:hidden;
+  overflow-y:auto;
+  max-height:30vw;
+}
+.cart-list-product{
+  width:100%;
+  display:-webkit-box;
+  display:flex;
+}
+.cart-list-name-primary{
+  font-size: 20px;
+  font-family: 'roman';
+  font-weight: bold;
+  font-size:1.11111vw;
+  padding:0 .69444vw 0 1.11111vw;
+}
+#cart-title{
+  padding: 5.90278vw 0 0;
+}
+.cart-list-quantity-container{
+  margin: .55556vw 0 0 .55556vw;
+}
+.cart-list-quantity{
+  width: 35px;
+  padding: 0 12px;
+  vertical-align: top;
+  text-align: center;
+  outline: none;
+  border: 1px solid #e6dcd2;
+  border-radius: .13889vw;
+}
+.cart-list-quantity,
+.cart-list-quantity-decrement,
+.cart-list-quantityr-increment{
+  height: 40px;
+  user-select: none;
+}
+.cart-list-quantity-decrement,
+.cart-list-quantity-increment{
+  display: inline-block;
+  width: 30px;
+  line-height: 38px;
+  background: transparent;
+  color: #444;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+.input-number-decrement{
+  border-right: none;
+  border-radius: 4px 0 0 4px
+}
+.input-number-increment{
+  border-left: none;
+  border-radius: 0 4px 4px 0
+}

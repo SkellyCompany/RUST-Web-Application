@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  constructor() { }
+  isCartVisible: boolean;
+  constructor() {
+   }
 
   ngOnInit() {
   }
 
+  setCartVisibility(){
+    if (this.isCartVisible){
+      this.isCartVisible = false;
+    }
+    else{
+      event.stopPropagation();
+      this.isCartVisible = true;
+    }
+  }
 }
