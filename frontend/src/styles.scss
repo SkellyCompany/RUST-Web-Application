@@ -15,6 +15,17 @@ body{
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar{
+  background-color: #fff;
+  width:0.6%;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #000
+}
+body::-webkit-scrollbar-thumb {
+  cursor:pointer, auto;
+}
+
 @font-face {
   font-family: roman;
   src: url(assets/fonts/ClassicRomanStdRegular.otf) format("opentype");
