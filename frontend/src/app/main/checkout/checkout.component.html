@@ -1,0 +1,75 @@
+<app-navigation-bar></app-navigation-bar>
+<body class="checkout">
+  <div class="container">
+    <div class="checkout-content">
+      <div class="page-title">
+        <h1>Checkout</h1>
+      </div>
+      <form class="checkout-form">							
+        <div class="checkout-wrapper">
+          <h3>Billing details</h3>
+          <div class="field-wrapper">		
+            <p class="form-row form-row-first"><label>First name</label><input type="text"/>
+            </p>
+            <p class="form-row form-row-last"><label>Last name</label><input type="text"/>
+            </p>
+            <p class="form-row form-row-wide"><label>Country</label><select><option>Select a country</option></select>
+            </p>
+            <p class="form-row form-row-wide"><label>Street</label><input type="text"/>
+            </p>
+            <p class="form-row form-row-wide"><label>ZipCode</label><input type="text"/>
+            </p>
+            <p class="form-row form-row-wide"><label>City</label><input type="text"/>
+            </p>
+            <p class="form-row form-row-wide"><label>Phone Number</label><input type="text"/>
+            </p>
+            <p class="form-row form-row-wide"><label>Email<address></address></label><input type="text"/>
+            </p>
+          </div>
+        </div>
+        <table class="checkout-review-container">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Somefukin hoodie 1x</td>
+              <td>50.00€</td>
+            </tr>
+            <tr>
+              <td>Somefukin tshirt 1x</td>
+              <td>40.00€</td>           
+            </tr>
+          </tbody>
+            <tfoot>
+              <tr class="cart-subtotal">
+                <th>Subtotal</th>
+                <td>90.00€</td>
+              </tr>	
+            <tr>
+              <th>Shipping</th>
+              <td>
+                <ul>
+                  <li>
+                    <label >10.00€</label>					
+                  </li>
+                </ul>
+              </td>
+            </tr>
+              <tr class="order-total">
+              <th>Total</th>
+              <td>100.00€</td>
+            </tr>
+          </tfoot>
+        </table>
+      </form>
+      <div class="purchase-container">
+        <button>Purchase</button>
+      </div>
+    </div>
+  </div>
+</body>
+<app-footer></app-footer>
