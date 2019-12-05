@@ -159,7 +159,7 @@ namespace RUSTWebApplication.UnitTests.Core
             Country expected = validCountry;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
-            countryRepository.Setup(repo => repo.Read(4)).
+            countryRepository.Setup(repo => repo.Read(validCountry.Id)).
                 Returns(validCountry);
             countryRepository.Setup(repo => repo.Update(validCountry)).
                 Returns(expected);
@@ -197,7 +197,7 @@ namespace RUSTWebApplication.UnitTests.Core
             Country nullProductCategory = null;
 
             Mock<ICountryRepository> countryRepository = new Mock<ICountryRepository>();
-            countryRepository.Setup(repo => repo.Read(4)).
+            countryRepository.Setup(repo => repo.Read(nonExistingCountry.Id)).
                 Returns(nullProductCategory);
 
             ICountryService countryService = new CountryService(countryRepository.Object);

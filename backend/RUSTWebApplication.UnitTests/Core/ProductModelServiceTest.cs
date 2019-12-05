@@ -35,7 +35,7 @@ namespace RUSTWebApplication.UnitTests.Core
             productModelRepository.Setup(repo => repo.Create(validProductModel)).
                 Returns(expected);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            productCategoryRepository.Setup(repo => repo.Read(2)).
+            productCategoryRepository.Setup(repo => repo.Read(validProductModel.ProductCategory.Id)).
                 Returns(validProductModel.ProductCategory);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
@@ -185,7 +185,7 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            productCategoryRepository.Setup(repo => repo.Read(2)).
+            productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
                 Returns(nullProductCategory);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
@@ -317,12 +317,12 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductModel expected = validProductModel;
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(3)).
+            productModelRepository.Setup(repo => repo.Read(validProductModel.Id)).
                 Returns(validProductModel);
             productModelRepository.Setup(repo => repo.Create(validProductModel)).
                 Returns(validProductModel);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            productCategoryRepository.Setup(repo => repo.Read(2)).
+            productCategoryRepository.Setup(repo => repo.Read(validProductModel.ProductCategory.Id)).
                 Returns(validProductModel.ProductCategory);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
@@ -371,10 +371,10 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductModel nullProductModel = null;
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(1)).
+            productModelRepository.Setup(repo => repo.Read(nonExistingProductModel.Id)).
                 Returns(nullProductModel);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            productCategoryRepository.Setup(repo => repo.Read(2)).
+            productCategoryRepository.Setup(repo => repo.Read(nonExistingProductModel.ProductCategory.Id)).
                 Returns(nonExistingProductModel.ProductCategory);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
@@ -401,7 +401,7 @@ namespace RUSTWebApplication.UnitTests.Core
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(1)).
+            productModelRepository.Setup(repo => repo.Read(invalidProductModel.Id)).
                 Returns(invalidProductModel);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
 
@@ -431,10 +431,10 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductCategory nullProductCategory = null;
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(1)).
+            productModelRepository.Setup(repo => repo.Read(invalidProductModel.Id)).
                 Returns(invalidProductModel);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            productCategoryRepository.Setup(repo => repo.Read(2)).
+            productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
                 Returns(nullProductCategory);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,

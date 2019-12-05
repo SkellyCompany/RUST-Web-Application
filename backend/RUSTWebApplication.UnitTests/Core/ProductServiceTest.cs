@@ -33,7 +33,7 @@ namespace RUSTWebApplication.UnitTests.Core
             productRepository.Setup(repo => repo.Create(validProduct)).
                 Returns(expected);
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(2)).
+            productModelRepository.Setup(repo => repo.Read(validProduct.ProductModel.Id)).
                 Returns(validProduct.ProductModel);
 
             IProductService productService = new ProductService(productRepository.Object,
@@ -177,7 +177,7 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(2)).
+            productModelRepository.Setup(repo => repo.Read(invalidProduct.ProductModel.Id)).
                 Returns(nullProductModel);
 
             IProductService productService = new ProductService(productRepository.Object,
@@ -287,7 +287,7 @@ namespace RUSTWebApplication.UnitTests.Core
             productRepository.Setup(repo => repo.Update(validProduct)).
                 Returns(validProduct);
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(2)).
+            productModelRepository.Setup(repo => repo.Read(validProduct.ProductModel.Id)).
                 Returns(validProduct.ProductModel);
 
             IProductService productService = new ProductService(productRepository.Object,

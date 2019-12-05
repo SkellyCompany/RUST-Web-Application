@@ -144,7 +144,7 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductCategory expected = validProductCategory;
 
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            productCategoryRepository.Setup(repo => repo.Read(4)).
+            productCategoryRepository.Setup(repo => repo.Read(validProductCategory.Id)).
                 Returns(validProductCategory);
             productCategoryRepository.Setup(repo => repo.Update(validProductCategory)).
                 Returns(expected);
@@ -182,7 +182,7 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductCategory nullProductCategory = null;
 
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-            productCategoryRepository.Setup(repo => repo.Read(4)).
+            productCategoryRepository.Setup(repo => repo.Read(nonExistingProductCategory.Id)).
                 Returns(nullProductCategory);
 
             IProductCategoryService productCategoryService = new ProductCategoryService(productCategoryRepository.Object);

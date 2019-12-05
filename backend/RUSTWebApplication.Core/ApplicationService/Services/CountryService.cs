@@ -63,8 +63,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 throw new ArgumentException($"Cannot find a Country with an ID: {country.Id}");
             }
-        }
-        
+        }      
         
         private void ValidateNull(Country country)
         {

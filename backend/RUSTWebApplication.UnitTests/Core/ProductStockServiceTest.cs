@@ -32,10 +32,10 @@ namespace RUSTWebApplication.UnitTests.Core
             productStockRepository.Setup(repo => repo.Create(validProductStock)).
                 Returns(expected);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
+            productRepository.Setup(repo => repo.Read(validProductStock.Product.Id)).
                 Returns(validProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
+            productSizeRepository.Setup(repo => repo.Read(validProductStock.ProductSize.Id)).
                 Returns(validProductStock.ProductSize);
 
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
@@ -109,7 +109,7 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
+            productSizeRepository.Setup(repo => repo.Read(invalidProductStock.ProductSize.Id)).
                 Returns(invalidProductStock.ProductSize);
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
@@ -137,10 +137,10 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
+            productRepository.Setup(repo => repo.Read(invalidProductStock.Product.Id)).
                 Returns(nullProduct);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
+            productSizeRepository.Setup(repo => repo.Read(invalidProductStock.ProductSize.Id)).
                 Returns(invalidProductStock.ProductSize);
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
@@ -166,7 +166,7 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
+            productRepository.Setup(repo => repo.Read(invalidProductStock.Product.Id)).
                 Returns(invalidProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
@@ -195,10 +195,10 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
+            productRepository.Setup(repo => repo.Read(invalidProductStock.Product.Id)).
                 Returns(invalidProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
+            productSizeRepository.Setup(repo => repo.Read(invalidProductStock.ProductSize.Id)).
                 Returns(nullProductSize);
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
@@ -305,15 +305,15 @@ namespace RUSTWebApplication.UnitTests.Core
             ProductStock expected = validProductStock;
 
             Mock<IProductStockRepository> productStockRepository = new Mock<IProductStockRepository>();
-            productStockRepository.Setup(repo => repo.Read(10)).
+            productStockRepository.Setup(repo => repo.Read(validProductStock.Id)).
                 Returns(validProductStock);
             productStockRepository.Setup(repo => repo.Update(validProductStock)).
                 Returns(expected);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(5)).
+            productRepository.Setup(repo => repo.Read(validProductStock.Product.Id)).
                 Returns(validProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(3)).
+            productSizeRepository.Setup(repo => repo.Read(validProductStock.ProductSize.Id)).
                 Returns(validProductStock.ProductSize);
 
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
