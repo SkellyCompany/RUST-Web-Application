@@ -21,6 +21,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
 		public Product Create(Product newProduct)
         {
+            ValidateCreate(newProduct);
             return _productRepository.Create(newProduct);
         }
 
@@ -36,12 +37,78 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
 		public Product Update(Product updatedProduct)
         {
+            ValidateUpdate(updatedProduct);
             return _productRepository.Update(updatedProduct);
         }
 
         public Product Delete(int productId)
         {
             return _productRepository.Delete(productId);
+        }
+        private void ValidateCreate(Product product)
+        {
+            ValidateNull(product);
+            if (product.Id != default)
+            {
+                throw new ArgumentException("You are not allowed to specify an ID when creating a Product.");
+            }
+            ValidateColor(product);
+            ValidateProductModel(product);
+            ValidateProductStock(product);
+        }
+
+        private void ValidateUpdate(Product product)
+        {
+            ValidateNull(product);
+
+            if (_productRepository.Read(product.Id) == null)
+            {
+                throw new ArgumentException($"Cannot find a Product with an ID: {product.Id}");
+            }
+            ValidateColor(product);
+            if (product.ProductModel != null)
+            {
+                throw new ArgumentException("You are not allowed to specify the Project Model when updating a Product.");
+            }
+            ValidateProductStock(product);
+        }
+
+
+        private void ValidateNull(Product product)
+        {
+            if (product == null)
+            {
+                throw new ArgumentNullException("Product is null");
+            }
+        }
+
+        private void ValidateColor(Product product)
+        {
+            if (string.IsNullOrEmpty(product.Color))
+            {
+                throw new ArgumentException("You need to specify a Color.");
+            }
+        }
+
+        private void ValidateProductModel(Product product)
+        {
+            if (product.ProductModel == null)
+            {
+                throw new ArgumentException("You need to specify a Product Model");
+            }
+
+            if (_productModelRepository.Read(product.ProductModel.Id) == null)
+            {
+                throw new ArgumentException($"Product Model with the ID: {product.ProductModel.Id} doesn't exist'");
+            }
+        }
+
+        private void ValidateProductStock(Product product)
+        {
+            if (product.ProductStocks != null)
+            {
+                throw new ArgumentException("Product Stock must be null");
+            }
         }
     }
 }
