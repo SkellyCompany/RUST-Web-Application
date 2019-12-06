@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using RUSTWebApplication.Core.Authentication;
+using RUSTWebApplication.Infrastructure;
 
 namespace RUSTWebApplication.UI.RestAPI
 {
@@ -25,7 +23,27 @@ namespace RUSTWebApplication.UI.RestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			Byte[] secretBytes = new byte[40];
+			Random rand = new Random();
+			rand.NextBytes(secretBytes);
+
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+			{
+				options.TokenValidationParameters = new TokenValidationParameters
+				{
+					ValidateAudience = false,
+					ValidateIssuer = false,
+					ValidateIssuerSigningKey = true,
+					IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
+					ValidateLifetime = true,
+					ClockSkew = TimeSpan.FromMinutes(5)
+				};
+			});
+
+			services.AddTransient<IDbInitializer, DbInitializer>();
+			services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
+
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,7 +51,13 @@ namespace RUSTWebApplication.UI.RestAPI
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+				using (var scope = app.ApplicationServices.CreateScope())
+				{
+					RUSTWebApplicationContext context = scope.ServiceProvider.GetService<RUSTWebApplicationContext>();
+					IDbInitializer dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+					dbInitializer.Seed(context);
+				}
+				app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -42,7 +66,8 @@ namespace RUSTWebApplication.UI.RestAPI
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+			app.UseAuthentication();
+			app.UseMvc();
         }
     }
 }
