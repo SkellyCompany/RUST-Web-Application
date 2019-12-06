@@ -374,7 +374,7 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
-        public void Update_ProductSizeValid_ReturnsUpdatedProductSizeWithId()
+        public void Update_ProductSizeValid_ReturnsUpdatedProductSize()
         {
             //Arrange
             ProductSize validProductSize = new ProductSize
