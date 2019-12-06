@@ -388,6 +388,58 @@ namespace RUSTWebApplication.UnitTests.Core
         }
 
         [Fact]
+        public void Update_NameNull_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductModel invalidProductModel = new ProductModel
+            {
+                Id = 1,
+                Name = null,
+                ProductCategory = new ProductCategory { Id = 2 },
+                Price = 130,
+                Products = null
+            };
+
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+
+            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
+                productCategoryRepository.Object);
+
+            //Act
+            Action actual = () => productModelService.Update(invalidProductModel);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Update_NameEmpty_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductModel invalidProductModel = new ProductModel
+            {
+                Id = 1,
+                Name = "",
+                ProductCategory = new ProductCategory { Id = 2 },
+                Price = 130,
+                Products = null
+            };
+
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+
+            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
+                productCategoryRepository.Object);
+
+            //Act
+            Action actual = () => productModelService.Update(invalidProductModel);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
         public void Update_ProductCategoryNull_ThrowsArgumentException()
         {
             //Arrange
@@ -436,58 +488,6 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
                 Returns(nullProductCategory);
-
-            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
-
-            //Act
-            Action actual = () => productModelService.Update(invalidProductModel);
-
-            //Assert
-            Assert.Throws<ArgumentException>(actual);
-        }
-
-        [Fact]
-        public void Update_NameNull_ThrowsArgumentException()
-        {
-            //Arrange
-            ProductModel invalidProductModel = new ProductModel
-            {
-                Id = 1,
-                Name = null,
-                ProductCategory = new ProductCategory { Id = 2 },
-                Price = 130,
-                Products = null
-            };
-
-            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
-
-            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
-
-            //Act
-            Action actual = () => productModelService.Update(invalidProductModel);
-
-            //Assert
-            Assert.Throws<ArgumentException>(actual);
-        }
-
-        [Fact]
-        public void Update_NameEmpty_ThrowsArgumentException()
-        {
-            //Arrange
-            ProductModel invalidProductModel = new ProductModel
-            {
-                Id = 1,
-                Name = "",
-                ProductCategory = new ProductCategory { Id = 2 },
-                Price = 130,
-                Products = null
-            };
-
-            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
                 productCategoryRepository.Object);

@@ -345,7 +345,7 @@ namespace RUSTWebApplication.UnitTests.Core
             Action actual = () => productService.Update(nonExistingProduct);
 
             //Assert
-            Assert.Throws<ArgumentNullException>(actual);
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]
@@ -420,7 +420,7 @@ namespace RUSTWebApplication.UnitTests.Core
             Action actual = () => productService.Update(invalidProduct);
 
             //Assert
-            Assert.Throws<ArgumentNullException>(actual);
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]
@@ -448,7 +448,7 @@ namespace RUSTWebApplication.UnitTests.Core
             Action actual = () => productService.Update(invalidProduct);
 
             //Assert
-            Assert.Throws<ArgumentNullException>(actual);
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]

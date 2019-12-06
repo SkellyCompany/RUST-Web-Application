@@ -9,11 +9,13 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 	public class ProductSizeService : IProductSizeService
 	{
 		private readonly IProductSizeRepository _productSizeRepository;
+        private readonly IProductMetricRepository _productMetricRepository;
 
-
-		public ProductSizeService(IProductSizeRepository productSizeRepository)
+        public ProductSizeService(IProductSizeRepository productSizeRepository,
+            IProductMetricRepository productMetricRepository)
 		{
 			_productSizeRepository = productSizeRepository;
+            _productMetricRepository = productMetricRepository;
 		}
 
 		public ProductSize Create(ProductSize newProductSize)
