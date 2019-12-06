@@ -9,11 +9,17 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 	public class OrderService : IOrderService
 	{
 		private readonly IOrderRepository _orderRepository;
+        private readonly ICountryRepository _countryRepository;
+        private readonly IProductStockRepository _productStockRepository;
 
 
-		public OrderService(IOrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository,
+            ICountryRepository countryRepository,
+            IProductStockRepository productStockRepository)
 		{
 			_orderRepository = orderRepository;
+            _countryRepository = countryRepository;
+            _productStockRepository = productStockRepository;
 		}
 
 		public Order Create(Order newOrder)
