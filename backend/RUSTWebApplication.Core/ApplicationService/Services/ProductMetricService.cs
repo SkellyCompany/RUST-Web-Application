@@ -8,11 +8,14 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
     {
         
         private readonly IProductMetricRepository _productMetricRepository;
+        private readonly IProductModelRepository _productModelRepository;
 
 
-        public ProductMetricService(IProductMetricRepository productMetricRepository)
+        public ProductMetricService(IProductMetricRepository productMetricRepository,
+            IProductModelRepository productModelRepository)
         {
             _productMetricRepository = productMetricRepository;
+            _productModelRepository = productModelRepository;
         }
         
         public ProductMetric Create(ProductMetric newProductMetric)

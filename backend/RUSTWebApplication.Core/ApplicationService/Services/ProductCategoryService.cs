@@ -55,13 +55,12 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         private void ValidateUpdate(ProductCategory productCategory)
         {
             ValidateNull(productCategory);
+            ValidateName(productCategory);
             if (_productCategoryRepository.Read(productCategory.Id) == null)
             {
                 throw new ArgumentException($"Cannot find a Product Category with an ID: {productCategory.Id}");
             }
-            ValidateName(productCategory);
         }
-
 
         private void ValidateNull(ProductCategory productCategory)
         {
