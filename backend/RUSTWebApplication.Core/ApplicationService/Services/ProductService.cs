@@ -53,32 +53,31 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
                 throw new ArgumentException("You are not allowed to specify an ID when creating a Product.");
             }
             ValidateColor(product);
+	    ValidateProductStock(product);
             ValidateProductModel(product);
-            ValidateProductStock(product);
         }
 
         private void ValidateUpdate(Product product)
         {
             ValidateNull(product);
-
+	    ValidateColor(product);
+	    ValidateProductStock(product);
+	    if (product.ProductModel != null)
+            {
+                throw new ArgumentException("You are not allowed to specify the Project Model when updating a Product.");
+            }	    
             if (_productRepository.Read(product.Id) == null)
             {
                 throw new ArgumentException($"Cannot find a Product with an ID: {product.Id}");
-            }
-            ValidateColor(product);
-            if (product.ProductModel != null)
-            {
-                throw new ArgumentException("You are not allowed to specify the Project Model when updating a Product.");
-            }
-            ValidateProductStock(product);
+            }          
+            
         }
-
 
         private void ValidateNull(Product product)
         {
             if (product == null)
             {
-                throw new ArgumentNullException("Product is null");
+                throw new ArgumentNullException("Product cannot be null");
             }
         }
 
