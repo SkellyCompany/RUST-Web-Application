@@ -310,11 +310,7 @@ namespace RUSTWebApplication.UnitTests.Core
             productStockRepository.Setup(repo => repo.Update(validProductStock)).
                 Returns(expected);
             Mock<IProductRepository> productRepository = new Mock<IProductRepository>();
-            productRepository.Setup(repo => repo.Read(validProductStock.Product.Id)).
-                Returns(validProductStock.Product);
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
-            productSizeRepository.Setup(repo => repo.Read(validProductStock.ProductSize.Id)).
-                Returns(validProductStock.ProductSize);
 
             IProductStockService productStockService = new ProductStockService(productStockRepository.Object,
                 productRepository.Object,
