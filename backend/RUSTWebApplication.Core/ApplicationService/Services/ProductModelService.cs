@@ -21,6 +21,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
 		public ProductModel Create(ProductModel newProductModel)
         {
+            ValidateCreate(newProductModel);
             return _productModelRepository.Create(newProductModel);
         }
 
@@ -36,12 +37,84 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
 		public ProductModel Update(ProductModel updatedProductModel)
         {
+            ValidateUpdate(updatedProductModel);
             return _productModelRepository.Update(updatedProductModel);
         }
 
         public ProductModel Delete(int productModelId)
         {
             return _productModelRepository.Delete(productModelId);
+        }
+        private void ValidateCreate(ProductModel productModel)
+        {
+            ValidateNull(productModel);
+            if (productModel.Id != default)
+            {
+                throw new ArgumentException("You are not allowed to specify an ID when creating a Product Model.");
+            }
+            ValidateName(productModel);
+            ValidatePrice(productModel);
+            ValidateProducts(productModel);
+	    ValidateProductCategory(productModel);
+        }
+
+        private void ValidateUpdate(ProductModel productModel)
+        {
+            ValidateNull(productModel);
+            ValidateName(productModel);
+	    ValidatePrice(productModel);
+	    ValidateProducts(productModel);
+            ValidateProductCategory(productModel);     
+	    if (_productModelRepository.Read(productModel.Id) == null)
+            {
+                throw new ArgumentException($"Cannot find a Product Model with an ID: {productModel.Id}");
+            }
+        }
+
+
+        private void ValidateNull(ProductModel productModel) 
+	{ 
+            if (productModel == null)
+            {
+                throw new ArgumentNullException("Product Model cannot be null");
+            }
+        }
+
+        private void ValidateName(ProductModel productModel)
+        {
+            if (string.IsNullOrEmpty(productModel.Name))
+            {
+                throw new ArgumentException("You need to specify a name for the Product Model.");
+            }
+        }
+
+        private void ValidateProductCategory(ProductModel productModel)
+        {
+            if (productModel.ProductCategory == null)
+            {
+                throw new ArgumentException("Product Category cannot be null");
+            }
+
+            if (_productCategoryRepository.Read(productModel.ProductCategory.Id) == null)
+            {
+                throw new ArgumentException($"Product Category with the ID: {productModel.ProductCategory.Id} doesn't exist.");
+            }
+        }
+
+        private void ValidatePrice(ProductModel productModel)
+        {
+            if (productModel.Price < 0)
+            {
+                throw new ArgumentException("Price cannot be less then 0");
+            }
+        }
+
+        private void ValidateProducts(ProductModel productModel)
+        {
+            if (productModel.Products != null)
+            {
+                throw new ArgumentException("Products cannot be specified.");
+            }
         }
     }
 }
