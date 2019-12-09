@@ -1,23 +1,22 @@
 <header class="navigation-bar">
   <!-- Navigation bar -->
-  <div class="navigation-bar-holder">
-    <div class="container">
+  <div class="navigation-bar-holder" >
+    <div  class="container" > 
       <div class="flex-parent">
         <a class="logo" routerLink="/"><img src="assets/images/RUST-logo-white.png" title="RUST Logo"></a>
         <nav class="flex-child navigation-bar-wrap d-none d-lg-none d-xl-block">
           <ul class="navigation-bar-menu">
-            <li><a routerLink="/vision">Vision</a></li>
-            <li class="navigation-bar-dropdown">
-              <a routerLink="/shop">Shop<img src="assets/images/dropdown-arrow.png" height="10" width="10"></a>
+            <li><img routerLink="/vision" src="assets/images/vision.png"><a></a></li>
+            <li class="navigation-bar-dropdown"><img routerLink="/shop" src="assets/images/shop.png"><a></a>
               <ul class="navigation-bar-dropdown-menu">
-                <li><a>Top</a></li>
-                <li><a>Bottom</a></li>
+                <li><a>top</a></li>
+                <li><a>bottom</a></li>
               </ul>
             </li>
           </ul>
         </nav>
         <li class="navigation-bar-dropdown">
-          <img src="assets/images/shopping-cart.png" (click)="setCartVisibility()">
+          <img class="navigation-bar-cart" src="assets/images/shopping-cart.png" (click)="setCartVisibility()">
         </li>
       </div>
     </div>
@@ -32,13 +31,13 @@
               <li>
                 <div class="cart-list-product">
                   <div>
-                    <img src="https://makiaclothing.com/wp-content/uploads/2018/01/CC_W21032_0011-697x697.jpg" height="125" width="125">       
+                    <img src="https://i.imgur.com/y2AohP6.png" height="125" width="125">       
                   </div>
                   <div>
                     <div class="cart-list-name-primary">Greg suks shirt</div>
                     <div class="cart-list-name-secondary">White</div>
                     <div class="cart-list-quantity-container">
-                      <span class="cart-list-quantity-decrement">–</span><input class="cart-list-quantity" type="text" value="1" min="0" max="10"><span class="cart-list-quantity-increment">+</span>
+                      <span class="cart-list-quantity-decrement">–</span><input class="cart-list-quantity" onkeydown="return false" type="text" value="1" min="0" max="10"><span class="cart-list-quantity-increment">+</span>
                     </div>
                   </div>
                   <div class="cart-list-price-primary">132.99€</div>
