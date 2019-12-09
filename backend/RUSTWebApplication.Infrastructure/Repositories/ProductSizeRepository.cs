@@ -16,6 +16,11 @@ namespace RUSTWebApplication.Infrastructure.Repositories
             throw new System.NotImplementedException();
         }
 
+        public ProductSize ReadIncludeProductMetric(int productSizeId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<ProductSize> ReadAll()
         {
             throw new System.NotImplementedException();

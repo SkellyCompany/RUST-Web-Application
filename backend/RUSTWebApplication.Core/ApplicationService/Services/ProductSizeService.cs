@@ -44,7 +44,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productSizeRepository.Delete(productSizeId);
         }
-        private void ValidateCreate(ProductSize  productSize)
+        private void ValidateCreate(ProductSize productSize)
         {
             ValidateNull(productSize);
             if (productSize.Id != default)
@@ -52,8 +52,9 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
                 throw new ArgumentException("You are not allowed to specify an ID when creating a ProductSize.");
             }
             ValidateSize(productSize);
-            ProductMetric productSizeMetric = ValidateProductMetric(productSize);
-            ValidateMetricValues(productSize, productSizeMetric);
+            ValidateProductMetric(productSize);
+            var productMetric = _productMetricRepository.Read(productSize.ProductMetric.Id);
+            ValidateMetricValues(productSize, productMetric);
         }
 
         private void ValidateUpdate(ProductSize productSize)
@@ -64,9 +65,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 throw new ArgumentException("You are not allowed to specify a ProductMetric when updating the ProductSize.");
             }
+            var productMetric = _productSizeRepository.ReadIncludeProductMetric(productSize.Id).ProductMetric;
+            ValidateMetricValues(productSize, productMetric);
             if (_productSizeRepository.Read(productSize.Id) == null)
             {
-                throw new ArgumentNullException($"Cannot find a ProductSize with the ID: {productSize.Id}");
+                throw new ArgumentException($"Cannot find a ProductSize with the ID: {productSize.Id}");
             }
         }
 
@@ -77,28 +80,24 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
                 throw new ArgumentNullException("Product Size cannot be null");
             }
         }
-
-        private ProductMetric ValidateProductMetric(ProductSize productSize)
-        {
-            if (productSize.ProductMetric == null)
-            {
-                throw new ArgumentException("You need to specify a ProductMetric for the ProductSize.");
-            }
-            
-            ProductMetric sizeMetric = _productMetricRepository.Read(productSize.ProductMetric.Id);
-            if (sizeMetric == null)
-            {
-                throw new ArgumentException($"Product Metric with the ID: {productSize.ProductMetric.Id} doesn't exist.'");
-            }
-
-            return sizeMetric;
-        }
-
+        
         private void ValidateSize(ProductSize productSize)
         {
             if (string.IsNullOrEmpty(productSize.Size))
             {
                 throw new ArgumentException("You need to specify a Size for the ProductSize.");
+            }
+        }
+
+        private void ValidateProductMetric(ProductSize productSize)
+        {
+            if (productSize.ProductMetric == null)
+            {
+                throw new ArgumentException("You need to specify a ProductMetric for the ProductSize.");
+            }
+            if (_productMetricRepository.Read(productSize.ProductMetric.Id) == null)
+            {
+                throw new ArgumentException($"Product Metric with the ID: {productSize.ProductMetric.Id} doesn't exist.'");
             }
         }
 
@@ -108,13 +107,27 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 ValidateMetricXValue(productSize);
             }
+            else if(productSize.MetricXValue != default)
+            {
+                throw new ArgumentException("You are not allowed to specify MetricXValue for this ProductSize");
+            }
+            
             if (!string.IsNullOrEmpty(productMetric.MetricY))
             {
                 ValidateMetricYValue(productSize);
             }
+            else if(productSize.MetricYValue != default)
+            {
+                throw new ArgumentException("You are not allowed to specify MetricYValue for this ProductSize");
+            }
+            
             if (!string.IsNullOrEmpty(productMetric.MetricZ))
             {
                 ValidateMetricZValue(productSize);
+            }
+            else if(productSize.MetricZValue != default)
+            {
+                throw new ArgumentException("You are not allowed to specify MetricZValue for this ProductSize");
             }
         }
 
@@ -138,7 +151,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productSize.MetricZValue <= 0)
             {
-                throw new ArgumentException("MetricZ can not be less or equals zero");
+                throw new ArgumentException("MetricZ cannot be less then or equal to zero");
             }
         }
     }

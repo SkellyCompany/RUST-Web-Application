@@ -9,6 +9,8 @@ namespace RUSTWebApplication.Core.DomainService
 
 		ProductSize Read(int productSizeId);
 
+		ProductSize ReadIncludeProductMetric(int productSizeId);
+
 		IEnumerable<ProductSize> ReadAll();
 
 		ProductSize Update(ProductSize updatedProductSize);
