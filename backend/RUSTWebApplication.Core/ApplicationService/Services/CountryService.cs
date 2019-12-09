@@ -69,7 +69,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (country == null)
             {
-                throw new ArgumentNullException("Country is null");
+                throw new ArgumentNullException("Country cannot be null");
             }
         }
 
