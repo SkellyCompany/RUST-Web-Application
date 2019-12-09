@@ -53,11 +53,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         private void ValidateCreate(ProductStock productStock)
         {
             ValidateNull(productStock);
-	    if (productStock.Id != default)
+	        if (productStock.Id != default)
             {
                 throw new ArgumentException("You are not allowed to specify an ID when creating a Country.");
             }
-	    ValidateQuantity(productStock);
+	        ValidateQuantity(productStock);
             ValidateProduct(productStock);
             ValidateProductSize(productStock);
         }
@@ -65,7 +65,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         private void ValidateUpdate(ProductStock productStock)
         {
             ValidateNull(productStock);
-            ValidateQuantity(productStock);    
+            ValidateQuantity(productStock);
+            if (_productStockRepository.Read(productStock.Id) == null)
+            {
+                throw new ArgumentException($"Cannot find a ProductStock with an ID: {productStock.Id}");
+            }
             if (productStock.Product != null)
             {
                 throw new ArgumentException("Product cannot be updated");
@@ -74,12 +78,8 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 throw new ArgumentException("Product Size cannot be updated.");
             }
-            if (_productStockRepository.Read(productStock.Id) == null)
-            {
-                throw new ArgumentException($"Cannot find a ProductStock with an ID: {productStock.Id}");
-            }
+            
         }
-
 
         private void ValidateNull(ProductStock productStock)
         {
