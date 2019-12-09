@@ -77,11 +77,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(country.Name))
             {
-                throw new ArgumentException("You need to specify a name for the Country.");
+                throw new ArgumentException("You need to specify a Name for the Country.");
             }
             if (!char.IsUpper(country.Name[0]))
             {
-                throw new ArgumentException("Country name must start with an uppercase letter.");
+                throw new ArgumentException("Country Name must start with an uppercase letter.");
             }
         }
     }

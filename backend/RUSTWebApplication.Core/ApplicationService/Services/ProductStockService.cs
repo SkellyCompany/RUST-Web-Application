@@ -55,7 +55,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productStock);
 	        if (productStock.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a Country.");
+                throw new ArgumentException("You are not allowed to specify the ID when creating a Country.");
             }
 	        ValidateQuantity(productStock);
             ValidateProduct(productStock);
@@ -66,26 +66,25 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             ValidateNull(productStock);
             ValidateQuantity(productStock);
-            if (_productStockRepository.Read(productStock.Id) == null)
-            {
-                throw new ArgumentException($"Cannot find a ProductStock with an ID: {productStock.Id}");
-            }
             if (productStock.Product != null)
             {
-                throw new ArgumentException("Product cannot be updated");
+                throw new ArgumentException("You are not allowed to specify a Product when updating a ProductStock.");
             }
             if (productStock.ProductSize != null)
             {
-                throw new ArgumentException("Product Size cannot be updated.");
+                throw new ArgumentException("You are not allowed to specify a ProductSize when updating a ProductStock.");
             }
-            
+            if (_productStockRepository.Read(productStock.Id) == null)
+            {
+                throw new ArgumentException($"Cannot find a ProductStock with the ID: {productStock.Id}");
+            }
         }
 
         private void ValidateNull(ProductStock productStock)
         {
             if (productStock == null)
             {
-                throw new ArgumentNullException("Product Stock cannot be null");
+                throw new ArgumentNullException("ProductStock cannot be null");
             }
         }
 
@@ -93,7 +92,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productStock.Product == null)
             {
-                throw new ArgumentException("Product Stock cannot be null.");
+                throw new ArgumentException("You need to specify a Product for the ProductStock.");
             }
             if (_productRepository.Read(productStock.Product.Id) == null)
             {
@@ -105,11 +104,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productStock.ProductSize == null)
             {
-                throw new ArgumentException("Product Size cannot be null.");
+                throw new ArgumentException("You need to specify a ProductSize for the ProductStock.");
             }
             if (_productSizeRepository.Read(productStock.ProductSize.Id) == null)
             {
-                throw new ArgumentException($"The Product Size with the ID: {productStock.ProductSize.Id} doesn't exist.");
+                throw new ArgumentException($"The ProductSize with the ID: {productStock.ProductSize.Id} doesn't exist.");
             }
         }
 
