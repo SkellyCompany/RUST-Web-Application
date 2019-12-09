@@ -49,38 +49,32 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productSize);
             if (productSize.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a Product Size.");
+                throw new ArgumentException("You are not allowed to specify an ID when creating a ProductSize.");
             }
-            ValidateProductMetric(productSize);
             ValidateSize(productSize);
-            ValidateMetricXValue(productSize);
-            ValidateMetricYValue(productSize);
-            ValidateMetricZValue(productSize);
+            ValidateProductMetric(productSize);
+            ValidateMetricValues(productSize);
         }
 
         private void ValidateUpdate(ProductSize productSize)
         {
             ValidateNull(productSize);
-            if (_productSizeRepository.Read(productSize.Id) == null)
-            {
-                throw new ArgumentNullException($"Cannot find a Product Size with an ID: {productSize.Id}");
-            }
-
+            ValidateSize(productSize);
             if (productSize.ProductMetric != null)
             {
-                throw new ArgumentException("Product Metric must not be specified.");
+                throw new ArgumentException("You are not allowed to specify a ProductMetric when updating the ProductSize.");
             }
-            ValidateSize(productSize);
-            ValidateMetricXValue(productSize);
-            ValidateMetricYValue(productSize);
-            ValidateMetricZValue(productSize);
+            if (_productSizeRepository.Read(productSize.Id) == null)
+            {
+                throw new ArgumentNullException($"Cannot find a ProductSize with the ID: {productSize.Id}");
+            }
         }
 
         private void ValidateNull(ProductSize productSize)
         {
             if (productSize == null)
             {
-                throw new ArgumentNullException("Product Size is null");
+                throw new ArgumentNullException("Product Size cannot be null");
             }
         }
 
@@ -88,7 +82,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productSize.ProductMetric == null)
             {
-                throw new ArgumentException("You need to specify a Product Metric for the Product Size.");
+                throw new ArgumentException("You need to specify a ProductMetric for the ProductSize.");
             }
 
             if (_productMetricRepository.Read(productSize.ProductMetric.Id) == null)
@@ -101,7 +95,24 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(productSize.Size))
             {
-                throw new ArgumentException("Size can not be empty.");
+                throw new ArgumentException("You need to specify a Size for the ProductSize.");
+            }
+        }
+
+        private void ValidateMetricValues(ProductSize productSize)
+        {
+            ProductMetric sizeMetric = _productMetricRepository.Read(productSize.ProductMetric.Id);
+            if(!string.IsNullOrEmpty(sizeMetric.MetricX))
+            {
+                ValidateMetricXValue(productSize);
+            }
+            if (!string.IsNullOrEmpty(sizeMetric.MetricY))
+            {
+                ValidateMetricYValue(productSize);
+            }
+            if (!string.IsNullOrEmpty(sizeMetric.MetricZ))
+            {
+                ValidateMetricZValue(productSize);
             }
         }
 
@@ -109,7 +120,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productSize.MetricXValue <= 0)
             {
-                throw new ArgumentException("MetricX can not be less or equals zero");
+                throw new ArgumentException("MetricX cannot be less then or equal to zero");
             }
         }
 
@@ -117,7 +128,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productSize.MetricYValue <= 0)
             {
-                throw new ArgumentException("MetricY can not be less or equals zero");
+                throw new ArgumentException("MetricY cannot be less then or equal to zero");
             }
         }
 

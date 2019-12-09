@@ -287,8 +287,6 @@ namespace RUSTWebApplication.UnitTests.Core
             productRepository.Setup(repo => repo.Update(validProduct)).
                 Returns(validProduct);
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
-            productModelRepository.Setup(repo => repo.Read(validProduct.ProductModel.Id)).
-                Returns(validProduct.ProductModel);
 
             IProductService productService = new ProductService(productRepository.Object,
                 productModelRepository.Object);
