@@ -33,7 +33,7 @@
           <li>
             <div class="cart-list-product">
               <div>
-                <img src="https://i.imgur.com/y2AohP6.png" height="125" width="125">       
+                <img src="https://i.imgur.com/ktK60Ge.png" height="125" width="125">       
               </div>
               <div>
                 <div class="cart-list-name-primary">Greg suks shirt</div>
@@ -45,7 +45,7 @@
           <li>
             <div class="cart-list-product">
               <div>
-                <img src="https://i.imgur.com/y2AohP6.png" height="125" width="125">       
+                <img src="https://i.imgur.com/ktK60Ge.png" height="125" width="125">       
               </div>
               <div>
                 <div class="cart-list-name-primary">Greg suks shirt</div>
@@ -56,11 +56,25 @@
           </li>        
         </ul>
       <div>      
-        <div id="cart-total-w">Subtotal: 132.99€</div>
+        <div id="cart-total">Subtotal: 132.99€</div>
       </div>
       </form>
       <div class="purchase-container">
-        <button>Purchase</button>
+        <button (click)="setOrderConfirmationVisibility()" >Purchase</button>
+      </div>
+    </div>
+  </div>
+  <!-- Order Confirmation -->
+  <div *ngIf="isOrderConfirmationVisible === true">
+    <div class="orderConfirmation">
+      <div class="orderConfirmation-content" (clickOutside)="setOrderConfirmationVisibility()">
+        <div class="orderConfirmation-body">
+          <h3 class="orderConfirmation-header">Order confirmed!</h3>
+          <p>Thank you for your purchase. <br> We've sent an email to you with further details.</p>
+        </div>
+        <div class="orderConfirmation-container" style=" margin-top: 20%;">
+          <button (click)="setOrderConfirmationVisibility()">Ok</button>
+        </div>
       </div>
     </div>
   </div>

@@ -46,8 +46,8 @@ header .flex-child{
   min-height:20px;
   // background-image: url('https://i.imgur.com/KHBUExj.png');
   background-color: #000;
-  -webkit-box-shadow:0 2px 10px rgba(0,0,0,.1);
-  box-shadow:0 2px 10px rgba(0,0,0,.1);
+  -webkit-box-shadow:0 2px 10px rgba(255,255,255,.1);
+  box-shadow:0 2px 10px rgba(255,255,255,.1);
 }
 .navigation-bar-wrap{
   padding-left:40px;
@@ -106,7 +106,7 @@ header .flex-child{
   left:0;
   right:5px;
   margin:0 auto;
-  background-color:green;
+  background-color:#fff;
   -webkit-transition:all 0.3s ease-in-out;
   transition:all 0.3s ease-in-out;
 }
@@ -204,8 +204,8 @@ header .flex-child{
       list-style:none;
       white-space:nowrap;
       background-color:#000;
-      -webkit-box-shadow:0 8  px 20px rgba(0,0,0,.1);
-      box-shadow:0 8px 20px rgba(0,0,0,.1);
+      -webkit-box-shadow:0 8  px 20px rgba(255,255,255,.1);
+      box-shadow:0 8px 20px rgba(255,255,255,.1);
       background-clip:padding-box;
       display:block;
       visibility:hidden;
@@ -221,7 +221,7 @@ header .flex-child{
       display:block;
     }
     .navigation-bar-dropdown-menu>li>a:hover{
-      color:green;
+      color: #fff;
       font-family: 'roman';
       text-transform: uppercase;
     }
@@ -247,9 +247,9 @@ header .flex-child{
       text-align:right;
       list-style:none;
       white-space:nowrap;
-      background-color:green;
-      -webkit-box-shadow:0 8  px 20px rgba(0,0,0,.1);
-      box-shadow:0 8px 20px rgba(0,0,0,.1);
+      background-color:#fff;
+      -webkit-box-shadow:0 8  px 20px rgba(255,255,255,.1);
+      box-shadow:0 8px 20px rgba(255,255,255,.1);
       -webkit-transition:all 0.1s ease-in-out;
       transition:all 0.1s ease-in-out;
     }
@@ -309,7 +309,7 @@ header .flex-child{
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.8);
 }
-#cart-total-w{
+#cart-total{
   margin-top: 5%;
   font-family: 'roman';
   font-weight: bold;
@@ -325,7 +325,6 @@ header .flex-child{
 .sidebar-wide{
   position:absolute;
   pointer-events: all;
-
   z-index: 22500!important;
   top:0;
   bottom:0;

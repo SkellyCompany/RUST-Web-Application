@@ -17,20 +17,12 @@ th{
   padding-right:20px;
   padding-left:20px;
 }
-tr.cart-subtotal th{
-  padding:20px 0!important;
-}
-tr.cart-subtotal td{
-  padding:20px 0!important;
-}
 .row,.form-row{
   display:flex;
   flex-wrap:wrap;
   margin-right:-20px;
   margin-left:-20px;
-}
-.checkout-review-container th,.checkout-review-container td{
-  padding:0px!important;
+  color: #fff;
 }
 .purchase-container{
   margin-top:5%;
@@ -38,8 +30,8 @@ tr.cart-subtotal td{
 }
 .purchase-container button{
   cursor:pointer;
-  background:#000;
-  color:#fff;
+  background:#fff;
+  color:#000;
   -webkit-appearance:none;
   border:none;
   -webkit-border-radius:0;
@@ -58,22 +50,16 @@ tr.cart-subtotal td{
   width:100%;
   padding:24px 0;
 }
-table.checkout-review-container tr.order-total{
-  font-size:2rem!important;
+.checkout-wrapper{
+  color: #fff;
 }
-.checkout-review-container{
-  width:100%;
-}
-.checkout-review-container th:last-child,.checkout-review-container td:last-child{
-  width:25%;
-  text-align:right;
-} 
 .checkout .checkout-content .page-title{
   margin-bottom:3rem;
   text-align: center;
   text-transform: uppercase;
   margin-top: 20%;
   text-align:left!important;
+  color: #fff;
 }
 .checkout .checkout-content .checkout-form h3{
   margin-top:1rem;
@@ -105,22 +91,24 @@ input,select,textarea{
   padding:0.5rem 0.75rem;
   font-size:1rem;
   line-height:1.25;
-  color:#464a4c;
-  background-color:#fff;
+  color:#fff;
+  background-color:#000;
   background-image:none;
   background-clip:padding-box;
-  border:1px solid rgba(0, 0, 0, 0.15);
+  border:1px solid rgba(255, 255, 255, 0.55);
   border-radius:0;
   transition:border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-//sda
+//checkout cart
 #cart-title{
   padding: 5.90278vw 0 0;
+  color:#fff;
 }
 .cart-list-price-primary{
   margin:.24vw 0 0;
   font-family: 'roman';
   font-weight: bold;
+  color:#fff;
 }
 .cart-list-name-secondary{
   overflow:hidden;
@@ -129,6 +117,7 @@ input,select,textarea{
   font-size: 16px;
   font-family: 'roman';
   font-weight: bold;
+  color:#fff;
 }
 .cart-list-name-secondary{
   padding:0 .69444vw 0 1.11111vw;
@@ -140,6 +129,7 @@ input,select,textarea{
   overflow:hidden;
   overflow-y:auto;
   max-height:30vw;
+  color:#fff;
 }
 .cart-list-product{
   width:100%;
@@ -162,7 +152,7 @@ input,select,textarea{
   vertical-align: top;
   text-align: center;
   outline: none;
-  border: 1px solid #e6dcd2;
+  border: 1px solid #fff;
   border-radius: .13889vw;
 }
 .cart-list-quantity,
@@ -177,16 +167,102 @@ input,select,textarea{
   width: 30px;
   line-height: 38px;
   background: transparent;
-  color: #444;
+  color: #fff;
   text-align: center;
   font-weight: bold;
   cursor: pointer;
 }
-#cart-total-w{
+#cart-total{
   margin-top: 5%;
   font-family: 'roman';
   font-weight: bold;
+  font-size: 22px;
 }
+//Order confirmation
+.orderConfirmation {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  padding-top: 200px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+  z-index: 1500!important;
+}
+.orderConfirmation-content {
+  position: relative;
+  background-color: #000;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 30%;
+  height: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animateTop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animateTop;
+  animation-duration: 0.4s
+}
+@-webkit-keyframes animateTop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+@keyframes animateTop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+.orderConfirmation-header {
+  text-align: center;
+  background-color: #000;
+  border-bottom: 2px solid #fff;
+  color: white;
+  font-size: 25px;
+  font-family: 'roman';
+  margin-bottom: 9%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+}
+.orderConfirmation-body {
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 3%;
+}
+.orderConfirmation-container{
+  margin-top:5%;
+  margin-bottom:20%;
+}
+.orderConfirmation-container button{
+  cursor:pointer;
+  background:#000;
+  color:#fff;
+  -webkit-appearance:none;
+  border:none;
+  -webkit-border-radius:0;
+  -moz-border-radius:0;
+  border-radius:0;
+  display:inline-block;
+  -ms-grid-column:1;
+  -ms-grid-column-span:2;
+  grid-column:1/span 2;
+  text-transform:uppercase;
+  font-size:18px;
+  padding:14px 30px;
+  line-height:1;
+  text-decoration:none;
+  display:block;
+  width:100%;
+  padding:24px 0;
+  outline: 0;
+}
+.orderConfirmation-container button:hover{
+  text-decoration: underline;
+}
+
 /* Media */
 @media (min-width: 992px){
 .container{

@@ -74,7 +74,7 @@
 
 //General
 .content-inner{
-  background-color:#fff;
+  background-color:#000;
   max-width:960px;
   margin:0 auto;
   padding:100px 8%;
@@ -132,7 +132,7 @@
 }
 .content-block h1{
   margin:1em 0 .5em;
-  color:#16161d;
+  color:#fff;;
   font-family:'roman';
   font-size:2em;
   font-weight:600;
@@ -146,7 +146,6 @@
   letter-spacing:0px;
   text-decoration:none;
   line-height:80px;
-  color:#000;
   max-width:1000px!important;
   margin:0 auto!important;
 }
@@ -162,7 +161,7 @@
   line-height:1.2em;
   letter-spacing:.8em!important;
   margin:1em 0 .5em;
-  color:#16161d;
+  color:#fff;
   font-size:12px;
   text-align:left;
   line-height:0px!important;
@@ -170,6 +169,7 @@
 
 p{
   font-family:'BrownStd-Light'!important;
+  color:#fff;
   font-size:16px!important;
   letter-spacing:.02em!important;
   text-align:left;
@@ -187,8 +187,6 @@ p{
   text-align: center;
   display:inline-block;
   background:#000;
-  border-radius:50%;
-  border:2px solid #000;
   padding-right: 38%;
   padding-left: 38%;
 }
@@ -198,19 +196,22 @@ p{
   text-align: center;
   display:inline-block;
   background:#000;
-  border-radius:50%;
-  border:2px solid #000;
   padding-right: 5%;
   padding-left: 5%;
 }
 .content-outer, .dark{
   background-color:#000;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 .h1, .dark{
   color:#fff !important;
+  border: none;
 }
 .p, .dark{
   color:#fff !important;
+  border: none;
+
 }
 
 //Contact

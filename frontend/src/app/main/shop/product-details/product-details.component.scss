@@ -2,7 +2,7 @@
 
 //Product
 .page-product{
-  background:#fbfbfb;
+  background:#000;
   padding-bottom:112px;
   padding-top:10%;
 }
@@ -39,6 +39,7 @@
   line-height:1.2;
   font-size:32px;
   font-weight:500;
+  color: #fff;
 }
 .page-product .product-content-header .title .brand{
   display:block;
@@ -47,7 +48,7 @@
   font-weight:400;
   margin-top:12px;
   font-size:28px;
-  color:#000;
+  color:#fff;
 }
 .page-product .product-content-selection .selection{
   display:-webkit-box;
@@ -63,7 +64,7 @@
   margin-bottom:24px;
 }
 .page-product .product-content-selection select.form-control{
-  border:1px solid #1c1818;
+  border:1px solid #fff;
   -webkit-border-radius:0;
   -moz-border-radius:0;
   border-radius:0;
@@ -80,6 +81,7 @@
 }
 .color-container{
   margin-bottom:18%;
+  color: #fff;
 }
 .color-carousel .color-scroller{
   margin-right:80px;
@@ -120,12 +122,12 @@
 }
 .product-content-selection select.form-control:focus{
   outline:none;
-  border-color:#1c1818;
+  border-color:#fff;
 }
 .product-content-selection .button{
   cursor:pointer;
-  background:#000;
-  color:#fff;
+  background:#fff;
+  color:#000;
   -webkit-appearance:none;
   border:none;
   -webkit-border-radius:0;
@@ -145,6 +147,39 @@
   padding:24px 0;
 }
 .product-content-selection .button:hover{
+}
+.product-content-selection .button{
+  cursor:pointer;
+  color: #fff;
+  background: #000;
+  border: 2px solid #fff;
+  -webkit-appearance:none;
+  -webkit-border-radius:0;
+  -moz-border-radius:0;
+  border-radius:0;
+  display:inline-block;
+  -ms-grid-column:1;
+  -ms-grid-column-span:2;
+  grid-column:1/span 2;
+  text-transform:uppercase;
+  font-size:15px;
+  padding:14px 30px;
+  line-height:1;
+  text-decoration:none;
+  display:block;
+  width:100%;
+  padding:24px 0;
+  font-family: "Helvetica Neue";
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+}
+.product-content-selection .button:hover{
+  color: #000;
+  background-color: #fff;
+  cursor: pointer;    
 }
 /* Media */
 @media (min-width:1200px){
@@ -189,11 +224,13 @@
 
 //Details 
 .details-container{
+  border-top: 1px solid #fff;
   width:90%;
   margin:0 auto;
   max-width:1360px;
   padding-top: 8%;
   padding-bottom: 5%;
+  color: #fff;
 }
 .details-title{
   font-size:13px;
@@ -201,6 +238,7 @@
   text-transform:uppercase;
   letter-spacing:0.16em;
   margin-bottom:20px;
+  color: #fff;
 }
 .description-container{
   display:inline-block;
