@@ -66,7 +66,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productCategory == null)
             {
-                throw new ArgumentNullException("Product Category is null");
+                throw new ArgumentNullException("Product Category cannot be null");
             }
         }
 
