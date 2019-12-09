@@ -53,18 +53,18 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
                 throw new ArgumentException("You are not allowed to specify an ID when creating a Product.");
             }
             ValidateColor(product);
-	    ValidateProductStock(product);
+	        ValidateProductStock(product);
             ValidateProductModel(product);
         }
 
         private void ValidateUpdate(Product product)
         {
             ValidateNull(product);
-	    ValidateColor(product);
-	    ValidateProductStock(product);
-	    if (product.ProductModel != null)
+	        ValidateColor(product);
+	        ValidateProductStock(product);
+	        if (product.ProductModel != null)
             {
-                throw new ArgumentException("You are not allowed to specify the Project Model when updating a Product.");
+                throw new ArgumentException("You are not allowed to specify a ProductModel when updating a Product.");
             }	    
             if (_productRepository.Read(product.Id) == null)
             {
@@ -85,7 +85,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(product.Color))
             {
-                throw new ArgumentException("You need to specify a Color.");
+                throw new ArgumentException("You need to specify a Color for the Product.");
             }
         }
 
@@ -93,12 +93,12 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (product.ProductModel == null)
             {
-                throw new ArgumentException("You need to specify a Product Model");
+                throw new ArgumentException("You need to specify a ProductModel for the Product");
             }
 
             if (_productModelRepository.Read(product.ProductModel.Id) == null)
             {
-                throw new ArgumentException($"Product Model with the ID: {product.ProductModel.Id} doesn't exist'");
+                throw new ArgumentException($"ProductModel with the ID: {product.ProductModel.Id} doesn't exist'");
             }
         }
 
@@ -106,7 +106,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (product.ProductStocks != null)
             {
-                throw new ArgumentException("Product Stock must be null");
+                throw new ArgumentException("You are not allowed to specify a ProductStock for a Product");
             }
         }
     }
