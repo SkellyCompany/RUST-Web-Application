@@ -4,6 +4,6 @@ namespace RUSTWebApplication.Core.ApplicationService
 {
 	public interface IUserService
 	{
-		User ValidateUser(LoginInputModel loginInput);
+		User Validate(LoginInputModel loginInput);
 	}
 }

@@ -14,7 +14,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 			_userRepository = userRepository;
 		}
 
-		public User ValidateUser(LoginInputModel loginInput)
+		public User Validate(LoginInputModel loginInput)
 		{
 			throw new NotImplementedException();
 		}
