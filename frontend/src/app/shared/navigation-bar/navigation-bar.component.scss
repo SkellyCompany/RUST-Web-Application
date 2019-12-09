@@ -31,6 +31,7 @@ header .flex-child{
 .logo{
   cursor: pointer;
   width:150px;
+  outline: 0;
 }
 
 .navigation-bar{
@@ -266,7 +267,7 @@ header .flex-child{
 
 //Cart
 .checkout-button{
-  height: 4.57143rem;
+  height: 3.57143rem;
   line-height: 3.57143rem;
   transition: all .15s ease;
   font-family: "Helvetica Neue";
@@ -298,7 +299,8 @@ header .flex-child{
   line-height:1;
   font-weight: bold;
   font-family: 'roman';
-  padding-bottom: 5%;
+  padding-bottom: 1%;
+  text-align: center;
 }
 .over-page{
   z-index:1001;
@@ -310,17 +312,16 @@ header .flex-child{
   background-color: rgba(0, 0, 0, 0.8);
 }
 #cart-total{
-  margin-top: 5%;
+  margin-top: 75%;
   font-family: 'roman';
   font-weight: bold;
 }
 .sidebar{
   position:relative;
   margin:auto;
-  padding-left:17%;
-  padding-right:16%;
+  padding-left:2%;
+  padding-right:2%;
   pointer-events: all;
-
 }
 .sidebar-wide{
   position:absolute;
@@ -334,18 +335,34 @@ header .flex-child{
   -webkit-transform:translate3d(100%,0,0);
   transform:translate3d(100%,0,0);
   transform: translate3d(0%, 0px, 0px);
-  width:620px;
+  width:330px;
+  height: 600px;
+  margin-top: 4.5%;
+  margin-right: 13.5%;
+  -webkit-animation-name: animateFade;
+  -webkit-animation-duration: 0.5s;
+  animation-name: animateFade;
+  animation-duration: 0.5s
 }
+  @-webkit-keyframes animateFade {
+    from {opacity:0} 
+    to {opacity:1}
+    }
+  @keyframes animateFade {
+    from {opacity:0}
+    to {opacity:1}
+    }
 .cart-list-price-primary{
-  margin:.24vw 0 0;
+  margin:.12vw 0 0;
   font-family: 'roman';
   font-weight: bold;
+  font-size: 14px;
 }
 .cart-list-name-secondary{
   overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'roman';
   font-weight: bold;
 }
@@ -358,23 +375,29 @@ header .flex-child{
 .cart-list{
   padding-top: 12%;
   overflow:hidden;
-  overflow-y:auto;
-  max-height:30vw;
+  overflow-y: auto;
+  max-height:22vw;
+}
+.cart-list::-webkit-scrollbar{
+  width: 0;
+  height: 0;
 }
 .cart-list-product{
   width:100%;
+  padding-top: 5%;
   display:-webkit-box;
   display:flex;
+  border-bottom: 1px solid #000;
 }
 .cart-list-name-primary{
-  font-size: 20px;
+  font-size: 16px!important;
   font-family: 'roman';
   font-weight: bold;
   font-size:1.11111vw;
   padding:0 .69444vw 0 1.11111vw;
 }
 #cart-title{
-  padding: 5.90278vw 0 0;
+  padding: 1.5vw 0 0;
 }
 .cart-list-quantity-container{
   margin: .55556vw 0 0 .55556vw;
