@@ -53,31 +53,30 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         private void ValidateCreate(ProductStock productStock)
         {
             ValidateNull(productStock);
-            ValidateProduct(productStock);
-            ValidateSize(productStock);
-            ValidateQuantity(productStock);
-            if (productStock.Id != default)
+	    if (productStock.Id != default)
             {
                 throw new ArgumentException("You are not allowed to specify an ID when creating a Country.");
             }
+	    ValidateQuantity(productStock);
+            ValidateProduct(productStock);
+            ValidateProductSize(productStock);
         }
 
         private void ValidateUpdate(ProductStock productStock)
         {
             ValidateNull(productStock);
-            ValidateQuantity(productStock);
-            if (_productStockRepository.Read(productStock.Id) == null)
-            {
-                throw new ArgumentException($"Cannot find a ProductStock with an ID: {productStock.Id}");
-            }
-
+            ValidateQuantity(productStock);    
             if (productStock.Product != null)
             {
-                throw new ArgumentException("Product can not be updated");
+                throw new ArgumentException("Product cannot be updated");
             }
             if (productStock.ProductSize != null)
             {
-                throw new ArgumentException("Product Size can not be updated.");
+                throw new ArgumentException("Product Size cannot be updated.");
+            }
+            if (_productStockRepository.Read(productStock.Id) == null)
+            {
+                throw new ArgumentException($"Cannot find a ProductStock with an ID: {productStock.Id}");
             }
         }
 
@@ -86,7 +85,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productStock == null)
             {
-                throw new ArgumentNullException("Product Stock is null");
+                throw new ArgumentNullException("Product Stock cannot be null");
             }
         }
 
@@ -94,7 +93,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productStock.Product == null)
             {
-                throw new ArgumentException("Product Stock can not be null.");
+                throw new ArgumentException("Product Stock cannot be null.");
             }
             if (_productRepository.Read(productStock.Product.Id) == null)
             {
@@ -102,11 +101,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
         }
 
-        private void ValidateSize(ProductStock productStock)
+        private void ValidateProductSize(ProductStock productStock)
         {
             if (productStock.ProductSize == null)
             {
-                throw new ArgumentException("Product Size can not be null.");
+                throw new ArgumentException("Product Size cannot be null.");
             }
             if (_productSizeRepository.Read(productStock.ProductSize.Id) == null)
             {
@@ -118,7 +117,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productStock.Quantity < 0)
             {
-                throw new ArgumentException("Quantity can not be negative.");
+                throw new ArgumentException("Quantity cannot be negative.");
             }
 
         }
