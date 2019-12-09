@@ -50,24 +50,24 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productModel);
             if (productModel.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a Product Model.");
+                throw new ArgumentException("You are not allowed to specify the ID when creating a Product Model.");
             }
             ValidateName(productModel);
             ValidatePrice(productModel);
             ValidateProducts(productModel);
-	    ValidateProductCategory(productModel);
+	        ValidateProductCategory(productModel);
         }
 
         private void ValidateUpdate(ProductModel productModel)
         {
             ValidateNull(productModel);
             ValidateName(productModel);
-	    ValidatePrice(productModel);
-	    ValidateProducts(productModel);
+	        ValidatePrice(productModel);
+	        ValidateProducts(productModel);
             ValidateProductCategory(productModel);     
-	    if (_productModelRepository.Read(productModel.Id) == null)
+	        if (_productModelRepository.Read(productModel.Id) == null)
             {
-                throw new ArgumentException($"Cannot find a Product Model with an ID: {productModel.Id}");
+                throw new ArgumentException($"Cannot find a Product Model with the ID: {productModel.Id}");
             }
         }
 
@@ -84,7 +84,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(productModel.Name))
             {
-                throw new ArgumentException("You need to specify a name for the Product Model.");
+                throw new ArgumentException("You need to specify a Name for the Product Model.");
             }
         }
 
@@ -92,7 +92,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productModel.ProductCategory == null)
             {
-                throw new ArgumentException("Product Category cannot be null");
+                throw new ArgumentException("You need to specify a ProductCategory for the ProductModel");
             }
 
             if (_productCategoryRepository.Read(productModel.ProductCategory.Id) == null)
@@ -113,7 +113,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productModel.Products != null)
             {
-                throw new ArgumentException("Products cannot be specified.");
+                throw new ArgumentException("You are not allowed to specify a Products for the ProductModel.");
             }
         }
     }

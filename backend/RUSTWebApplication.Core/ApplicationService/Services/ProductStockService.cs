@@ -55,7 +55,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productStock);
 	        if (productStock.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a Country.");
+                throw new ArgumentException("You are not allowed to specify the ID when creating a Country.");
             }
 	        ValidateQuantity(productStock);
             ValidateProduct(productStock);

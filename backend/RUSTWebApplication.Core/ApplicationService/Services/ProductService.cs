@@ -50,10 +50,10 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(product);
             if (product.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a Product.");
+                throw new ArgumentException("You are not allowed to specify the ID when creating a Product.");
             }
             ValidateColor(product);
-	        ValidateProductStock(product);
+	        ValidateProductStocks(product);
             ValidateProductModel(product);
         }
 
@@ -61,14 +61,14 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             ValidateNull(product);
 	        ValidateColor(product);
-	        ValidateProductStock(product);
+	        ValidateProductStocks(product);
 	        if (product.ProductModel != null)
             {
                 throw new ArgumentException("You are not allowed to specify a ProductModel when updating a Product.");
             }	    
             if (_productRepository.Read(product.Id) == null)
             {
-                throw new ArgumentException($"Cannot find a Product with an ID: {product.Id}");
+                throw new ArgumentException($"Cannot find a Product with the ID: {product.Id}");
             }          
             
         }
@@ -102,11 +102,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
         }
 
-        private void ValidateProductStock(Product product)
+        private void ValidateProductStocks(Product product)
         {
             if (product.ProductStocks != null)
             {
-                throw new ArgumentException("You are not allowed to specify a ProductStock for a Product");
+                throw new ArgumentException("You are not allowed to specify a ProductStocks for a Product");
             }
         }
     }

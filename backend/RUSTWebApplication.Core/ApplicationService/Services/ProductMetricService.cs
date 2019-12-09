@@ -50,13 +50,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productMetric);
             if (productMetric.Id != default)
             {
-                throw new ArgumentException("You are not allowed to specify an ID when creating a Product Metric.");
+                throw new ArgumentException("You are not allowed to specify an ID when creating a ProductMetric.");
             }
             ValidateName(productMetric);
-            ValidateProductModel(productMetric);
             ValidateMetricXValue(productMetric);
-            ValidateMetricYValue(productMetric);
-            ValidateMetricZValue(productMetric);
+            ValidateProductModel(productMetric);
         }
 
         private void ValidateUpdate(ProductMetric productMetric)
@@ -64,13 +62,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productMetric);
             if (_productMetricRepository.Read(productMetric.Id) == null)
             {
-                throw new ArgumentException($"Cannot find a Product Metric with an ID: {productMetric.Id}");
+                throw new ArgumentException($"Cannot find a Product Metric with the ID: {productMetric.Id}");
             }
             ValidateName(productMetric);
-            ValidateProductModel(productMetric);
             ValidateMetricXValue(productMetric);
-            ValidateMetricYValue(productMetric);
-            ValidateMetricZValue(productMetric);
+            ValidateProductModel(productMetric);
 
         }
 
@@ -78,7 +74,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (productSize == null)
             {
-                throw new ArgumentNullException("Product Metric is null");
+                throw new ArgumentNullException("ProductMetric cannot be null");
             }
         }
 
@@ -86,14 +82,14 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(productMetric.Name))
             {
-                throw new ArgumentException("Name can not be empty.");
+                throw new ArgumentException("You need to specify a Name for the ProductMetric.");
             }
         }
         private void ValidateProductModel(ProductMetric productMetric)
         {
             if (productMetric.ProductModel == null)
             {
-                throw new ArgumentException("You need to specify a Product Model for the Product Metric.");
+                throw new ArgumentException("You need to specify a ProductModel for the ProductMetric.");
             }
 
             if (_productModelRepository.Read(productMetric.ProductModel.Id) == null)
@@ -106,23 +102,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(productMetric.MetricX))
             {
-                throw new ArgumentException("MetricX can not be empty");
-            }
-        }
-
-        private void ValidateMetricYValue(ProductMetric productMetric)
-        {
-            if (string.IsNullOrEmpty(productMetric.MetricY))
-            {
-                throw new ArgumentException("MetricY can not be empty");
-            }
-        }
-
-        private void ValidateMetricZValue(ProductMetric productMetric)
-        {
-            if (string.IsNullOrEmpty(productMetric.MetricZ))
-            {
-                throw new ArgumentException("MetricZ can not be empty");
+                throw new ArgumentException("You need to specify a MetricX for the ProductMetric");
             }
         }
     }
