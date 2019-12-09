@@ -244,6 +244,42 @@ namespace RUSTWebApplication.UnitTests.Core
             //Assert
             Assert.Throws<ArgumentException>(actual);
         }
+        
+        [Fact]
+        public void Create_MetricsTooManyFilled_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductSize invalidProductSize = new ProductSize
+            {
+                ProductMetric = new ProductMetric { Id = 1 },
+                Size = "XL",
+                MetricXValue = 70,
+                MetricYValue = 100,
+                MetricZValue = 150,
+            };
+
+            ProductMetric fetchedProductMetric = new ProductMetric
+            {
+                Id = 1,
+                Name = "Oversized Hoodie",
+                ProductModel = new ProductModel { Id = 1 },
+                MetricX = "Length",
+                MetricY = "Width"
+            };
+
+            Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(invalidProductSize.ProductMetric.Id)).
+                Returns(fetchedProductMetric);
+            IProductSizeService productSizeService = new ProductSizeService(productSizeRepository.Object,
+                productMetricRepository.Object);
+
+            //Act
+            Action actual = () => productSizeService.Create(invalidProductSize);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
 
         [Fact]
         public void Create_MetricSpecifiedValueZero_ThrowsArgumentException()
@@ -388,10 +424,24 @@ namespace RUSTWebApplication.UnitTests.Core
             };
 
             ProductSize expected = validProductSize;
+            
+            ProductMetric fetchedProductMetric = new ProductMetric {Id = 1, MetricX = "Length", MetricY = "Width", MetricZ = "Sleeve Length"};
+
+            ProductSize fetchedProductSize = new ProductSize
+            {
+                Id = 1,
+                ProductMetric = fetchedProductMetric,
+                Size = "XL",
+                MetricXValue = 70,
+                MetricYValue = 100,
+                MetricZValue = 150
+            };
 
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             productSizeRepository.Setup(repo => repo.Read(validProductSize.Id)).
                 Returns(expected);
+            productSizeRepository.Setup((repo => repo.ReadIncludeProductMetric(validProductSize.Id)))
+                .Returns(fetchedProductSize);
             productSizeRepository.Setup(repo => repo.Update(validProductSize)).
                 Returns(expected);
             Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
@@ -439,10 +489,24 @@ namespace RUSTWebApplication.UnitTests.Core
             };
 
             ProductSize nullProductSize = null;
+            
+            ProductMetric fetchedProductMetric = new ProductMetric {Id = 1, MetricX = "Length", MetricY = "Width", MetricZ = "Sleeve Length"};
+
+            ProductSize fetchedProductSize = new ProductSize
+            {
+                Id = 1,
+                ProductMetric = fetchedProductMetric,
+                Size = "XL",
+                MetricXValue = 70,
+                MetricYValue = 100,
+                MetricZValue = 150
+            };
 
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             productSizeRepository.Setup(repo => repo.Read(invalidProductSize.Id)).
                 Returns(nullProductSize);
+            productSizeRepository.Setup((repo => repo.ReadIncludeProductMetric(invalidProductSize.Id)))
+                .Returns(fetchedProductSize);
             Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductSizeService productSizeService = new ProductSizeService(productSizeRepository.Object,
@@ -452,7 +516,7 @@ namespace RUSTWebApplication.UnitTests.Core
             Action actual = () => productSizeService.Update(invalidProductSize);
 
             //Assert
-            Assert.Throws<ArgumentNullException>(actual);
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [Fact]
@@ -545,11 +609,13 @@ namespace RUSTWebApplication.UnitTests.Core
                 MetricXValue = 70,
                 MetricYValue = 100
             };
+            
+            ProductMetric fetchedProductMetric = new ProductMetric {Id = 1, MetricX = "Length", MetricY = "Width", MetricZ = "Sleeve Length"};
 
             ProductSize fetchedProductSize = new ProductSize
             {
                 Id = 1,
-                ProductMetric = new ProductMetric { Id = 1 },
+                ProductMetric = fetchedProductMetric,
                 Size = "XL",
                 MetricXValue = 70,
                 MetricYValue = 100,
@@ -559,6 +625,49 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             productSizeRepository.Setup(repo => repo.Read(invalidProductSize.Id)).
                 Returns(fetchedProductSize);
+            productSizeRepository.Setup((repo => repo.ReadIncludeProductMetric(invalidProductSize.Id)))
+                .Returns(fetchedProductSize);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            IProductSizeService productSizeService = new ProductSizeService(productSizeRepository.Object,
+                productMetricRepository.Object);
+
+            //Act
+            Action actual = () => productSizeService.Update(invalidProductSize);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+        
+        [Fact]
+        public void Update_MetricsTooManyFilled_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductSize invalidProductSize = new ProductSize
+            {
+                Id = 1,
+                ProductMetric = null,
+                Size = "XL",
+                MetricXValue = 70,
+                MetricYValue = 100,
+                MetricZValue = 150
+            };
+            
+            ProductMetric fetchedProductMetric = new ProductMetric {Id = 1, MetricX = "Length", MetricY = "Width"};
+
+            ProductSize fetchedProductSize = new ProductSize
+            {
+                Id = 1,
+                ProductMetric = fetchedProductMetric,
+                Size = "XL",
+                MetricXValue = 70,
+                MetricYValue = 100
+            };
+
+            Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
+            productSizeRepository.Setup(repo => repo.Read(invalidProductSize.Id)).
+                Returns(fetchedProductSize);
+            productSizeRepository.Setup((repo => repo.ReadIncludeProductMetric(invalidProductSize.Id)))
+                .Returns(fetchedProductSize);
             Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
             IProductSizeService productSizeService = new ProductSizeService(productSizeRepository.Object,
                 productMetricRepository.Object);
@@ -584,10 +693,12 @@ namespace RUSTWebApplication.UnitTests.Core
                 MetricZValue = 0
             };
 
+            ProductMetric fetchedProductMetric = new ProductMetric {Id = 1, MetricX = "Length", MetricY = "Width", MetricZ = "Sleeve Length"};
+
             ProductSize fetchedProductSize = new ProductSize
             {
                 Id = 1,
-                ProductMetric = new ProductMetric { Id = 1 },
+                ProductMetric = fetchedProductMetric,
                 Size = "XL",
                 MetricXValue = 70,
                 MetricYValue = 100,
@@ -597,6 +708,8 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             productSizeRepository.Setup(repo => repo.Read(invalidProductSize.Id)).
                 Returns(fetchedProductSize);
+            productSizeRepository.Setup((repo => repo.ReadIncludeProductMetric(invalidProductSize.Id)))
+                .Returns(fetchedProductSize);
             Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
             IProductSizeService productSizeService = new ProductSizeService(productSizeRepository.Object,
                 productMetricRepository.Object);
@@ -622,10 +735,12 @@ namespace RUSTWebApplication.UnitTests.Core
                 MetricZValue = -40
             };
 
+            ProductMetric fetchedProductMetric = new ProductMetric {Id = 1, MetricX = "Length", MetricY = "Width", MetricZ = "Sleeve Length"};
+
             ProductSize fetchedProductSize = new ProductSize
             {
                 Id = 1,
-                ProductMetric = new ProductMetric { Id = 1 },
+                ProductMetric = fetchedProductMetric,
                 Size = "XL",
                 MetricXValue = 70,
                 MetricYValue = 100,
@@ -635,6 +750,8 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductSizeRepository> productSizeRepository = new Mock<IProductSizeRepository>();
             productSizeRepository.Setup(repo => repo.Read(invalidProductSize.Id)).
                 Returns(fetchedProductSize);
+            productSizeRepository.Setup((repo => repo.ReadIncludeProductMetric(invalidProductSize.Id)))
+                .Returns(fetchedProductSize);
             Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
             IProductSizeService productSizeService = new ProductSizeService(productSizeRepository.Object,
                 productMetricRepository.Object);
