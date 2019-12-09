@@ -52,8 +52,8 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
                 throw new ArgumentException("You are not allowed to specify an ID when creating a ProductSize.");
             }
             ValidateSize(productSize);
-            ValidateProductMetric(productSize);
-            ValidateMetricValues(productSize);
+            ProductMetric productSizeMetric = ValidateProductMetric(productSize);
+            ValidateMetricValues(productSize, productSizeMetric);
         }
 
         private void ValidateUpdate(ProductSize productSize)
@@ -78,17 +78,20 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
         }
 
-        private void ValidateProductMetric(ProductSize productSize)
+        private ProductMetric ValidateProductMetric(ProductSize productSize)
         {
             if (productSize.ProductMetric == null)
             {
                 throw new ArgumentException("You need to specify a ProductMetric for the ProductSize.");
             }
-
-            if (_productMetricRepository.Read(productSize.ProductMetric.Id) == null)
+            
+            ProductMetric sizeMetric = _productMetricRepository.Read(productSize.ProductMetric.Id);
+            if (sizeMetric == null)
             {
                 throw new ArgumentException($"Product Metric with the ID: {productSize.ProductMetric.Id} doesn't exist.'");
             }
+
+            return sizeMetric;
         }
 
         private void ValidateSize(ProductSize productSize)
@@ -99,18 +102,17 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
         }
 
-        private void ValidateMetricValues(ProductSize productSize)
+        private void ValidateMetricValues(ProductSize productSize, ProductMetric productMetric)
         {
-            ProductMetric sizeMetric = _productMetricRepository.Read(productSize.ProductMetric.Id);
-            if(!string.IsNullOrEmpty(sizeMetric.MetricX))
+            if(!string.IsNullOrEmpty(productMetric.MetricX))
             {
                 ValidateMetricXValue(productSize);
             }
-            if (!string.IsNullOrEmpty(sizeMetric.MetricY))
+            if (!string.IsNullOrEmpty(productMetric.MetricY))
             {
                 ValidateMetricYValue(productSize);
             }
-            if (!string.IsNullOrEmpty(sizeMetric.MetricZ))
+            if (!string.IsNullOrEmpty(productMetric.MetricZ))
             {
                 ValidateMetricZValue(productSize);
             }
