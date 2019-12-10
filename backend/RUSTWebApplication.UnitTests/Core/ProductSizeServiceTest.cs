@@ -36,7 +36,6 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Id = 1,
                 Name = "Oversized Hoodie",
-                ProductModel = new ProductModel { Id = 1 },
                 MetricX = "Length",
                 MetricY = "Width",
                 MetricZ = "Sleeve Length"
@@ -224,7 +223,6 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Id = 1,
                 Name = "Oversized Hoodie",
-                ProductModel = new ProductModel { Id = 1 },
                 MetricX = "Length",
                 MetricY = "Width",
                 MetricZ = "Sleeve Length"
@@ -262,7 +260,6 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Id = 1,
                 Name = "Oversized Hoodie",
-                ProductModel = new ProductModel { Id = 1 },
                 MetricX = "Length",
                 MetricY = "Width"
             };
@@ -298,7 +295,6 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Id = 1,
                 Name = "Oversized Hoodie",
-                ProductModel = new ProductModel { Id = 1 },
                 MetricX = "Length",
                 MetricY = "Width",
                 MetricZ = "Sleeve Length"
@@ -336,7 +332,6 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Id = 1,
                 Name = "Oversized Hoodie",
-                ProductModel = new ProductModel { Id = 1 },
                 MetricX = "Length",
                 MetricY = "Width",
                 MetricZ = "Sleeve Length"

@@ -10,13 +10,16 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 	{
 		private readonly IProductModelRepository _productModelRepository;
         private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IProductMetricRepository _productMetricRepository;
 
 
         public ProductModelService(IProductModelRepository productModelRepository,
-            IProductCategoryRepository productCategoryRepository)
+            IProductCategoryRepository productCategoryRepository,
+            IProductMetricRepository productMetricRepository)
 		{
 			_productModelRepository = productModelRepository;
             _productCategoryRepository = productCategoryRepository;
+            _productMetricRepository = productMetricRepository;
 		}
 
 		public ProductModel Create(ProductModel newProductModel)
@@ -56,6 +59,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidatePrice(productModel);
             ValidateProducts(productModel);
 	        ValidateProductCategory(productModel);
+            ValidateProductMetric(productModel);
         }
 
         private void ValidateUpdate(ProductModel productModel)
@@ -64,10 +68,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateName(productModel);
 	        ValidatePrice(productModel);
 	        ValidateProducts(productModel);
-            ValidateProductCategory(productModel);     
+            ValidateProductCategory(productModel);
+            ValidateProductMetric(productModel);
 	        if (_productModelRepository.Read(productModel.Id) == null)
             {
-                throw new ArgumentException($"Cannot find a Product Model with the ID: {productModel.Id}");
+                throw new ArgumentException($"Cannot find a ProductModel with the ID: {productModel.Id}");
             }
         }
 
@@ -76,7 +81,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 	{ 
             if (productModel == null)
             {
-                throw new ArgumentNullException("Product Model cannot be null");
+                throw new ArgumentNullException("ProductModel cannot be null");
             }
         }
 
@@ -84,7 +89,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             if (string.IsNullOrEmpty(productModel.Name))
             {
-                throw new ArgumentException("You need to specify a Name for the Product Model.");
+                throw new ArgumentException("You need to specify a Name for the ProductModel.");
             }
         }
 
@@ -97,7 +102,20 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
             if (_productCategoryRepository.Read(productModel.ProductCategory.Id) == null)
             {
-                throw new ArgumentException($"Product Category with the ID: {productModel.ProductCategory.Id} doesn't exist.");
+                throw new ArgumentException($"ProductCategory with the ID: {productModel.ProductCategory.Id} doesn't exist.");
+            }
+        }
+
+        private void ValidateProductMetric(ProductModel productModel)
+        {
+            if (productModel.ProductMetric == null)
+            {
+                throw new ArgumentException("You need to specify a ProductMetric for the ProductModel");
+            }
+
+            if (_productMetricRepository.Read(productModel.ProductMetric.Id) == null)
+            {
+                throw new ArgumentException($"ProductMetric with the ID: {productModel.ProductMetric.Id} doesn't exist.");
             }
         }
 

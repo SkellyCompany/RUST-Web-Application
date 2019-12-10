@@ -30,11 +30,47 @@ namespace RUSTWebApplication.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
 
+            modelBuilder.Entity<OrderLine>().
+                HasKey(ol => new { ol.OrderId, ol.ProductStockId});
+
+            modelBuilder.Entity<OrderLine>().
+                HasOne(ol => ol.Order).
+                WithMany(o => o.OrderLines);
+
+            modelBuilder.Entity<OrderLine>().
+                HasOne(ol => ol.ProductStock).
+                WithMany();
+
+            modelBuilder.Entity<Order>().
+                HasOne(o => o.Country).
+                WithMany();
+
+            modelBuilder.Entity<ProductModel>().
+                HasOne(pm => pm.ProductCategory).
+                WithMany();
+
+            modelBuilder.Entity<ProductModel>().
+                HasOne(pm => pm.ProductMetric).
+                WithMany();
+
+            //modelBuilder.Entity<ProductModel>().
+            //    HasMany(pm => pm.Products).
+            //    WithOne();
+
+            //modelBuilder.Entity<Product>().
+            //    HasMany(p => p.ProductStocks).
+            //    WithOne();
+
+            modelBuilder.Entity<ProductStock>().
+                HasOne(ps => ps.ProductSize).
+                WithMany();
+
+            modelBuilder.Entity<ProductSize>().
+                HasOne(ps => ps.ProductMetric).
+                WithMany();
 
         }
-
     }
 }
 

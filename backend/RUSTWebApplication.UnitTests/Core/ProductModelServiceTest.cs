@@ -19,6 +19,7 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2},
+                ProductMetric = new ProductMetric {  Id = 4},
                 Price = 130,
                 Products = null
             };
@@ -27,6 +28,7 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
@@ -37,9 +39,12 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(validProductModel.ProductCategory.Id)).
                 Returns(validProductModel.ProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(validProductModel.ProductMetric.Id)).
+                Returns(validProductModel.ProductMetric);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             ProductModel actual = productModelService.Create(validProductModel);
@@ -56,9 +61,10 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -77,15 +83,17 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -102,15 +110,17 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Name = null,
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -127,15 +137,17 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Name = "",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -152,15 +164,19 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = null,
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 120,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(invalidProductModel.ProductMetric.Id)).
+                Returns(invalidProductModel.ProductMetric);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -177,6 +193,7 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 120,
                 Products = null
             };
@@ -187,9 +204,74 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
                 Returns(nullProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(invalidProductModel.ProductMetric.Id)).
+                Returns(invalidProductModel.ProductMetric);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
+
+            //Act
+            Action actual = () => productModelService.Create(invalidProductModel);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Create_ProductMetricNull_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductModel invalidProductModel = new ProductModel
+            {
+                Name = "Rust In Peace Hoodie",
+                ProductCategory = new ProductCategory { Id = 4 },
+                ProductMetric = null,
+                Price = 120,
+                Products = null
+            };
+
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
+                Returns(invalidProductModel.ProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+
+            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
+                productCategoryRepository.Object, productMetricRepository.Object);
+
+            //Act
+            Action actual = () => productModelService.Create(invalidProductModel);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Create_ProductMetricNonExisting_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductModel invalidProductModel = new ProductModel
+            {
+                Name = "Rust In Peace Hoodie",
+                ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
+                Price = 120,
+                Products = null
+            };
+
+            ProductMetric nullProductMetric = null;
+
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
+                Returns(invalidProductModel.ProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(invalidProductModel.ProductMetric.Id)).
+                Returns(nullProductMetric);
+
+            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -206,15 +288,17 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = -5,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -231,6 +315,7 @@ namespace RUSTWebApplication.UnitTests.Core
             {
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 120,
                 Products = new List<Product>
                 {
@@ -240,9 +325,10 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Create(invalidProductModel);
@@ -269,9 +355,10 @@ namespace RUSTWebApplication.UnitTests.Core
             productModelRepository.Setup(repo => repo.Read(existingId)).
                 Returns(expected);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             ProductModel actual = productModelService.Read(existingId);
@@ -291,9 +378,10 @@ namespace RUSTWebApplication.UnitTests.Core
             productModelRepository.Setup(repo => repo.Read(existingId)).
                 Returns(expected);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             ProductModel actual = productModelService.Read(existingId);
@@ -311,6 +399,7 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 3,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
@@ -324,9 +413,12 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(validProductModel.ProductCategory.Id)).
                 Returns(validProductModel.ProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(validProductModel.ProductMetric.Id)).
+                Returns(validProductModel.ProductMetric);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             ProductModel actual = productModelService.Update(validProductModel);
@@ -343,9 +435,10 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(invalidProductModel);
@@ -364,6 +457,7 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
@@ -376,9 +470,12 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(nonExistingProductModel.ProductCategory.Id)).
                 Returns(nonExistingProductModel.ProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(nonExistingProductModel.ProductMetric.Id)).
+                Returns(nonExistingProductModel.ProductMetric);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(nonExistingProductModel);
@@ -396,15 +493,17 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = null,
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(invalidProductModel);
@@ -422,15 +521,17 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 130,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(invalidProductModel);
@@ -448,6 +549,7 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = null,
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 120,
                 Products = null
             };
@@ -456,9 +558,12 @@ namespace RUSTWebApplication.UnitTests.Core
             productModelRepository.Setup(repo => repo.Read(invalidProductModel.Id)).
                 Returns(invalidProductModel);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(invalidProductModel.ProductMetric.Id)).
+                Returns(invalidProductModel.ProductMetric);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(invalidProductModel);
@@ -476,6 +581,7 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 120,
                 Products = null
             };
@@ -488,9 +594,80 @@ namespace RUSTWebApplication.UnitTests.Core
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
             productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
                 Returns(nullProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(invalidProductModel.ProductMetric.Id)).
+                Returns(invalidProductModel.ProductMetric);
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
+
+            //Act
+            Action actual = () => productModelService.Update(invalidProductModel);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Update_ProductMetricNull_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductModel invalidProductModel = new ProductModel
+            {
+                Id = 1,
+                Name = "Rust In Peace Hoodie",
+                ProductCategory = new ProductCategory { Id = 4 },
+                ProductMetric = null,
+                Price = 120,
+                Products = null
+            };
+
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+            productModelRepository.Setup(repo => repo.Read(invalidProductModel.Id)).
+                Returns(invalidProductModel);
+            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
+                Returns(invalidProductModel.ProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+
+            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
+                productCategoryRepository.Object, productMetricRepository.Object);
+
+            //Act
+            Action actual = () => productModelService.Update(invalidProductModel);
+
+            //Assert
+            Assert.Throws<ArgumentException>(actual);
+        }
+
+        [Fact]
+        public void Update_ProductMetricNonExisting_ThrowsArgumentException()
+        {
+            //Arrange
+            ProductModel invalidProductModel = new ProductModel
+            {
+                Id = 1,
+                Name = "Rust In Peace Hoodie",
+                ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
+                Price = 120,
+                Products = null
+            };
+
+            ProductMetric nullProductMetric = null;
+
+            Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
+            productModelRepository.Setup(repo => repo.Read(invalidProductModel.Id)).
+                Returns(invalidProductModel);
+            Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            productCategoryRepository.Setup(repo => repo.Read(invalidProductModel.ProductCategory.Id)).
+                Returns(invalidProductModel.ProductCategory);
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
+            productMetricRepository.Setup(repo => repo.Read(invalidProductModel.ProductMetric.Id)).
+                Returns(nullProductMetric);
+
+            IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(invalidProductModel);
@@ -508,15 +685,17 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = -5,
                 Products = null
             };
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(invalidProductModel);
@@ -534,6 +713,7 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = 1,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 120,
                 Products = new List<Product>
                 {
@@ -543,9 +723,10 @@ namespace RUSTWebApplication.UnitTests.Core
 
             Mock<IProductModelRepository> productModelRepository = new Mock<IProductModelRepository>();
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             Action actual = () => productModelService.Update(invalidProductModel);
@@ -564,6 +745,7 @@ namespace RUSTWebApplication.UnitTests.Core
                 Id = existingId,
                 Name = "Rust In Peace Hoodie",
                 ProductCategory = new ProductCategory { Id = 2 },
+                ProductMetric = new ProductMetric { Id = 4 },
                 Price = 120,
                 Products = null
             };
@@ -572,9 +754,10 @@ namespace RUSTWebApplication.UnitTests.Core
             productModelRepository.Setup(repo => repo.Delete(existingId)).
                 Returns(expected);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             ProductModel actual = productModelService.Delete(existingId);
@@ -594,9 +777,10 @@ namespace RUSTWebApplication.UnitTests.Core
             productModelRepository.Setup(repo => repo.Delete(existingId)).
                 Returns(expected);
             Mock<IProductCategoryRepository> productCategoryRepository = new Mock<IProductCategoryRepository>();
+            Mock<IProductMetricRepository> productMetricRepository = new Mock<IProductMetricRepository>();
 
             IProductModelService productModelService = new ProductModelService(productModelRepository.Object,
-                productCategoryRepository.Object);
+                productCategoryRepository.Object, productMetricRepository.Object);
 
             //Act
             ProductModel actual = productModelService.Delete(existingId);
