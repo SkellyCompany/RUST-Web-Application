@@ -1,6 +1,6 @@
 //General
 .content-inner{
-  background-color:#fff;
+  background-color:#000;
   max-width:960px;
   margin:0 auto;
   padding:125px 10%;
@@ -65,7 +65,7 @@
   letter-spacing:0px;
   text-decoration:none;
   line-height:80px;
-  color:#000;
+  color:#fff;
   max-width:1000px!important;
   margin:0 auto!important;
 }
@@ -81,7 +81,7 @@
   line-height:1.2em;
   letter-spacing:.8em!important;
   margin:1em 0 .5em;
-  color:#16161d;
+  color:#fff;
   font-size:24px;
   text-align:left;
   line-height:0px!important;
@@ -92,6 +92,7 @@ p{
   letter-spacing:.02em!important;
   text-align:left;
   line-height:40px!important;
+  color: #fff;
 }
 //Team
 .founders{

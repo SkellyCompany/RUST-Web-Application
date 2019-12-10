@@ -2,6 +2,7 @@
 using Moq;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.ApplicationService.Services;
+using RUSTWebApplication.Core.Authentication;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Authentication;
 using Xunit;
@@ -27,17 +28,20 @@ namespace RUSTWebApplication.UnitTests.Core
                 IsAdmin = true
             };
 
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                expected.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(validLoginInputModel.Password));
-                expected.PasswordSalt = hmac.Key;
+			using (var hmac = new System.Security.Cryptography.HMACSHA512())
+			{
+				expected.PasswordSalt = hmac.Key;
+				expected.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(validLoginInputModel.Password));
             }
 
-            Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
+			Mock<IAuthenticationHelper> authenticationHelper = new Mock<IAuthenticationHelper>();
+			authenticationHelper.Setup(auth => auth.VerifyPasswordHash(validLoginInputModel.Password, expected.PasswordHash, expected.PasswordSalt)).
+				Returns(true);
+			Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
             userRepository.Setup(repo => repo.Read(validLoginInputModel.Username)).
                 Returns(expected);
 
-            IUserService userService = new UserService(userRepository.Object);
+            IUserService userService = new UserService(userRepository.Object, authenticationHelper.Object);
 
             //Act
             User actual = userService.Validate(validLoginInputModel);
@@ -52,12 +56,13 @@ namespace RUSTWebApplication.UnitTests.Core
             //Arrange
             LoginInputModel invalidLoginInputModel = null;
 
-            Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
+			Mock<IAuthenticationHelper> authenticationHelper = new Mock<IAuthenticationHelper>();
+			Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
 
-            IUserService userService = new UserService(userRepository.Object);
+			IUserService userService = new UserService(userRepository.Object, authenticationHelper.Object);
 
-            //Act
-            Action actual = () => userService.Validate(invalidLoginInputModel);
+			//Act
+			Action actual = () => userService.Validate(invalidLoginInputModel);
 
             //Assert
             Assert.Throws<ArgumentNullException>(actual);
@@ -73,12 +78,13 @@ namespace RUSTWebApplication.UnitTests.Core
                 Password = "admin"
             };
 
-            Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
+			Mock<IAuthenticationHelper> authenticationHelper = new Mock<IAuthenticationHelper>();
+			Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
 
-            IUserService userService = new UserService(userRepository.Object);
+			IUserService userService = new UserService(userRepository.Object, authenticationHelper.Object);
 
-            //Act
-            Action actual = () => userService.Validate(invalidLoginInputModel);
+			//Act
+			Action actual = () => userService.Validate(invalidLoginInputModel);
 
             //Assert
             Assert.Throws<ArgumentException>(actual);
@@ -94,12 +100,13 @@ namespace RUSTWebApplication.UnitTests.Core
                 Password = "admin"
             };
 
-            Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
+			Mock<IAuthenticationHelper> authenticationHelper = new Mock<IAuthenticationHelper>();
+			Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
 
-            IUserService userService = new UserService(userRepository.Object);
+			IUserService userService = new UserService(userRepository.Object, authenticationHelper.Object);
 
-            //Act
-            Action actual = () => userService.Validate(invalidLoginInputModel);
+			//Act
+			Action actual = () => userService.Validate(invalidLoginInputModel);
 
             //Assert
             Assert.Throws<ArgumentException>(actual);
@@ -115,12 +122,13 @@ namespace RUSTWebApplication.UnitTests.Core
                 Password = null
             };
 
-            Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
+			Mock<IAuthenticationHelper> authenticationHelper = new Mock<IAuthenticationHelper>();
+			Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
 
-            IUserService userService = new UserService(userRepository.Object);
+			IUserService userService = new UserService(userRepository.Object, authenticationHelper.Object);
 
-            //Act
-            Action actual = () => userService.Validate(invalidLoginInputModel);
+			//Act
+			Action actual = () => userService.Validate(invalidLoginInputModel);
 
             //Assert
             Assert.Throws<ArgumentException>(actual);
@@ -136,12 +144,13 @@ namespace RUSTWebApplication.UnitTests.Core
                 Password = ""
             };
 
-            Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
+			Mock<IAuthenticationHelper> authenticationHelper = new Mock<IAuthenticationHelper>();
+			Mock<IUserRepository> userRepository = new Mock<IUserRepository>();
 
-            IUserService userService = new UserService(userRepository.Object);
+			IUserService userService = new UserService(userRepository.Object, authenticationHelper.Object);
 
-            //Act
-            Action actual = () => userService.Validate(invalidLoginInputModel);
+			//Act
+			Action actual = () => userService.Validate(invalidLoginInputModel);
 
             //Assert
             Assert.Throws<ArgumentException>(actual);

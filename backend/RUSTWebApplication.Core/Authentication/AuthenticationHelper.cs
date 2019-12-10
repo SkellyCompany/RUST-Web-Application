@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using RUSTWebApplication.Core.Entity.Authentication;
-
+using System.Diagnostics;
 
 namespace RUSTWebApplication.Core.Authentication
 {
@@ -34,7 +34,10 @@ namespace RUSTWebApplication.Core.Authentication
 				var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 				for (int i = 0; i < computedHash.Length; i++)
 				{
-					if (computedHash[i] != storedHash[i]) return false;
+					if (computedHash[i] != storedHash[i])
+					{
+						return false;
+					}
 				}
 			}
 			return true;
