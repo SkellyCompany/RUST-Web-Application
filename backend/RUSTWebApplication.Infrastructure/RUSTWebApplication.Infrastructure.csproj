@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\RUSTWebApplication.Core.Entity\RUSTWebApplication.Core.Entity.csproj" />
     <ProjectReference Include="..\RUSTWebApplication.Core\RUSTWebApplication.Core.csproj" />
   </ItemGroup>
