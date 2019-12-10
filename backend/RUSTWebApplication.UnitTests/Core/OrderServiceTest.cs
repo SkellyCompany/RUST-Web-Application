@@ -1729,7 +1729,7 @@ namespace RUSTWebApplication.UnitTests.Core
 
             };
 
-            Country nullCountry = new Country { Id = 3 };
+            Country nullCountry = null;
 
             Mock<IOrderRepository> orderRepository = new Mock<IOrderRepository>();
             orderRepository.Setup(repo => repo.Read(invalidOrder.Id)).
