@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './shared/auth-guard/auth-guard';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { HomeComponent } from './main/home/home.component';
 import { VisionComponent } from './main/vision/vision.component';
 import { ProductListComponent } from './main/shop/product-list/product-list.component';
@@ -9,13 +11,13 @@ import { CreditsComponent } from './main/credits/credits.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent},
+  { path: 'admin/login', component: AdminLoginComponent},
   { path: 'vision', component: VisionComponent },
   { path: 'shop', component: ProductListComponent },
   { path: 'shop/:id', component: ProductDetailsComponent },
   { path: 'checkout', component: CheckoutComponent},
-  { path: 'credits', component: CreditsComponent },
+  { path: 'credits', component: CreditsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
