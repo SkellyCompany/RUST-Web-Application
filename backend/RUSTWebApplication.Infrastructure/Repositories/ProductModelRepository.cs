@@ -25,7 +25,7 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 
         public ProductModel Read(int productModelId)
         {
-            return _ctx.ProductModels.AsNoTracking().FirstOrDefault(ps => ps.Id == productModelId);
+            return _ctx.ProductModels.AsNoTracking().FirstOrDefault(pm => pm.Id == productModelId);
         }
 
         public IEnumerable<ProductModel> ReadAll()
@@ -43,7 +43,7 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 
         public ProductModel Delete(int productModelId)
         {
-            var productModelToDelete = _ctx.ProductModels.FirstOrDefault(ps => ps.Id == productModelId);
+            var productModelToDelete = _ctx.ProductModels.FirstOrDefault(pm => pm.Id == productModelId);
             _ctx.ProductModels.Remove(productModelToDelete);
             _ctx.SaveChanges();
             return productModelToDelete;

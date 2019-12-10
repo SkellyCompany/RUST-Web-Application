@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -32,7 +33,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
         public List<ProductMetric> ReadAll()
         {
-            return _productMetricRepository.ReadAll();
+            return _productMetricRepository.ReadAll().ToList();
         }
 
         public ProductMetric Update(ProductMetric updatedProductMetric)
@@ -60,13 +61,13 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         private void ValidateUpdate(ProductMetric productMetric)
         {
             ValidateNull(productMetric);
+            ValidateName(productMetric);
+            ValidateMetricXValue(productMetric);
+            ValidateProductModel(productMetric);
             if (_productMetricRepository.Read(productMetric.Id) == null)
             {
                 throw new ArgumentException($"Cannot find a Product Metric with the ID: {productMetric.Id}");
             }
-            ValidateName(productMetric);
-            ValidateMetricXValue(productMetric);
-            ValidateProductModel(productMetric);
 
         }
 
