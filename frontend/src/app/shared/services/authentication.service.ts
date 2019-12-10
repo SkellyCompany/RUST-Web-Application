@@ -13,14 +13,18 @@ export class AuthenticationService {
     return this.http.post<any>(this.apiUrl,{ username, password })
       .pipe(map(response => {
         const token = response.token;
-        const isAdmin = response.isAdmin;
         if (token) {
-          localStorage.setItem('currentUser', JSON.stringify({ username: username, isAdmin: isAdmin,  token: token }));
+          localStorage.setItem('currentUser', JSON.stringify({ username: username,  token: token }));
           return true;
         } else {
           return false;
         }
       }));
+  }
+
+  isAdmin() : boolean{
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUser.isAdmin;
   }
 
   getToken(): string {
@@ -31,12 +35,7 @@ export class AuthenticationService {
     }
   }
 
-  getUsername(): string {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    return currentUser.username;
-  }
-
   logout(): void {
-      localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
   }
 }

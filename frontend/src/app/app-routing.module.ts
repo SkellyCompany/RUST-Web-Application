@@ -11,6 +11,7 @@ import { CreditsComponent } from './main/credits/credits.component';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent},
   { path: 'admin/login', component: AdminLoginComponent},
   { path: 'vision', component: VisionComponent },
