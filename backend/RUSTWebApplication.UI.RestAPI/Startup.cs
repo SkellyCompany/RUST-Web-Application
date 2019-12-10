@@ -111,7 +111,8 @@ namespace RUSTWebApplication.UI.RestAPI
 					RUSTWebApplicationContext context = scope.ServiceProvider.GetService<RUSTWebApplicationContext>();
 					IDbInitializer dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
                     context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();      
+                    context.Database.EnsureCreated();
+                    dbInitializer.Seed(context);
                 }
 				app.UseDeveloperExceptionPage();
             }
