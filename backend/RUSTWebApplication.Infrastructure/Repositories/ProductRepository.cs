@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -6,29 +8,44 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 {
     public class ProductRepository: IProductRepository
     {
+
+        private readonly RUSTWebApplicationContext _ctx;
+
+        public ProductRepository(RUSTWebApplicationContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         public Product Create(Product newProduct)
         {
-            throw new System.NotImplementedException();
+            _ctx.Products.Attach(newProduct).State = EntityState.Added;
+            _ctx.SaveChanges();
+            return newProduct;
         }
 
         public Product Read(int productId)
         {
-            throw new System.NotImplementedException();
+            return _ctx.Products.AsNoTracking().FirstOrDefault(p => p.Id == productId);
         }
 
         public IEnumerable<Product> ReadAll()
         {
-            throw new System.NotImplementedException();
+            return _ctx.Products.AsNoTracking();
         }
 
         public Product Update(Product updatedProduct)
         {
-            throw new System.NotImplementedException();
+            _ctx.Products.Attach(updatedProduct).State = EntityState.Modified;
+            _ctx.SaveChanges();
+            return updatedProduct;
         }
 
         public Product Delete(int productId)
         {
-            throw new System.NotImplementedException();
+            var productToDelete = _ctx.Products.FirstOrDefault(p => p.Id == productId);
+            _ctx.Products.Remove(productToDelete);
+            _ctx.SaveChanges();
+            return productToDelete;
         }
     }
 }
