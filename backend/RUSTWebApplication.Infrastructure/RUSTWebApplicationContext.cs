@@ -54,14 +54,6 @@ namespace RUSTWebApplication.Infrastructure
                 HasOne(pm => pm.ProductMetric).
                 WithMany();
 
-            //modelBuilder.Entity<ProductModel>().
-            //    HasMany(pm => pm.Products).
-            //    WithOne();
-
-            //modelBuilder.Entity<Product>().
-            //    HasMany(p => p.ProductStocks).
-            //    WithOne();
-
             modelBuilder.Entity<ProductStock>().
                 HasOne(ps => ps.ProductSize).
                 WithMany();
