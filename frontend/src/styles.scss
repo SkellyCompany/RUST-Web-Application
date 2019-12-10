@@ -3,7 +3,7 @@
   padding: 0;
   list-style: none;
   text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'roman' Arial, Helvetica, sans-serif;
 }
 
 html{
@@ -11,7 +11,7 @@ html{
 }
 
 body{
-  background-color: #fff;
+  background-color: #000;
   overflow-x: hidden;
 }
 
@@ -22,8 +22,41 @@ body{
 ::-webkit-scrollbar-thumb{
   background-color: #000
 }
-
 @font-face {
   font-family: roman;
   src: url(assets/fonts/ClassicRomanStdRegular.otf) format("opentype");
+}
+
+
+//Ids
+#film-grain:after{
+  content: "";
+  animation: grain 4.5s steps(10) infinite;
+  background-image: url("/assets/images/film-grain.jpg");
+  height: 300%;
+  left: -50%;
+  opacity: 0.115;
+  position: fixed;
+  top: -100%;
+  width: 300%;
+  z-index: 2000;
+  pointer-events: none;
+}
+@keyframes grain {
+0%, 100% { transform:translate(0, 0) }
+10% { transform:translate(5%, -12%) }
+20% { transform:translate(-12%, -5%) }
+30% { transform:translate(3%, -15%) }
+40% { transform:translate(15%, 10%) }
+50% { transform:translate(-8%, -5%) }
+60% { transform:translate(5%, 2%) }
+70% { transform:translate(15%, -1%) }
+80% { transform:translate(0%, -6%) }
+90% { transform:translate(-7%, 2%) }
+}
+#film-grain{
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
 }

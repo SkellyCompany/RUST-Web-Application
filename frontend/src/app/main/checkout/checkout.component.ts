@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
+  isOrderConfirmationVisible : boolean;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setOrderConfirmationVisibility(){
+    if (this.isOrderConfirmationVisible){
+      this.isOrderConfirmationVisible = false;
+    }
+    else{
+      event.stopPropagation();
+      this.isOrderConfirmationVisible = true;
+    }
   }
 
 }
