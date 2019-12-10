@@ -274,13 +274,12 @@ header .flex-child{
   letter-spacing: .07143rem;
   font-size: 16px;
   text-transform: uppercase;
-  border: 1px solid #000;
-  margin-top: 7%;
+  margin-top:147%;
   padding-right: 5%;
   padding-left: 5%;
   text-align: center;
-  color: #000;
-  background: #fff;
+  color: #fff;
+  background: #000;
   z-index: 9;
   width: 100%;
   -o-transition:.5s;
@@ -290,8 +289,8 @@ header .flex-child{
   transition:.5s;
 }
 .checkout-button:hover{
-  color: #fff;
-  background-color: black;
+  color: #000;
+  background-color: #fff;
   cursor: pointer;    
 }
 .sidebar-title{
@@ -301,6 +300,7 @@ header .flex-child{
   font-family: 'roman';
   padding-bottom: 1%;
   text-align: center;
+  color: #fff;
 }
 .over-page{
   z-index:1001;
@@ -312,9 +312,11 @@ header .flex-child{
   background-color: rgba(0, 0, 0, 0.8);
 }
 #cart-total{
-  margin-top: 75%;
+  padding-top: 133%;
   font-family: 'roman';
+  position: absolute;
   font-weight: bold;
+  color: #fff;
 }
 .sidebar{
   position:relative;
@@ -330,14 +332,15 @@ header .flex-child{
   top:0;
   bottom:0;
   right:0;
-  background:#fff;
+  background:#000;
   font-weight:500;
   -webkit-transform:translate3d(100%,0,0);
   transform:translate3d(100%,0,0);
   transform: translate3d(0%, 0px, 0px);
   width:330px;
   height: 600px;
-  margin-top: 4.5%;
+  border: 1px solid #fff;
+  margin-top: 4.4%;
   margin-right: 13.5%;
   -webkit-animation-name: animateFade;
   -webkit-animation-duration: 0.5s;
@@ -357,6 +360,7 @@ header .flex-child{
   font-family: 'roman';
   font-weight: bold;
   font-size: 14px;
+  color: #fff;
 }
 .cart-list-name-secondary{
   overflow:hidden;
@@ -365,6 +369,7 @@ header .flex-child{
   font-size: 14px;
   font-family: 'roman';
   font-weight: bold;
+  color: #fff;
 }
 .cart-list-name-secondary{
   padding:0 .69444vw 0 1.11111vw;
@@ -387,14 +392,19 @@ header .flex-child{
   padding-top: 5%;
   display:-webkit-box;
   display:flex;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #fff;
 }
 .cart-list-name-primary{
   font-size: 16px!important;
   font-family: 'roman';
   font-weight: bold;
   font-size:1.11111vw;
+  width:112px;  
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
   padding:0 .69444vw 0 1.11111vw;
+  color: #fff;
 }
 #cart-title{
   padding: 1.5vw 0 0;
@@ -408,7 +418,7 @@ header .flex-child{
   vertical-align: top;
   text-align: center;
   outline: none;
-  border: 1px solid #e6dcd2;
+  border: 1px solid #fff;
   border-radius: .13889vw;
 }
 .cart-list-quantity,
@@ -423,7 +433,7 @@ header .flex-child{
   width: 30px;
   line-height: 38px;
   background: transparent;
-  color: #444;
+  color: #fff;
   text-align: center;
   font-weight: bold;
   cursor: pointer;
