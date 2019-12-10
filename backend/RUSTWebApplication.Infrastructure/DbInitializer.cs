@@ -44,15 +44,15 @@ namespace RUSTWebApplication.Infrastructure
 
 			//ProductModels
 			ProductModel hoodieModel1 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel2 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel3 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel4 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel5 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
-			ProductModel pantsModel1 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel2 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel3 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel4 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel5 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
+			ProductModel hoodieModel2 = context.ProductModels.Add(new ProductModel() { Id = 2, Name = "Apocalypse Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
+			ProductModel hoodieModel3 = context.ProductModels.Add(new ProductModel() { Id = 3, Name = "Rape Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
+			ProductModel hoodieModel4 = context.ProductModels.Add(new ProductModel() { Id = 4, Name = "Ryu Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
+			ProductModel hoodieModel5 = context.ProductModels.Add(new ProductModel() { Id = 5, Name = "Logo Hoodie", ProductCategory = categoryTop, Price = 59.99, Products = null }).Entity;
+			ProductModel pantsModel1 = context.ProductModels.Add(new ProductModel() { Id = 6, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
+			ProductModel pantsModel2 = context.ProductModels.Add(new ProductModel() { Id = 7, Name = "Apocalypse Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
+			ProductModel pantsModel3 = context.ProductModels.Add(new ProductModel() { Id = 8, Name = "Rape Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
+			ProductModel pantsModel4 = context.ProductModels.Add(new ProductModel() { Id = 9, Name = "Ryu Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
+			ProductModel pantsModel5 = context.ProductModels.Add(new ProductModel() { Id = 10, Name = "Logo Pants", ProductCategory = categoryBottom, Price = 75.99, Products = null }).Entity;
 
 			//Products
 			Product hoodieProduct1 = context.Products.Add(new Product() { Id = 1, ProductModel = hoodieModel1, ProductStocks = null, Color = "Black" }).Entity;
@@ -273,8 +273,10 @@ namespace RUSTWebApplication.Infrastructure
 			OrderLine yellowPantseSmallStockOrderLine = context.OrderLines.Add(new OrderLine() { Order = null, ProductStock = yellowPantseSmallStock2, Quantity = 1 }).Entity;
 
 			//Orders
-			context.Orders.Add(new Order() { Id = 1, OrderLines = new List<OrderLine>(){ blackHoodieExtraExtraLargeOrderLine}, Country = polandCountry, OrderDate = DateTime.Parse("07/05/2019"), DeliveryDate = DateTime.Parse("07/21/2019"), Address = "Zelwerowicza 18/6", ZipCode = "54-238", City = "Warszawa", Phone = "+48509840123", Email = "schemaboi@gmail.com" });
-			context.Orders.Add(new Order() { Id = 2, OrderLines = new List<OrderLine>() { pinkHoodieExtraExtraLargeOrderLine, yellowPantseSmallStockOrderLine, yellowHoodieMediumOrderLine }, Country = denmarkCountry, OrderDate = DateTime.Parse("09/01/2019"), DeliveryDate = DateTime.Parse("09/10/2019"), Address = "Jyllandsgade 55st", ZipCode = "6700", City = "Esbjerg", Phone = "+45409720140", Email = "steven1995@gmail.com" });
+			context.Orders.Add(new Order() { Id = 1, OrderLines = new List<OrderLine>(){ blackHoodieExtraExtraLargeOrderLine}, Country = polandCountry, OrderDate = DateTime.Parse("07/05/2019"), DeliveryDate = DateTime.Parse("07/21/2019"), FirstName = "Grzegorz", LastName = "Charyszczak", Address = "Zelwerowicza 18/6", ZipCode = "54-238", City = "Warszawa", Phone = "+48509840123", Email = "schemaboi@gmail.com" });
+			context.Orders.Add(new Order() { Id = 2, OrderLines = new List<OrderLine>() { pinkHoodieExtraExtraLargeOrderLine, yellowPantseSmallStockOrderLine, yellowHoodieMediumOrderLine }, Country = denmarkCountry, OrderDate = DateTime.Parse("09/01/2019"), DeliveryDate = DateTime.Parse("09/10/2019"), FirstName = "David", LastName = "Kalatzis",Address = "Jyllandsgade 55st", ZipCode = "6700", City = "Esbjerg", Phone = "+45409720140", Email = "steven1995@gmail.com" });
+
+            context.SaveChanges();
 		}
 	}
 }
