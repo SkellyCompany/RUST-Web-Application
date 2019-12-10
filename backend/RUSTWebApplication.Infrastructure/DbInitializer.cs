@@ -42,10 +42,10 @@ namespace RUSTWebApplication.Infrastructure
 			ProductSize xlSizeHoodie = context.ProductSizes.Add(new ProductSize() { Id = 4, ProductMetric = metricTop, Size = "XL", MetricXValue = 72, MetricYValue = 100, MetricZValue = 76 }).Entity;
 			ProductSize xxlSizeHoodie = context.ProductSizes.Add(new ProductSize() { Id = 5, ProductMetric = metricTop, Size = "XXL", MetricXValue = 74, MetricYValue = 102, MetricZValue = 78 }).Entity;
 
-			ProductSize sSizePants = context.ProductSizes.Add(new ProductSize() { Id = 1, ProductMetric = metricBottom, Size = "S", MetricXValue = 65, MetricYValue = 78 }).Entity;
-			ProductSize mSizePants = context.ProductSizes.Add(new ProductSize() { Id = 2, ProductMetric = metricBottom, Size = "M", MetricXValue = 70, MetricYValue = 83 }).Entity;
-			ProductSize lSizePants = context.ProductSizes.Add(new ProductSize() { Id = 3, ProductMetric = metricBottom, Size = "L", MetricXValue = 75, MetricYValue = 87 }).Entity;
-			ProductSize xlSizePants = context.ProductSizes.Add(new ProductSize() { Id = 4, ProductMetric = metricBottom, Size = "XL", MetricXValue = 80, MetricYValue = 92 }).Entity;
+			ProductSize sSizePants = context.ProductSizes.Add(new ProductSize() { Id = 6, ProductMetric = metricBottom, Size = "S", MetricXValue = 65, MetricYValue = 78 }).Entity;
+			ProductSize mSizePants = context.ProductSizes.Add(new ProductSize() { Id = 7, ProductMetric = metricBottom, Size = "M", MetricXValue = 70, MetricYValue = 83 }).Entity;
+			ProductSize lSizePants = context.ProductSizes.Add(new ProductSize() { Id = 8, ProductMetric = metricBottom, Size = "L", MetricXValue = 75, MetricYValue = 87 }).Entity;
+			ProductSize xlSizePants = context.ProductSizes.Add(new ProductSize() { Id = 9, ProductMetric = metricBottom, Size = "XL", MetricXValue = 80, MetricYValue = 92 }).Entity;
 
 			//ProductModels
 			ProductModel hoodieModel1 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null }).Entity;
