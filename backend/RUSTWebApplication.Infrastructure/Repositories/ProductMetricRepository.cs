@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -6,29 +8,45 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 {
     public class ProductMetricRepository : IProductMetricRepository
     {
+
+        private readonly RUSTWebApplicationContext _ctx;
+
+        public ProductMetricRepository(RUSTWebApplicationContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         public ProductMetric Create(ProductMetric newProductMetric)
         {
-            throw new System.NotImplementedException();
+            _ctx.ProductMetrics.Attach(newProductMetric).State = EntityState.Added;
+            _ctx.SaveChanges();
+            return newProductMetric;
         }
 
         public ProductMetric Read(int productMetricId)
         {
-            throw new System.NotImplementedException();
+            return _ctx.ProductMetrics.AsNoTracking().FirstOrDefault(pm => pm.Id == productMetricId);
         }
 
-        public List<ProductMetric> ReadAll()
+        public IEnumerable<ProductMetric> ReadAll()
         {
-            throw new System.NotImplementedException();
+            return _ctx.ProductMetrics.AsNoTracking();
         }
 
         public ProductMetric Update(ProductMetric updatedProductMetric)
         {
-            throw new System.NotImplementedException();
+            _ctx.ProductMetrics.Attach(updatedProductMetric).State = EntityState.Modified;
+            _ctx.Entry(updatedProductMetric).Reference(pm => pm.ProductModel).IsModified = true;
+            _ctx.SaveChanges();
+            return updatedProductMetric;
         }
 
         public ProductMetric Delete(int productMetricId)
         {
-            throw new System.NotImplementedException();
+            var productMetricToDelete = _ctx.ProductMetrics.FirstOrDefault(pm => pm.Id == productMetricId);
+            _ctx.ProductMetrics.Remove(productMetricToDelete);
+            _ctx.SaveChanges();
+            return productMetricToDelete;
         }
     }
 }

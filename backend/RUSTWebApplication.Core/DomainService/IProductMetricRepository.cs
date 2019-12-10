@@ -9,7 +9,7 @@ namespace RUSTWebApplication.Core.DomainService
 
         ProductMetric Read(int productMetricId);
 
-        List<ProductMetric> ReadAll();
+        IEnumerable<ProductMetric> ReadAll();
 
         ProductMetric Update(ProductMetric updatedProductMetric);
 

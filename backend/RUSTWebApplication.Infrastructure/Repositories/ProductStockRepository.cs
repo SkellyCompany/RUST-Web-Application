@@ -25,7 +25,7 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 
         public ProductStock Read(int productStockId)
         {
-            return _ctx.ProductStocks.AsNoTracking().FirstOrDefault(c => c.Id == productStockId);
+            return _ctx.ProductStocks.AsNoTracking().FirstOrDefault(ps => ps.Id == productStockId);
         }
 
         public IEnumerable<ProductStock> ReadAll()

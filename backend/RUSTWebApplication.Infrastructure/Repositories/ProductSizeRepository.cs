@@ -25,14 +25,14 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 
         public ProductSize Read(int productSizeId)
         {
-            return _ctx.ProductSizes.AsNoTracking().FirstOrDefault(c => c.Id == productSizeId);
+            return _ctx.ProductSizes.AsNoTracking().FirstOrDefault(ps => ps.Id == productSizeId);
         }
 
         public ProductSize ReadIncludeProductMetric(int productSizeId)
         {
             return _ctx.ProductSizes.AsNoTracking().
                 Include(ps => ps.ProductMetric).
-                FirstOrDefault(c => c.Id == productSizeId);
+                FirstOrDefault(ps => ps.Id == productSizeId);
         }
 
         public IEnumerable<ProductSize> ReadAll()
