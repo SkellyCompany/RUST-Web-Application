@@ -26,7 +26,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 		{
 			try
 			{
-				User user = _userService.ValidateUser(loginInputModel);
+				User user = _userService.Validate(loginInputModel);
 				string token = _authenticationHelper.GenerateToken(user);
 				return Ok(new { user.Username, token });
 			}

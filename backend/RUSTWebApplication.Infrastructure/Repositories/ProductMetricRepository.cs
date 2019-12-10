@@ -36,7 +36,6 @@ namespace RUSTWebApplication.Infrastructure.Repositories
         public ProductMetric Update(ProductMetric updatedProductMetric)
         {
             _ctx.ProductMetrics.Attach(updatedProductMetric).State = EntityState.Modified;
-            _ctx.Entry(updatedProductMetric).Reference(pm => pm.ProductModel).IsModified = true;
             _ctx.SaveChanges();
             return updatedProductMetric;
         }

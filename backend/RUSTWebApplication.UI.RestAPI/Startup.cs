@@ -8,17 +8,24 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using RUSTWebApplication.Core.Authentication;
 using RUSTWebApplication.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using RUSTWebApplication.Core.ApplicationService;
+using RUSTWebApplication.Core.ApplicationService.Services;
+using RUSTWebApplication.Infrastructure.Repositories;
+using RUSTWebApplication.Core.DomainService;
 
 namespace RUSTWebApplication.UI.RestAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            Environment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -40,11 +47,6 @@ namespace RUSTWebApplication.UI.RestAPI
 				};
 			});
 
-			services.AddTransient<IDbInitializer, DbInitializer>();
-			services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
-
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
 			services.AddCors(options =>
 			{
 				options.AddPolicy("AllowSpecificOrigin",
@@ -52,29 +54,79 @@ namespace RUSTWebApplication.UI.RestAPI
 						.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()
 					);
 			});
-		}
+
+            if (Environment.IsDevelopment())
+            {
+                services.AddDbContext<RUSTWebApplicationContext>(opt => {
+                    opt.UseSqlite("Data Source=RUSTWebapp.db");
+                }
+                );
+            }
+            else
+            {
+                services.AddDbContext<RUSTWebApplicationContext>(opt =>
+                    opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+            }
+
+            services.AddTransient<IDbInitializer, DbInitializer>();
+            services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
+            services.AddScoped<IProductCategoryService, ProductCategoryService>();
+            services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IProductMetricService, ProductMetricService>();
+            services.AddScoped<IProductMetricRepository, ProductMetricRepository>();
+            services.AddScoped<IProductSizeService, ProductSizeService>();
+            services.AddScoped<IProductSizeRepository, ProductSizeRepository>();
+
+            services.AddScoped<IProductModelService, ProductModelService>();
+            services.AddScoped<IProductModelRepository, ProductModelRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductStockService, ProductStockService>();
+            services.AddScoped<IProductStockRepository, ProductStockRepository>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-			app.UseCors("AllowSpecificOrigin");
-
 			if (env.IsDevelopment())
             {
 				using (var scope = app.ApplicationServices.CreateScope())
 				{
 					RUSTWebApplicationContext context = scope.ServiceProvider.GetService<RUSTWebApplicationContext>();
 					IDbInitializer dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-					dbInitializer.Seed(context);
-				}
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();      
+                }
 				app.UseDeveloperExceptionPage();
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<RUSTWebApplicationContext>();
+                    ctx.Database.EnsureCreated();
+                }
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
+            app.UseCors("AllowSpecificOrigin");
             app.UseHttpsRedirection();
 			app.UseAuthentication();
 			app.UseMvc();

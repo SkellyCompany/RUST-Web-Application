@@ -10,14 +10,11 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
     {
         
         private readonly IProductMetricRepository _productMetricRepository;
-        private readonly IProductModelRepository _productModelRepository;
 
 
-        public ProductMetricService(IProductMetricRepository productMetricRepository,
-            IProductModelRepository productModelRepository)
+        public ProductMetricService(IProductMetricRepository productMetricRepository)
         {
             _productMetricRepository = productMetricRepository;
-            _productModelRepository = productModelRepository;
         }
         
         public ProductMetric Create(ProductMetric newProductMetric)
@@ -55,7 +52,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
             ValidateName(productMetric);
             ValidateMetricXValue(productMetric);
-            ValidateProductModel(productMetric);
         }
 
         private void ValidateUpdate(ProductMetric productMetric)
@@ -63,7 +59,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateNull(productMetric);
             ValidateName(productMetric);
             ValidateMetricXValue(productMetric);
-            ValidateProductModel(productMetric);
             if (_productMetricRepository.Read(productMetric.Id) == null)
             {
                 throw new ArgumentException($"Cannot find a Product Metric with the ID: {productMetric.Id}");
@@ -84,18 +79,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             if (string.IsNullOrEmpty(productMetric.Name))
             {
                 throw new ArgumentException("You need to specify a Name for the ProductMetric.");
-            }
-        }
-        private void ValidateProductModel(ProductMetric productMetric)
-        {
-            if (productMetric.ProductModel == null)
-            {
-                throw new ArgumentException("You need to specify a ProductModel for the ProductMetric.");
-            }
-
-            if (_productModelRepository.Read(productMetric.ProductModel.Id) == null)
-            {
-                throw new ArgumentException($"Product Model with the ID: {productMetric.ProductModel.Id} doesn't exist.'");
             }
         }
 

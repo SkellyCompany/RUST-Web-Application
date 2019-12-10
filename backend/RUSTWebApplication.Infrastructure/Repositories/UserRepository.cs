@@ -1,4 +1,5 @@
-﻿using RUSTWebApplication.Core.DomainService;
+﻿using Microsoft.EntityFrameworkCore;
+using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Authentication;
 using System.Linq;
 
