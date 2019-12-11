@@ -78,6 +78,10 @@
   display:block;
   width:-webkit-calc(100% - 26px);
   width:100%;
+  color: #000;
+}
+.page-product .product-content-selection select.form-control option{
+  color: #000;
 }
 .color-container{
   margin-bottom:18%;
@@ -119,10 +123,12 @@
   line-height:1;
   padding:10px 12px;
   background:#fff;
+  color: #000;
 }
 .product-content-selection select.form-control:focus{
   outline:none;
   border-color:#fff;
+  color: #000;
 }
 .product-content-selection .button{
   cursor:pointer;

@@ -4,100 +4,49 @@
   <!-- Heading -->
   <div class="heading">
     <h1 class="page-heading">Shop</h1>
-    <button class="filter-button">Tops</button>
-    <button class="filter-button">Bottoms</button>
+    <button class="filter-button" (click)="getProductModels(currentPage, 'Top')">Tops</button>
+    <button class="filter-button" (click)="getProductModels(currentPage, 'Bottom')">Bottoms</button>
   </div>
   <div>
   </div>
   <!-- Product Grid -->
-  <section class="product-grid">
-    <ul class="product-grid-list-container">             
-      <li class="product-grid-list">
-          <a class="_p">
-              <span class="product-grid-list-image">
-                <img src="https://i.imgur.com/ktK60Ge.png"  style="background-color: #000;" alt="">
-                <img src="https://media.giphy.com/media/dXcczD07oqteQ6HrnV/giphy.gif" alt="">
-              </span>
-              <span class="product-grid-list-title">Stool Hooded Sweatshirt</span>
-              <span class="product-grid-list-price">99.99€</span>
-          </a>
-      </li>
-      <li class="product-grid-list">
-          <a class="_p">
-              <span class="product-grid-list-image">
-                <img src="https://i.imgur.com/jcUVWVV.png" style="background-color: #000;" alt="">
-                <img src="https://media.giphy.com/media/cgfPnWC8s13J9QWtCW/giphy.gif" alt="">
-              </span>
-              <span class="product-grid-list-title">Vase Hooded Sweatshirt</span>
-              <span class="product-grid-list-price">89.99€</span>
-          </a>
-      </li>
-      <li class="product-grid-list">
-          <a class="_p">
-              <span class="product-grid-list-image">
-                <img src="https://i.imgur.com/Fxzdwi9.png" style="background-color: #000;" alt="">
-                <img src="https://media.giphy.com/media/SV6SPYfqJlJpyC9k2u/giphy.gif" alt="">
-              </span>
-              <span class="product-grid-list-title">Library T-Shirt</span>
-              <span class="product-grid-list-price">39.99€</span>
-          </a>
-      </li>
-      <li class="product-grid-list">
-           <a class="_p">
-              <span class="product-grid-list-image">
-                <img src="https://i.imgur.com/jcUVWVV.png" style="background-color: #000;" alt="">
-                <img src="https://media.giphy.com/media/cgfPnWC8s13J9QWtCW/giphy.gif" alt="">
-              </span>
-              <span class="product-grid-list-title">Vase Hooded Sweatshirt</span>
-              <span class="product-grid-list-price">89.99€</span>
-          </a>
-      </li>
-      <li class="product-grid-list">
-          <a class="_p">
-              <span class="product-grid-list-image">
-                <img src="https://i.imgur.com/Fxzdwi9.png" style="background-color: #000;" alt="">
-                <img src="https://media.giphy.com/media/SV6SPYfqJlJpyC9k2u/giphy.gif" alt="">
-              </span>
-              <span class="product-grid-list-title">Library T-Shirt</span>
-              <span class="product-grid-list-price">39.99€</span>
-          </a>
-      </li>
-      <li class="product-grid-list">
-          <a class="_p">
-              <span class="product-grid-list-image">
-                <img src="https://i.imgur.com/ktK60Ge.png"  style="background-color: #000;" alt="">
-                <img src="https://media.giphy.com/media/dXcczD07oqteQ6HrnV/giphy.gif" alt="">
-              </span>
-              <span class="product-grid-list-title">Stool Hooded Sweatshirt</span>
-              <span class="product-grid-list-price">99.99€</span>
-          </a>
-      </li>
-      <li class="product-grid-list">
-          <a class="_p">
-              <span class="product-grid-list-image">
-                <img src="https://i.imgur.com/ktK60Ge.png"  style="background-color: #000;" alt="">
-                <img src="https://media.giphy.com/media/dXcczD07oqteQ6HrnV/giphy.gif" alt="">
-              </span>
-              <span class="product-grid-list-title">Stool Hooded Sweatshirt</span>
-              <span class="product-grid-list-price">99.99€</span>
-          </a>
+  <section class="product-grid" *ngIf="productModels">
+    <ul class="product-grid-list-container">              
+      <li class="product-grid-list" *ngFor="let productModel of productModels">
+        <a class="_p">
+            <span class="product-grid-list-image" routerLink="/pet/1">
+              <img [src]="productModel.imagePath"  style="background-color: #000;" alt="">
+              <img [src]="productModel.videoPath" alt="">
+            </span>
+            <span class="product-grid-list-title">{{ productModel.name }}</span>
+            <span class="product-grid-list-price">{{ productModel.price}}€</span>
+        </a>
       </li>
     </ul>
   </section>
   <!-- Paging -->
   <nav data-pagination>
-      <ul>
-        <a><img src="assets/images/arrow-left.png" width="18" height="14" onmouseover="this.src='assets/images/arrow-left-hover.png'" onmouseout="this.src='assets/images/arrow-left.png'"></a>
+      <ul *ngIf="currentPage > 1">
+        <a (click)="getProductModels(currentPage - 1, categoryType)"><img src="assets/images/arrow-left.png" width="18" height="14" onmouseover="this.src='assets/images/arrow-left-hover.png'" onmouseout="this.src='assets/images/arrow-left.png'"></a>
       </ul>
-      <ul>
-        <li><a>1</a>
-          <li><a>2</a>
-            <li><a>3</a>
+      <ul *ngIf="currentPage === 1">
+        <a style="cursor:default;"><img src="assets/images/arrow-left-disabled.png" width="18" height="14" ></a>
       </ul>
-      <ul>
-        <a><img src="assets/images/arrow-right.png" width="18" height="14" onmouseover="this.src='assets/images/arrow-right-hover.png'" onmouseout="this.src='assets/images/arrow-right.png'"></a>
+      <ul *ngFor='let in of counter(totalPages); let i = index'>
+        <li *ngIf="currentPage === i + 1">
+          <a class="currentPagination" (click)="getProductModels(i + 1, categoryType)">{{ i + 1 }}</a>
+        <li *ngIf="currentPage !== i + 1">
+          <a (click)="getProductModels(i + 1, categoryType)">{{ i + 1 }}</a>
+      </ul>
+      <ul *ngIf="currentPage < totalPages">
+        <a (click)="getProductModels(currentPage + 1, categoryType)"><img src="assets/images/arrow-right.png" width="18" height="14" onmouseover="this.src='assets/images/arrow-right-hover.png'" onmouseout="this.src='assets/images/arrow-right.png'"></a>
+      </ul>
+      <ul *ngIf="currentPage === totalPages">
+        <a style="cursor:default;"><img src="assets/images/arrow-right-disabled.png" width="18" height="14" ></a>
       </ul>
     </nav>
   <!-- Loading -->
- <h2 class="loading">Loading</h2>
- <app-footer></app-footer>
+  <div class="loading-ring-container" *ngIf="!productModels">
+      <div class="loading-ring">Loading...</div>
+  </div>
+<app-footer></app-footer>
