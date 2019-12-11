@@ -3,9 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
 @Injectable()
 export class AuthenticationService {
-  private apiUrl = 'https://localhost:44344/api/users';
+  private apiUrl = 'http://localhost:55390/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -21,17 +22,16 @@ export class AuthenticationService {
       }));
   }
 
-  isAdmin() : boolean{
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    return currentUser.isAdmin;
-  }
-
   getToken(): string {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser)
     {
       return currentUser.token;
     }
+  }
+
+  isTokenExpired(): boolean {
+    return;
   }
 
   logout(): void {
