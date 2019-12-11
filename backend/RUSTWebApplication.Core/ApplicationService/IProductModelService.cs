@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using RUSTWebApplication.Core.Entity.Filters;
 using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.Core.ApplicationService
@@ -9,7 +9,7 @@ namespace RUSTWebApplication.Core.ApplicationService
 
 		ProductModel Read(int productModelId);
 
-		List<ProductModel> ReadAll();
+		FilteredList<ProductModel> ReadAll(ProductModelFilter filter);
 
 		ProductModel Update(ProductModel updatedProductModel);
 

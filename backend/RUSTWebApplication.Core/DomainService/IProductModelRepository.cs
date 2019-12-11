@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using RUSTWebApplication.Core.Entity.Filters;
 using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.Core.DomainService
@@ -9,7 +9,7 @@ namespace RUSTWebApplication.Core.DomainService
 
 		ProductModel Read(int productModelId);
 
-		IEnumerable<ProductModel> ReadAll();
+		FilteredList<ProductModel> ReadAll(ProductModelFilter filter);
 
 		ProductModel Update(ProductModel updatedProductModel);
 

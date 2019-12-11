@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RUSTWebApplication.Core.DomainService;
+using RUSTWebApplication.Core.Entity.Filters;
 using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.Core.ApplicationService.Services
@@ -33,9 +34,9 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             return _productModelRepository.Read(productModelId);
         }
 
-		public List<ProductModel> ReadAll()
+		public FilteredList<ProductModel> ReadAll(ProductModelFilter filter)
         {
-            return _productModelRepository.ReadAll().ToList();
+            return _productModelRepository.ReadAll(filter);
         }
 
 		public ProductModel Update(ProductModel updatedProductModel)

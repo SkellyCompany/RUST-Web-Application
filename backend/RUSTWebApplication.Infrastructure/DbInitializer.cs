@@ -48,16 +48,30 @@ namespace RUSTWebApplication.Infrastructure
 			ProductSize xlSizePants = context.ProductSizes.Add(new ProductSize() { Id = 9, ProductMetric = metricBottom, Size = "XL", MetricXValue = 80, MetricYValue = 92 }).Entity;
 
 			//ProductModels
-			ProductModel hoodieModel1 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel2 = context.ProductModels.Add(new ProductModel() { Id = 2, Name = "Apocalypse Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel3 = context.ProductModels.Add(new ProductModel() { Id = 3, Name = "Rape Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel4 = context.ProductModels.Add(new ProductModel() { Id = 4, Name = "Ryu Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null }).Entity;
-			ProductModel hoodieModel5 = context.ProductModels.Add(new ProductModel() { Id = 5, Name = "Logo Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null }).Entity;
-			ProductModel pantsModel1 = context.ProductModels.Add(new ProductModel() { Id = 6, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel2 = context.ProductModels.Add(new ProductModel() { Id = 7, Name = "Apocalypse Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel3 = context.ProductModels.Add(new ProductModel() { Id = 8, Name = "Rape Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel4 = context.ProductModels.Add(new ProductModel() { Id = 9, Name = "Ryu Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null }).Entity;
-			ProductModel pantsModel5 = context.ProductModels.Add(new ProductModel() { Id = 10, Name = "Logo Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null }).Entity;
+			const string oversizedBlackHoodieImage = "assets/images/productModel/oversizedBlackHoodie.png";
+			const string oversizedYellowHoodieImage = "assets/images/productModel/oversizedYellowHoodie.png";
+			const string oversizedPinkHoodieImage = "assets/images/productModel/oversizedPinkHoodie.png";
+			const string oversizedBlackHoodieVideo = "assets/videos/productModel/oversizedBlackHoodie.gif";
+			const string oversizedYellowHoodieVideo = "assets/videos/productModel/oversizedYellowHoodie.gif";
+			const string oversizedPinkHoodieVideo = "assets/videos/productModel/oversizedPinkHoodie.gif";
+
+			const string chinoWhitePantsImage = "assets/images/productModel/chinoWhitePants.png";
+			const string chinoBluePantsImage = "assets/images/productModel/chinoBluePants.png";
+			const string chinoBrownPantsImage = "assets/images/productModel/chinoBrownPants.png";
+			const string chinoWhitePantsVideo = "assets/videos/productModel/chinoWhitePants.gif";
+			const string chinoBluePantsVideo = "assets/videos/productModel/chinoBluePants.gif";
+			const string chinoBrownPantsVideo = "assets/videos/productModel/chinoBrownPants.gif";
+
+			ProductModel hoodieModel1 = context.ProductModels.Add(new ProductModel() { Id = 1, Name = "Rust In Peace Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null, ImagePath = oversizedBlackHoodieImage, VideoPath = oversizedBlackHoodieVideo }).Entity;
+			ProductModel hoodieModel2 = context.ProductModels.Add(new ProductModel() { Id = 2, Name = "Apocalypse Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null, ImagePath = oversizedYellowHoodieImage, VideoPath = oversizedYellowHoodieVideo }).Entity;
+			ProductModel hoodieModel3 = context.ProductModels.Add(new ProductModel() { Id = 3, Name = "Rape Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null, ImagePath = oversizedPinkHoodieImage, VideoPath = oversizedPinkHoodieVideo }).Entity;
+			ProductModel hoodieModel4 = context.ProductModels.Add(new ProductModel() { Id = 4, Name = "Ryu Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null, ImagePath = oversizedBlackHoodieImage, VideoPath = oversizedBlackHoodieVideo }).Entity;
+			ProductModel hoodieModel5 = context.ProductModels.Add(new ProductModel() { Id = 5, Name = "Logo Hoodie", ProductCategory = categoryTop, ProductMetric = metricTop, Price = 59.99, Products = null, ImagePath = oversizedYellowHoodieImage, VideoPath = oversizedYellowHoodieVideo }).Entity;
+			ProductModel pantsModel1 = context.ProductModels.Add(new ProductModel() { Id = 6, Name = "Rust In Peace Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null, ImagePath = chinoWhitePantsImage, VideoPath = chinoWhitePantsVideo }).Entity;
+			ProductModel pantsModel2 = context.ProductModels.Add(new ProductModel() { Id = 7, Name = "Apocalypse Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null, ImagePath = chinoBluePantsImage, VideoPath = chinoBluePantsVideo }).Entity;
+			ProductModel pantsModel3 = context.ProductModels.Add(new ProductModel() { Id = 8, Name = "Rape Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null, ImagePath = chinoBrownPantsImage, VideoPath = chinoBrownPantsVideo }).Entity;
+			ProductModel pantsModel4 = context.ProductModels.Add(new ProductModel() { Id = 9, Name = "Ryu Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null, ImagePath = chinoWhitePantsImage, VideoPath = chinoWhitePantsVideo }).Entity;
+			ProductModel pantsModel5 = context.ProductModels.Add(new ProductModel() { Id = 10, Name = "Logo Pants", ProductCategory = categoryBottom, ProductMetric = metricBottom, Price = 75.99, Products = null, ImagePath = chinoBluePantsImage, VideoPath = chinoBluePantsVideo }).Entity;
 
 			//Products
 			Product hoodieProduct1 = context.Products.Add(new Product() { Id = 1, ProductModel = hoodieModel1, ProductStocks = null, Color = "Black" }).Entity;
