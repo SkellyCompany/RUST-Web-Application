@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RUSTWebApplication.Core.Entity.Order;
 using RUSTWebApplication.Core.DomainService;
+using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.Core.ApplicationService.Services
 {
@@ -125,6 +126,29 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 throw new ArgumentException("OrderLines is null");
             }
+            List<ProductStock> allProductStock = _productStockRepository.ReadAll().ToList();
+            order.OrderLines.ForEach(ol =>
+                {
+                    if (ol.ProductStock == null)
+                    {
+                        throw new ArgumentException($"ProductStock of OrderLine is null");
+                    }
+
+                    if (ol.Quantity <= 0)
+                    {
+                        throw new ArgumentException($"Quantity of OrderLine is equal or less then zero.");
+                    }
+
+                    if (ol.Quantity > ol.ProductStock.Quantity)
+                    {
+                        throw new ArgumentException("OrderLine Quantity bigger then ProductStock Quantity");
+                    }
+
+                    ProductStock productStock = allProductStock.Find(p => p.Id == ol.ProductStock.Id);
+                    ol.ProductStock = productStock ?? throw new ArgumentException($"Cannot find ProductStock with the Id {ol.ProductStock.Id}");
+
+                }
+                );
         }
 
         private void ValidateAddress(Order order)
@@ -193,11 +217,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 throw new ArgumentException("Phone is null or empty");
             }
-        }
-
-        private void ValidateProductStock(Order order)
-        {
-
         }
     }
 }
