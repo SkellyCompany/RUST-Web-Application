@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using RUSTWebApplication.Core.ApplicationService;
+using RUSTWebApplication.Core.Entity.Filters;
 using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.UI.RestAPI.Controllers
@@ -20,17 +20,17 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
         // GET api/productmodels
         [HttpGet]
-        public ActionResult<IEnumerable<ProductModel>> Get()
+        public ActionResult<FilteredList<ProductModel>> Get([FromQuery] ProductModelFilter filter)
         {
             try
             {
-                return Ok(_productModelService.ReadAll());
+				FilteredList<ProductModel> filteredProductModels = _productModelService.ReadAll(filter);
+				return Ok(new FilteredList<object> { TotalPages = filteredProductModels.TotalPages, Data = filteredProductModels.Data });
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
-
         }
 
         // GET api/productmodels/5

@@ -45,6 +45,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productRepository.Delete(productId);
         }
+
         private void ValidateCreate(Product product)
         {
             ValidateNull(product);

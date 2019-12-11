@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using RUSTWebApplication.Core.DomainService;
+using RUSTWebApplication.Core.Entity.Filters;
 using RUSTWebApplication.Core.Entity.Product;
 
 namespace RUSTWebApplication.Infrastructure.Repositories
@@ -28,10 +29,49 @@ namespace RUSTWebApplication.Infrastructure.Repositories
             return _ctx.ProductModels.AsNoTracking().FirstOrDefault(pm => pm.Id == productModelId);
         }
 
-        public IEnumerable<ProductModel> ReadAll()
+        public FilteredList<ProductModel> ReadAll(ProductModelFilter filter)
         {
-            return _ctx.ProductModels.AsNoTracking();
-        }
+			FilteredList<ProductModel> filteredList = new FilteredList<ProductModel>();
+			if (filter.CurrentPage == 0 && filter.ItemsPerPage == 0)
+			{
+				filteredList.Data = _ctx.ProductModels.AsNoTracking();
+				return filteredList;
+			}
+			else
+			{
+				if (filter.CategoryType == CategoryType.Default)
+				{
+					filteredList.Data = _ctx.ProductModels.AsNoTracking()
+						.Skip((filter.CurrentPage - 1) * filter.ItemsPerPage).Take(filter.ItemsPerPage);
+
+					if (_ctx.ProductModels.Count() % filter.ItemsPerPage != 0)
+					{
+						filteredList.TotalPages = (_ctx.ProductModels.Count() / filter.ItemsPerPage) + 1;
+					}
+					else
+					{
+						filteredList.TotalPages = _ctx.ProductModels.Count() / filter.ItemsPerPage;
+					}
+				}
+				else
+				{
+					filteredList.Data = _ctx.ProductModels.AsNoTracking().Where(pm => pm.ProductCategory.Name.Equals(filter.CategoryType.ToString()))
+						.Skip((filter.CurrentPage - 1) * filter.ItemsPerPage).Take(filter.ItemsPerPage);
+
+					int totalFilteredProductModels = _ctx.ProductModels.Where(pm => pm.ProductCategory.Name.Equals(filter.CategoryType.ToString())).Count();
+					if (totalFilteredProductModels % filter.ItemsPerPage != 0)
+					{
+						filteredList.TotalPages = (totalFilteredProductModels / filter.ItemsPerPage) + 1;
+					}
+					else
+					{
+						filteredList.TotalPages = totalFilteredProductModels / filter.ItemsPerPage;
+					}
+				}
+			}
+
+			return filteredList;
+		}
 
         public ProductModel Update(ProductModel updatedProductModel)
         {

@@ -10,5 +10,7 @@ namespace RUSTWebApplication.Core.Entity.Product
         public ProductMetric ProductMetric { get; set; }
         public double Price { get; set; }
 		public List<Product> Products { get; set; }
+		public string ImagePath { get; set; }
+		public string VideoPath { get; set; }
 	}
 }
