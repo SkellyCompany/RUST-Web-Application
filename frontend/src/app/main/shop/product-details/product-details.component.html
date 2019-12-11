@@ -1,19 +1,19 @@
 <app-navigation-bar></app-navigation-bar>
 <div id="film-grain"></div>
 <!-- Product -->
-<main class="page-product">
+<main class="page-product" *ngIf="productModel && currentProduct && productStock">
   <div class="product-wrapper">
     <div class="product">
       <section class="product-content">
         <div class="product-content-inner">
           <div class="product-content-header">
-            <h1 class="title">LittleThings T-shirt
-              <a class="brand">39.00€</a>
+            <h1 class="title">{{productModel.name}}
+              <a class="brand">{{productModel.price}}€</a>
             </h1>
           </div>
           <div class="color-container">
             <div>
-              <span>Color:</span><strong>white</strong>
+              <span>Color:</span><strong>{{currentProduct.color}}</strong>
             </div>
             <div class="color-carousel">
               <div class="color-flex">
@@ -35,7 +35,7 @@
               </div>
             </div>
           </div>
-          <a style="font-size: 17px; color: #fff;">Stock: <span>50</span></a>
+          <a style="font-size: 17px; color: #fff;">Stock: <span>k</span></a>
           <form class="product-content-selection">
             <div class="selection">
               <select class="form-control">
@@ -49,11 +49,14 @@
             <button class="button">Add to cart +</button>
           </form>
         </div>
-        <a><img src="https://media.giphy.com/media/dXcczD07oqteQ6HrnV/giphy.gif" width="697" height="697"></a>
+        <a><img [src]="productModel.videoPath" width="697" height="697"></a>
       </section>
     </div>
   </div>
 </main>
+<div class="loading-ring-container" *ngIf="!productModels">
+  <div class="loading-ring">Loading...</div>
+</div>
 <!-- Details !-->
 <section class="details-container">
   <div class="description-container">

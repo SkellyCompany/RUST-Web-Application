@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:51800/api/users';
+  private apiUrl = 'http://localhost:52631/api/users';
 
 
   constructor(private http: HttpClient) {}
