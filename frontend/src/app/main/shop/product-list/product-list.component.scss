@@ -60,11 +60,11 @@ a{color:inherit;text-decoration:none;}
 
 .product-grid{
   padding-top:10%;
-  padding-bottom:10%;
   margin:-1px auto 0;
   display:flex;
   display:-webkit-box;
   width:77%;
+  min-height: 1232px;
 }
 .product-grid-list-container{
   display:-webkit-box;
@@ -118,7 +118,7 @@ a{color:inherit;text-decoration:none;}
   transform:scale3d(1.1,1.1,1.1);
 }
 .product-grid-list:nth-child(n+4){
-  margin-top:4.30556vw;
+  margin-top:1vw;
 }
 .product-grid-list:not(:nth-child(3n+1)){
   margin-left:8.15278vw;
@@ -182,7 +182,7 @@ a{color:inherit;text-decoration:none;}
   font-size: 10px;
   line-height: 1;
   font-weight: 400;
-  padding-bottom: 30px;
+  padding-bottom: 90px;
   font-family: 'roman';
   -webkit-text-size-adjust: 100%;
   margin: 1em auto;
@@ -211,7 +211,7 @@ a{color:inherit;text-decoration:none;}
 }
 
 [data-pagination] a {
-  color: #54555E;
+  color: #d4d4d4;
   font-size: 100%;
   padding: .5em;
 }
@@ -219,7 +219,6 @@ a{color:inherit;text-decoration:none;}
 [data-pagination] a:focus,
 [data-pagination] a:hover {
   cursor: pointer;
-  text-decoration: underline;
   color: #fff;
 }
 
@@ -233,6 +232,11 @@ a{color:inherit;text-decoration:none;}
 [data-pagination] [disabled] {
   opacity: .5;
   pointer-events: none;
+}
+
+.currentPagination{
+  color: #fff!important;
+  text-decoration: underline!important;
 }
 
 @media (min-width: 350px) {
@@ -260,27 +264,37 @@ a{color:inherit;text-decoration:none;}
 }
 
 //Loading Ring
-.loading {
-display:flex;
-color:black;
-font-weight: bold;
-justify-content: center;
-align-items: center;
-height:100%;
-margin: auto;
-font-family: Helvetica;
-animation: load 1.5s infinite 0s ease-in-out;
-animation-direction: alternate;
-text-shadow: 0 0 1px white;
+.loading-ring-container {
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-@keyframes load {
-  0%{
-    opacity: 0.08;
-    filter: blur(5px);
-    letter-spacing: 3px;
+.loading-ring {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 46px;
+  font-family: 'roman';
+  font-size: 28px;
+  animation: load 1.5s infinite 0s ease-in-out;
+  animation-direction: alternate;
+  text-shadow: 0 0 1px white;
   }
-  100%{
-    opacity: 1;
-  }
-}
+  
+  @keyframes load {
+    0%{
+      opacity: 1.0;
+      filter: blur(3px);
+      letter-spacing: 3px;
+    }
+    100%{
+      opacity: 1;
+    }
+  }   

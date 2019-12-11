@@ -1,0 +1,74 @@
+* {
+  font-family: 'roman';
+	box-sizing: border-box;
+}
+h1 {
+	font-weight: bold;
+  margin: 0;
+  padding-bottom: 8%;
+  font-size: 45px;
+}
+p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+button {
+  margin: 25px 0;
+	background-color: #fff;
+	color: #000;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+.button-effect {
+  cursor: pointer;
+  color: #000;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+form {
+	background-color: #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+.container {
+	background-color: #000;
+	border: 2px solid #fff;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+  min-height: 480px;
+  margin-top: 10%;
+  margin-left: 30%;
+}
+.form-container {
+  position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
+}
+.sign-in-container {
+  width: 100%;
+	z-index: 2;
+}
