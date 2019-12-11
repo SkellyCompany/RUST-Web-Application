@@ -10,6 +10,7 @@ import { FilteredList } from '../models/filteredList.model';
 export class ProductModelService {
   private apiUrl = 'http://localhost:51800/api/productmodels';
 
+
   constructor(private http: HttpClient) { }
 
   /* GET all productModels */
