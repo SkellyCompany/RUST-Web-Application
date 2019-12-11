@@ -8,7 +8,8 @@ import { FilteredList } from '../models/filteredList.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProductModelService {
-  private apiUrl = 'http://localhost:55390/api/productmodels';
+  private apiUrl = 'http://localhost:51800/api/productmodels';
+
 
   constructor(private http: HttpClient) { }
 
