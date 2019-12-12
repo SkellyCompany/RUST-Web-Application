@@ -5,5 +5,5 @@ export class Product {
   id?: number;
   color: string;  
   productModel: ProductModel;
-  productStock: ProductStock;
+  productStocks: ProductStock[];
 }

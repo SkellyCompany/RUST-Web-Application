@@ -16,14 +16,13 @@ export class ProductDetailsComponent implements OnInit {
   products: Product[];
   currentProduct: Product;
   productModel: ProductModel;
-  productStock: ProductStock;
 
   constructor(private productService: ProductService, private productModelService: ProductModelService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getProductModel();
     this.getProduct();
-    this.getProductStock();
+    this.getProducts();
   }
 
 
@@ -36,10 +35,14 @@ export class ProductDetailsComponent implements OnInit {
   getProduct(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.productModelService.getProductModel(id)
-    .subscribe(productModel => this.currentProduct = productModel.products[0] );
+    .subscribe(productModel => this.currentProduct = productModel.products[1] );
   }
 
-  getProductStock(): void{
-    this.productStock = this.currentProduct.productStock;
+  getProducts(): void{
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.productModelService.getProductModel(id)
+    .subscribe(productModel => this.products.push(productModel.products[0]));
   }
+
+
 }
