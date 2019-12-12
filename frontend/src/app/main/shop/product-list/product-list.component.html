@@ -12,9 +12,9 @@
   <!-- Product Grid -->
   <section class="product-grid" *ngIf="productModels">
     <ul class="product-grid-list-container">              
-      <li class="product-grid-list" *ngFor="let productModel of productModels">
-        <a class="_p">
-            <span class="product-grid-list-image" routerLink="/pet/1">
+      <li class="product-grid-list" *ngFor="let productModel of productModels" > 
+        <a class="_p" routerLink="/shop/{{productModel.id}}">
+            <span class="product-grid-list-image">
               <img [src]="productModel.imagePath"  style="background-color: #000;" alt="">
               <img [src]="productModel.videoPath" alt="">
             </span>

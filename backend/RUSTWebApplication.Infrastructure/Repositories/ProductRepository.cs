@@ -25,12 +25,12 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 
         public Product Read(int productId)
         {
-            return _ctx.Products.AsNoTracking().FirstOrDefault(p => p.Id == productId);
+            return _ctx.Products.AsNoTracking().Include(p => p.ProductStocks).FirstOrDefault(p => p.Id == productId);
         }
 
         public IEnumerable<Product> ReadAll()
         {
-            return _ctx.Products.AsNoTracking();
+            return _ctx.Products.AsNoTracking().Include(p => p.ProductStocks);
         }
 
         public Product Update(Product updatedProduct)

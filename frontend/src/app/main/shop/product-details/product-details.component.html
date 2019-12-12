@@ -1,55 +1,43 @@
 <app-navigation-bar></app-navigation-bar>
 <div id="film-grain"></div>
 <!-- Product -->
-<main class="page-product">
+<main class="page-product" *ngIf="productModel && currentProduct">
   <div class="product-wrapper">
     <div class="product">
       <section class="product-content">
         <div class="product-content-inner">
           <div class="product-content-header">
-            <h1 class="title">LittleThings T-shirt
-              <a class="brand">39.00€</a>
+            <h1 class="title">{{productModel.name}}
+              <a class="brand">{{productModel.price}}€</a>
             </h1>
           </div>
           <div class="color-container">
             <div>
-              <span>Color:</span><strong>white</strong>
+              <span>Color:</span><strong>{{currentProduct.color}}</strong>
             </div>
             <div class="color-carousel">
               <div class="color-flex">
-                <div class="color-scroller">
-                  <div class="color-wrapper">
-                    <img src="https://i.imgur.com/ktK60Ge.png" />
-                  </div>
-                </div>
-                <div class="color-scroller">
-                  <div class="color-wrapper">
-                    <img src="https://i.imgur.com/jcUVWVV.png"/>
-                  </div>
-                </div>
-                <div class="color-scroller">
-                  <div class="color-wrapper">
-                    <img src="https://i.imgur.com/Fxzdwi9.png"/>
+                <div class="color-scroller" *ngFor="let product of products">
+                  <div class="color-wrapper" (click)="setCurrentProduct(product)">
+                    <img [src]="product.imagePath"/>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <a style="font-size: 17px; color: #fff;">Stock: <span>50</span></a>
-          <form class="product-content-selection">
-            <div class="selection">
-              <select class="form-control">
-                <option>XS</option>
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
+          <a style="font-size: 17px; color: #fff;">Stock: <span>{{currentProduct.productStocks[currentProductStockIndex].quantity}}</span></a>
+          <form class="product-content-selection" >
+            <div class="selection" >
+              <select class="form-control" (change)="setCurrentProductStockIndex($event.target.value)">
+                <option *ngFor="let productStock of currentProduct.productStocks;let i = index" [value]="i">
+                  {{productStock.productSize.size}}
+                </option>
               </select>
             </div>
             <button class="button">Add to cart +</button>
           </form>
         </div>
-        <a><img src="https://media.giphy.com/media/dXcczD07oqteQ6HrnV/giphy.gif" width="697" height="697"></a>
+        <a><img [src]="currentProduct.videoPath" width="697" height="697"></a>
       </section>
     </div>
   </div>
@@ -71,23 +59,29 @@
         <td class="specifications-stack-value"></td>
         <tr >
           <th class="specifications-stack-label"></th>
-          <td class="specifications-stack-value">
+          <td class="specifications-stack-value" >
             <p>
-            <a>Size: XS | X: 52 cm | Y: 68 cm | Z: 21,5 cm</a><br/>
-            <a>Size: S | X: 54 cm | Y: 68,5 cm | Z: 22 cm</a><br/>
-            <a>Size: M | X: 56 cm| Y: 69 cm | Z: 22,5 cm</a><br/>
-            <a>Size: L | X: 58 cm | Y: 71 cm | Z: 24 cm</a><br/>
-            <a>Size: XL | X: 60 cm | Y: 73 cm | Z: 25 cm</a><br/>
+            <a *ngFor="let productStock of currentProduct.productStocks">
+              Size: {{productStock.productSize.size}} | {{productStock.productSize.productMetric.metricX}}: {{productStock.productSize.metricXValue}} cm <span *ngIf="productStock.productSize.productMetric.metricY"> | {{productStock.productSize.productMetric.metricY}}: {{productStock.productSize.metricYValue}} cm </span>  <span *ngIf="productStock.productSize.productMetric.metricZ"> | {{productStock.productSize.productMetric.metricZ}}: {{productStock.productSize.metricZValue}} cm</span> <br/>
+            </a>
           </td>
         </tr>
         <tr>
           <th class="specifications-stack-label"></th>
           <div style ="text-align: center;">
-            <img src="https://i.imgur.com/82XTKY5.png">
+            <span *ngIf="productModel.productCategory.name === 'Top'">
+              <img src="assets/images/productCategory/topWireframe.png">
+            </span>
+            <span *ngIf="productModel.productCategory.name === 'Bottom'">
+              <img src="assets/images/productCategory/bottomWireframe.png">
+            </span>
           </div>
         </tr>
       </table>
     </div>
   </div>
 </section>
+<div class="loading-ring-container" *ngIf="!productModels && !currentProduct">
+  <div class="loading-ring">Loading...</div>
+</div>
 <app-footer></app-footer>
