@@ -383,20 +383,10 @@ namespace RUSTWebApplication.UnitTests.Core
                 {
                     new OrderLine
                     {
-                        ProductStock = new ProductStock
-                        {
-                            Id = 1,
-                            Quantity = 8
-                        },
                         Quantity = 2
                     },
                     new OrderLine
                     {
-                        ProductStock = new ProductStock
-                        {
-                            Id = 1,
-                            Quantity = 8
-                        },
                         Quantity = 3
                     },
                 },

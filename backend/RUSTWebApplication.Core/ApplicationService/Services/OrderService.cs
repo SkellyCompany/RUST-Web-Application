@@ -148,7 +148,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
                     ol.ProductStock = productStock ?? throw new ArgumentException($"Cannot find ProductStock with the Id {ol.ProductStock.Id}");
 
                 }
-                );
+            );
         }
 
         private void ValidateAddress(Order order)
