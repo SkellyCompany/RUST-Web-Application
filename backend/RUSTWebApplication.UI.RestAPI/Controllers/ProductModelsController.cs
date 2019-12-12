@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.Entity.Filters;
@@ -33,8 +34,8 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             }
         }
 
-        // GET api/productmodels/5
-        [HttpGet("{id}")]
+		// GET api/productmodels/5
+		[HttpGet("{id}")]
         public ActionResult<ProductModel> Get(int id)
         {
             try
@@ -48,8 +49,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
         }
 
 
-        // POST api/productmodels
-        [HttpPost]
+		// POST api/productmodels
+		[Authorize(Roles = "Administrator")]
+		[HttpPost]
         public ActionResult<ProductModel> Post([FromBody] ProductModel value)
         {
             try
@@ -64,8 +66,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
         }
 
-        // PUT api/productmodels/5
-        [HttpPut("{id}")]
+		// PUT api/productmodels/5
+		[Authorize(Roles = "Administrator")]
+		[HttpPut("{id}")]
         public ActionResult<ProductModel> Put(int id, [FromBody] ProductModel value)
         {
             try
@@ -82,8 +85,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             }
         }
 
-        // DELETE api/productmodels/5
-        [HttpDelete("{id}")]
+		// DELETE api/productmodels/5
+		[Authorize(Roles = "Administrator")]
+		[HttpDelete("{id}")]
         public ActionResult<ProductModel> Delete(int id)
         {
             ProductModel deletedProductModel = _productModelService.Delete(id);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.Entity.Product;
@@ -48,8 +49,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
         }
 
 
-        // POST api/productmetrics
-        [HttpPost]
+		// POST api/productmetrics
+		[Authorize(Roles = "Administrator")]
+		[HttpPost]
         public ActionResult<ProductMetric> Post([FromBody] ProductMetric value)
         {
             try
@@ -64,8 +66,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
         }
 
-        // PUT api/productmetrics/5
-        [HttpPut("{id}")]
+		// PUT api/productmetrics/5
+		[Authorize(Roles = "Administrator")]
+		[HttpPut("{id}")]
         public ActionResult<ProductMetric> Put(int id, [FromBody] ProductMetric value)
         {
             try
@@ -82,8 +85,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             }
         }
 
-        // DELETE api/productmetrics/5
-        [HttpDelete("{id}")]
+		// DELETE api/productmetrics/5
+		[Authorize(Roles = "Administrator")]
+		[HttpDelete("{id}")]
         public ActionResult<ProductMetric> Delete(int id)
         {
             ProductMetric deletedProductMetric = _productMetricService.Delete(id);

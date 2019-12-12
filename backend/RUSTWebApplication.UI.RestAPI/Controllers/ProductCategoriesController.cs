@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.Entity.Product;
@@ -48,8 +49,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
         }
 
 
-        // POST api/productcategories
-        [HttpPost]
+		// POST api/productcategories
+		[Authorize(Roles = "Administrator")]
+		[HttpPost]
         public ActionResult<ProductCategory> Post([FromBody] ProductCategory value)
         {
             try
@@ -64,8 +66,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
         }
 
-        // PUT api/productcategories/5
-        [HttpPut("{id}")]
+		// PUT api/productcategories/5
+		[Authorize(Roles = "Administrator")]
+		[HttpPut("{id}")]
         public ActionResult<ProductCategory> Put(int id, [FromBody] ProductCategory value)
         {
             try
@@ -82,8 +85,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             }
         }
 
-        // DELETE api/productcategories/5
-        [HttpDelete("{id}")]
+		// DELETE api/productcategories/5
+		[Authorize(Roles = "Administrator")]
+		[HttpDelete("{id}")]
         public ActionResult<ProductCategory> Delete(int id)
         {
             ProductCategory deletedCountry = _productCategoryService.Delete(id);

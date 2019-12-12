@@ -48,8 +48,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
         }
 
 
-        // POST api/products
-        [HttpPost]
+		// POST api/products
+		[Authorize(Roles = "Administrator")]
+		[HttpPost]
         public ActionResult<Product> Post([FromBody] Product value)
         {
             try
@@ -64,8 +65,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
         }
 
-        // PUT api/products/5
-        [HttpPut("{id}")]
+		// PUT api/products/5
+		[Authorize(Roles = "Administrator")]
+		[HttpPut("{id}")]
         public ActionResult<Product> Put(int id, [FromBody] Product value)
         {
             try
@@ -82,8 +84,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             }
         }
 
-        // DELETE api/products/5
-        [HttpDelete("{id}")]
+		// DELETE api/products/5
+		[Authorize(Roles = "Administrator")]
+		[HttpDelete("{id}")]
         public ActionResult<Product> Delete(int id)
         {
             Product deletedProduct = _productService.Delete(id);
