@@ -1,7 +1,8 @@
-<app-navigation-bar></app-navigation-bar>
+<app-navigation-bar [isCartVisible]="isCartVisible"></app-navigation-bar>
 <div id="film-grain"></div>
 <!-- Product -->
-<main class="page-product" *ngIf="productModel && currentProduct">
+<div *ngIf="productModel && currentProduct">
+<main class="page-product" >
   <div class="product-wrapper">
     <div class="product">
       <section class="product-content">
@@ -34,7 +35,7 @@
                 </option>
               </select>
             </div>
-            <button class="button">Add to cart +</button>
+            <button class="button" (click)="addProductToCart()">Add to cart +</button>
           </form>
         </div>
         <a><img [src]="currentProduct.videoPath" width="697" height="697"></a>
@@ -81,6 +82,7 @@
     </div>
   </div>
 </section>
+</div>
 <div class="loading-ring-container" *ngIf="!productModels && !currentProduct">
   <div class="loading-ring">Loading...</div>
 </div>

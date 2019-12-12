@@ -1,18 +1,20 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ɵConsole, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { Product } from 'src/app/shared/models/product/product.model';
 import { ProductModelService } from 'src/app/shared/services/product-model.service';
 import { ProductModel } from 'src/app/shared/models/product/productModel.model';
-import { ProductStock } from 'src/app/shared/models/product/productStock.model';
+import { NavigationBarComponent } from 'src/app/shared/navigation-bar/navigation-bar.component';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+  styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
 
+  @ViewChild(NavigationBarComponent, {static: false}) child:NavigationBarComponent;
+  isCartVisible: boolean = false;
   products: Product[] = [];
   currentProduct: Product;
   currentProductStockIndex: number = 0;
@@ -53,5 +55,9 @@ export class ProductDetailsComponent implements OnInit {
     this.currentProductStockIndex = productStockIndex;
   }
 
+  addProductToCart(){
+    this.child.setCartVisibility();
+    this.isCartVisible = true;
+  }
 
 }
