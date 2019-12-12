@@ -14,10 +14,9 @@ import { NavigationBarComponent } from 'src/app/shared/navigation-bar/navigation
 export class ProductDetailsComponent implements OnInit {
 
   @ViewChild(NavigationBarComponent, {static: false}) child:NavigationBarComponent;
-  isCartVisible: boolean = false;
   products: Product[] = [];
   currentProduct: Product;
-  currentProductStockIndex: number = 0;
+  currentProductStockIndex: number;
   productModel: ProductModel;
 
   constructor(private productService: ProductService, private productModelService: ProductModelService, private route: ActivatedRoute) { }
@@ -49,6 +48,7 @@ export class ProductDetailsComponent implements OnInit {
 
   setCurrentProduct(product: Product): void{
     this.currentProduct = product;
+    this.currentProductStockIndex = -1;
   }
 
   setCurrentProductStockIndex(productStockIndex: number): void{
@@ -56,8 +56,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addProductToCart(){
-    this.child.setCartVisibility();
-    this.isCartVisible = true;
+    if (this.currentProductStockIndex > -1){
+      this.child.setCartVisibility();
+    }
+    else{
+      alert("Select a size before adding this product to your cart.")
+    }
+
   }
 
 }
