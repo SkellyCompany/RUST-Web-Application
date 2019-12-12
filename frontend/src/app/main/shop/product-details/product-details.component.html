@@ -15,10 +15,10 @@
             <div>
               <span>Color:</span><strong>{{currentProduct.color}}</strong>
             </div>
-            <div class="color-carousel" *ngFor="let product of products">
+            <div class="color-carousel">
               <div class="color-flex">
-                <div class="color-scroller">
-                  <div class="color-wrapper">
+                <div class="color-scroller" *ngFor="let product of products">
+                  <div class="color-wrapper" (click)="setCurrentProduct(product)">
                     <img [src]="product.imagePath"/>
                   </div>
                 </div>

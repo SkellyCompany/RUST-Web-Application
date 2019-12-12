@@ -13,7 +13,7 @@ import { ProductStock } from 'src/app/shared/models/productStock.model';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  products: Product[];
+  products: Product[] = [];
   currentProduct: Product;
   productModel: ProductModel;
 
@@ -35,13 +35,17 @@ export class ProductDetailsComponent implements OnInit {
   getProduct(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.productModelService.getProductModel(id)
-    .subscribe(productModel => this.currentProduct = productModel.products[1] );
+    .subscribe(productModel => this.currentProduct = productModel.products[0]);
   }
 
   getProducts(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.productModelService.getProductModel(id)
-    .subscribe(productModel => this.products.push(productModel.products[0]));
+    .subscribe(productModel => this.products = this.products.concat(productModel.products));
+  }
+
+  setCurrentProduct(product: Product): void{
+    this.currentProduct = product;
   }
 
 
