@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel } from 'src/app/shared/models/productModel.model';
+import { ProductModel } from 'src/app/shared/models/product/productModel.model';
 import { ProductModelService } from 'src/app/shared/services/product-model.service';
 import { Router, NavigationEnd } from '@angular/router';
 

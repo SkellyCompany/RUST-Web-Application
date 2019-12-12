@@ -26,7 +26,7 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 
         public ProductModel Read(int productModelId)
         {
-            return _ctx.ProductModels.AsNoTracking().Include(pm => pm.Products).ThenInclude(p => p.ProductStocks).ThenInclude(ps => ps.ProductSize).ThenInclude(ps => ps.ProductMetric).FirstOrDefault(pm => pm.Id == productModelId);
+            return _ctx.ProductModels.AsNoTracking().Include(pm => pm.ProductCategory).Include(pm => pm.Products).ThenInclude(p => p.ProductStocks).ThenInclude(ps => ps.ProductSize).ThenInclude(ps => ps.ProductMetric).FirstOrDefault(pm => pm.Id == productModelId);
         }
 
         public FilteredList<ProductModel> ReadAll(ProductModelFilter filter)

@@ -1,10 +1,10 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { Product } from 'src/app/shared/models/product.model';
+import { Product } from 'src/app/shared/models/product/product.model';
 import { ProductModelService } from 'src/app/shared/services/product-model.service';
-import { ProductModel } from 'src/app/shared/models/productModel.model';
-import { ProductStock } from 'src/app/shared/models/productStock.model';
+import { ProductModel } from 'src/app/shared/models/product/productModel.model';
+import { ProductStock } from 'src/app/shared/models/product/productStock.model';
 
 @Component({
   selector: 'app-product-details',
@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit {
 
   products: Product[] = [];
   currentProduct: Product;
-  currentProductStock: ProductStock;
+  currentProductStockIndex: number = 0;
   productModel: ProductModel;
 
   constructor(private productService: ProductService, private productModelService: ProductModelService, private route: ActivatedRoute) { }
@@ -24,7 +24,6 @@ export class ProductDetailsComponent implements OnInit {
     this.getProductModel();
     this.getProduct();
     this.getProducts();
-    this.getProductStock();
   }
 
 
@@ -40,12 +39,6 @@ export class ProductDetailsComponent implements OnInit {
     .subscribe(productModel => this.currentProduct = productModel.products[0]);
   }
 
-  getProductStock(): void{
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.productModelService.getProductModel(id)
-    .subscribe(productModel => this.currentProductStock = productModel.products[0].productStocks[0]);
-  }
-
   getProducts(): void{
     const id = +this.route.snapshot.paramMap.get('id');
     this.productModelService.getProductModel(id)
@@ -56,8 +49,9 @@ export class ProductDetailsComponent implements OnInit {
     this.currentProduct = product;
   }
 
-  setCurrentProductStock(productStock: ProductStock): void{
-    console.log(productStock);
+  setCurrentProductStockIndex(productStockIndex: number): void{
+    this.currentProductStockIndex = productStockIndex;
   }
+
 
 }

@@ -1,7 +1,7 @@
 <app-navigation-bar></app-navigation-bar>
 <div id="film-grain"></div>
 <!-- Product -->
-<main class="page-product" *ngIf="productModel && currentProduct && currentProductStock">
+<main class="page-product" *ngIf="productModel && currentProduct">
   <div class="product-wrapper">
     <div class="product">
       <section class="product-content">
@@ -25,11 +25,11 @@
               </div>
             </div>
           </div>
-          <a style="font-size: 17px; color: #fff;">Stock: <span>{{currentProductStock.quantity}}</span></a>
+          <a style="font-size: 17px; color: #fff;">Stock: <span>{{currentProduct.productStocks[currentProductStockIndex].quantity}}</span></a>
           <form class="product-content-selection" >
             <div class="selection" >
-              <select class="form-control" (change)="setCurrentProductStock($event.target.value)">
-                <option *ngFor="let productStock of currentProduct.productStocks" [ngValue]="productStock">
+              <select class="form-control" (change)="setCurrentProductStockIndex($event.target.value)">
+                <option *ngFor="let productStock of currentProduct.productStocks;let i = index" [value]="i">
                   {{productStock.productSize.size}}
                 </option>
               </select>
@@ -62,18 +62,18 @@
           <td class="specifications-stack-value" >
             <p>
             <a *ngFor="let productStock of currentProduct.productStocks">
-              Size: {{productStock.productSize.size}} | {{productStock.productSize.productMetric.metricX}}: {{productStock.productSize.metricXValue}} cm | <span *ngIf="productStock.productSize.productMetric.metricY">{{productStock.productSize.productMetric.metricY}}: {{productStock.productSize.metricYValue}} cm |</span>  <span *ngIf="productStock.productSize.productMetric.metricZ">{{productStock.productSize.productMetric.metricZ}}: {{productStock.productSize.metricZValue}} cm</span> <br/>
+              Size: {{productStock.productSize.size}} | {{productStock.productSize.productMetric.metricX}}: {{productStock.productSize.metricXValue}} cm <span *ngIf="productStock.productSize.productMetric.metricY"> | {{productStock.productSize.productMetric.metricY}}: {{productStock.productSize.metricYValue}} cm </span>  <span *ngIf="productStock.productSize.productMetric.metricZ"> | {{productStock.productSize.productMetric.metricZ}}: {{productStock.productSize.metricZValue}} cm</span> <br/>
             </a>
           </td>
         </tr>
         <tr>
           <th class="specifications-stack-label"></th>
           <div style ="text-align: center;">
-            <span *ngIf="currentProductStock.productSize.productMetric.name === Top">
-              <img src="https://i.imgur.com/82XTKY5.png">
+            <span *ngIf="productModel.productCategory.name === 'Top'">
+              <img src="assets/images/productCategory/topWireframe.png">
             </span>
-            <span>
-              <img src="https://free-clipart-pictures.com/images/pants-drawing-pant-4.jpg">
+            <span *ngIf="productModel.productCategory.name === 'Bottom'">
+              <img src="assets/images/productCategory/bottomWireframe.png">
             </span>
           </div>
         </tr>
