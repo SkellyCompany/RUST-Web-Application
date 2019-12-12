@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.Entity.Order;
@@ -48,8 +49,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
         }
 
 
-        // POST api/orders
-        [HttpPost]
+		// POST api/orders
+		[Authorize(Roles = "Administrator")]
+		[HttpPost]
         public ActionResult<Order> Post([FromBody] Order value)
         {
             try
@@ -64,8 +66,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
         }
 
-        // PUT api/orders/5
-        [HttpPut("{id}")]
+		// PUT api/orders/5
+		[Authorize(Roles = "Administrator")]
+		[HttpPut("{id}")]
         public ActionResult<Order> Put(int id, [FromBody] Order value)
         {
             try
@@ -82,8 +85,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             }
         }
 
-        // DELETE api/orders/5
-        [HttpDelete("{id}")]
+		// DELETE api/orders/5
+		[Authorize(Roles = "Administrator")]
+		[HttpDelete("{id}")]
         public ActionResult<Order> Delete(int id)
         {
             Order deletedOrder = _orderService.Delete(id);

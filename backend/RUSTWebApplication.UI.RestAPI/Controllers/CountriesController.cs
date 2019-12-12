@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.Entity.Order;
@@ -48,8 +49,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
         }
 
 
-        // POST api/countries
-        [HttpPost]
+		// POST api/countries
+		[Authorize(Roles = "Administrator")]
+		[HttpPost]
         public ActionResult<Country> Post([FromBody] Country value)
         {
             try
@@ -64,8 +66,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
         }
 
-        // PUT api/countries/5
-        [HttpPut("{id}")]
+		// PUT api/countries/5
+		[Authorize(Roles = "Administrator")]
+		[HttpPut("{id}")]
         public ActionResult<Country> Put(int id, [FromBody] Country value)
         {
             try
@@ -82,8 +85,9 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             }
         }
 
-        // DELETE api/countries/5
-        [HttpDelete("{id}")]
+		// DELETE api/countries/5
+		[Authorize(Roles = "Administrator")]
+		[HttpDelete("{id}")]
         public ActionResult<Country> Delete(int id)
         {
             Country deletedCountry = _countryService.Delete(id);
