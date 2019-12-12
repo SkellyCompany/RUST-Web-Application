@@ -1,7 +1,8 @@
 <app-navigation-bar></app-navigation-bar>
 <div id="film-grain"></div>
 <!-- Product -->
-<main class="page-product" *ngIf="productModel && currentProduct">
+<div *ngIf="productModel && currentProduct">
+<main class="page-product" >
   <div class="product-wrapper">
     <div class="product">
       <section class="product-content">
@@ -25,16 +26,17 @@
               </div>
             </div>
           </div>
-          <a style="font-size: 17px; color: #fff;">Stock: <span>{{currentProduct.productStocks[currentProductStockIndex].quantity}}</span></a>
+          <a style="font-size: 17px; color: #fff;" *ngIf="currentProductStockIndex > -1">Stock: <span>{{currentProduct.productStocks[currentProductStockIndex].quantity}}</span></a>
           <form class="product-content-selection" >
             <div class="selection" >
               <select class="form-control" (change)="setCurrentProductStockIndex($event.target.value)">
+                <option [value]=-1>Choose size</option>
                 <option *ngFor="let productStock of currentProduct.productStocks;let i = index" [value]="i">
                   {{productStock.productSize.size}}
                 </option>
               </select>
             </div>
-            <button class="button">Add to cart +</button>
+           <button class="button" (click)="addProductToCart()">Add to cart +</button>
           </form>
         </div>
         <a><img [src]="currentProduct.videoPath" width="697" height="697"></a>
@@ -81,6 +83,7 @@
     </div>
   </div>
 </section>
+</div>
 <div class="loading-ring-container" *ngIf="!productModels && !currentProduct">
   <div class="loading-ring">Loading...</div>
 </div>
