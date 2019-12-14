@@ -6,11 +6,11 @@
       <div class="page-title">
         <h1>Checkout</h1>
       </div>
-      <form class="checkout-form">							
+      <form [formGroup]="orderForm" class="checkout-form" (ngSubmit)="addOrder()">							
         <div class="checkout-wrapper">
           <h3>Billing details</h3>
           <div class="field-wrapper">		
-            <p class="form-row form-row-first"><label>First name</label><input type="text"/>
+            <p class="form-row form-row-first"><label>First name</label><input type="text" formControlName="firstName"/>
             </p>
             <p class="form-row form-row-last"><label>Last name</label><input type="text"/>
             </p>
@@ -48,10 +48,11 @@
       <div>      
         <div id="cart-total">Subtotal: {{ getSubtotal() }}€</div>
       </div>
-      </form>
       <div class="purchase-container">
-        <button (click)="setOrderConfirmationVisibility()" >Purchase</button>
-      </div>
+          <button type="submit" (click)="setOrderConfirmationVisibility()" >Purchase</button>
+        </div>
+      </form>
+
     </div>
   </div>
   <!-- Order Confirmation -->

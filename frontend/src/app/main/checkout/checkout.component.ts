@@ -3,6 +3,8 @@ import { ProductCart } from 'src/app/shared/models/productCart';
 import { CartService } from 'src/app/shared/services/cart-service';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { Country } from 'src/app/shared/models/order/country.model';
+import { FormGroup, FormControl } from '@angular/forms';
+import { OrderService } from 'src/app/shared/services/order-service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,8 +16,20 @@ export class CheckoutComponent implements OnInit {
   isOrderConfirmationVisible : boolean;
   productCarts: ProductCart[] = [];
   countries: Country[] = [];
+  orderForm = new FormGroup({
+    orderDate: new FormControl(''),
+    deliveryDate: new FormControl(''),
+    address: new FormControl(''),
+    city: new FormControl(''),
+    zipCode: new FormControl(''),
+    country: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    emai: new FormControl(''),
+    phone: new FormControl('')
+  });
 
-  constructor(private cartService: CartService, private countryService: CountryService) { }
+  constructor(private cartService: CartService, private countryService: CountryService, private orderService: OrderService) { }
 
   ngOnInit() {
     this.productCarts = this.cartService.getProductCarts();
@@ -48,5 +62,12 @@ export class CheckoutComponent implements OnInit {
   getCountries(){
     this.countryService.getCountries()
     .subscribe(countries => this.countries = this.countries.concat(countries));
+  }
+
+  addOrder(){
+    const orderFromFields = this.orderForm.value;
+    console.log(orderFromFields.firstName);
+    // this.orderService.addOrder(orderFromFields)
+    // .subscribe(order => console.log(order.firstName, order.lastname));
   }
 }
