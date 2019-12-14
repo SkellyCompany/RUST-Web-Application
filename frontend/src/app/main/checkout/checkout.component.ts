@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCart } from 'src/app/shared/models/productCart';
 import { CartService } from 'src/app/shared/services/cart-service';
+import { CountryService } from 'src/app/shared/services/country.service';
+import { Country } from 'src/app/shared/models/order/country.model';
 
 @Component({
   selector: 'app-checkout',
@@ -11,11 +13,13 @@ export class CheckoutComponent implements OnInit {
 
   isOrderConfirmationVisible : boolean;
   productCarts: ProductCart[] = [];
+  countries: Country[] = [];
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private countryService: CountryService) { }
 
   ngOnInit() {
     this.productCarts = this.cartService.getProductCarts();
+    this.getCountries();
   }
 
   setOrderConfirmationVisibility(){
@@ -41,4 +45,8 @@ export class CheckoutComponent implements OnInit {
     return subtotal.toFixed(2);
   }
 
+  getCountries(){
+    this.countryService.getCountries()
+    .subscribe(countries => this.countries = this.countries.concat(countries));
+  }
 }

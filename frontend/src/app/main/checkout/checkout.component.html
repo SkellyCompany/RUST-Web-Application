@@ -14,7 +14,7 @@
             </p>
             <p class="form-row form-row-last"><label>Last name</label><input type="text"/>
             </p>
-            <p class="form-row form-row-wide"><label>Country</label><select><option>Select a country</option></select>
+            <p class="form-row form-row-wide"><label>Country</label><select><option>Choose country</option><option *ngFor="let country of countries">{{ country.name }}</option></select>
             </p>
             <p class="form-row form-row-wide"><label>Street</label><input type="text"/>
             </p>

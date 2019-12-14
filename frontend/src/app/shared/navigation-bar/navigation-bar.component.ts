@@ -45,12 +45,14 @@ export class NavigationBarComponent implements OnInit {
   getSubtotal(){
     let subtotal: number = 0;
     for (var i = 0; i < this.productCarts.length; i++) {
-      if (this.productCarts[i] == this.productCarts[0]){
-        subtotal += this.productCarts[i].price;
-      }
-      else{
-        subtotal += this.productCarts[i].price + 0.01;
-      }
+        for (var j = 0; j < this.productCarts[i].quantity; j++) {
+          if (j == 0 && this.productCarts[i] == this.productCarts[0]){
+          subtotal += this.productCarts[i].price;
+          }
+          else{
+            subtotal += this.productCarts[i].price + 0.01;
+          }
+        }
     }
     return subtotal.toFixed(2);
   }

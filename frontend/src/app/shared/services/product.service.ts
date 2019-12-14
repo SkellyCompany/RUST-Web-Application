@@ -6,13 +6,6 @@ import { Product } from '../models/product/product.model';
 import { AuthenticationService } from './authentication.service';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
-  })
-};
-
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
@@ -20,7 +13,7 @@ export class ProductService {
 
   /* GET all products */
   getProducts(): Observable<Product> {
-    return this.http.get<Product>(environment.apiUrl + '/api/products', httpOptions);
+    return this.http.get<Product>(environment.apiUrl + '/api/products');
   }
 
 }

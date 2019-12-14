@@ -16,8 +16,6 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class ProductModelService {
-  private apiUrl = 'http://localhost:49468/api/productmodels';
-
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
