@@ -19,7 +19,7 @@ export class AuthenticationService {
           return true;
         }
         return false;
-      }));
+    }));
   }
 
   getToken(): string {
