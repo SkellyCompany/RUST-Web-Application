@@ -5,6 +5,7 @@ import { Product } from 'src/app/shared/models/product/product.model';
 import { ProductModelService } from 'src/app/shared/services/product-model.service';
 import { ProductModel } from 'src/app/shared/models/product/productModel.model';
 import { NavigationBarComponent } from 'src/app/shared/navigation-bar/navigation-bar.component';
+import { ProductCart } from 'src/app/shared/models/productCart';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +14,7 @@ import { NavigationBarComponent } from 'src/app/shared/navigation-bar/navigation
 })
 export class ProductDetailsComponent implements OnInit {
 
-  @ViewChild(NavigationBarComponent, {static: false}) child:NavigationBarComponent;
+  @ViewChild(NavigationBarComponent, {static: false}) cart:NavigationBarComponent;
   products: Product[] = [];
   currentProduct: Product;
   currentProductStockIndex: number;
@@ -27,6 +28,10 @@ export class ProductDetailsComponent implements OnInit {
     this.getProducts();
   }
 
+  getProductCart(){
+    let productCart: ProductCart = {name: this.productModel.name, price: this.productModel.price, color: this.currentProduct.color, imagePath: this.currentProduct.imagePath, quantity: 1};
+    return productCart;
+  }
 
   getProductModel(): void{
     const id = +this.route.snapshot.paramMap.get('id');
@@ -57,7 +62,8 @@ export class ProductDetailsComponent implements OnInit {
 
   addProductToCart(){
     if (this.currentProductStockIndex > -1){
-      this.child.setCartVisibility();
+      this.cart.addProductToCart(this.getProductCart());
+      this.cart.setCartVisibility();
     }
     else{
       alert("Select a size before adding this product to your cart.")

@@ -6,4 +6,5 @@ export class Product {
   color: string;  
   productModel: ProductModel;
   productStocks: ProductStock[];
+  imagePath: string;
 }
