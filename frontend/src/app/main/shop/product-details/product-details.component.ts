@@ -29,7 +29,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   getProductCart(){
-    let productCart: ProductCart = {name: this.productModel.name, price: this.productModel.price, color: this.currentProduct.color, imagePath: this.currentProduct.imagePath, quantity: 1};
+    let productCart: ProductCart = {name: this.productModel.name, price: this.productModel.price, color: this.currentProduct.color, size: this.currentProduct.productStocks[this.currentProductStockIndex].productSize.size, imagePath: this.currentProduct.imagePath, quantity: 1};
     return productCart;
   }
 
