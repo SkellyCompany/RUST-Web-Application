@@ -28,24 +28,24 @@
         <div class="sidebar">
           <div id="cart-title" class="sidebar-title">Cart</div>
             <ul class="cart-list"  style="position:absolute!important;" *ngIf="productCarts">
-              <li *ngFor="let productCart of productCarts">
+              <li *ngFor="let productCart of productCarts;let i = index">
                 <div class="cart-list-product">
                   <div>
                     <img [src]="productCart.imagePath" height="125" width="125">       
                   </div>
                   <div>
-                    <div class="cart-list-name-primary">{{productCart.name}}</div>
-                    <div class="cart-list-name-secondary">{{productCart.color}}</div>  
+                    <div class="cart-list-name-primary">{{ productCart.name }}</div>
+                    <div class="cart-list-name-secondary">{{ productCart.color }}</div>  
                     <div class="cart-list-quantity-container" onkeydown="return false">
-                      <span class="cart-list-quantity-decrement" (click)="setProductCartQuantity(-1)">–</span><input class="cart-list-quantity" type="text" [value]="productCart.quantity" min="0" max="10"><span class="cart-list-quantity-increment" (click)="setProductCartQuantity(1)">+</span>
+                      <span class="cart-list-quantity-decrement" (click)="setProductCartQuantity(i, -1)">–</span><input class="cart-list-quantity" type="text" [value]="productCart.quantity" min="0" max="10"><span class="cart-list-quantity-increment" (click)="setProductCartQuantity(i, 1)">+</span>
                     </div>
                   </div>
-                  <div class="cart-list-price-primary">{{productCart.price}}€</div>
+                  <div class="cart-list-price-primary">{{ productCart.price }}€</div>
                 </div>                          
               </li>    
             </ul>
           <div >      
-            <div id="cart-total">Subtotal:<span *ngIf="getSubtotal() > 0"> {{getSubtotal()}}€ </span></div>
+            <div id="cart-total">Subtotal:<span *ngIf="getSubtotal() > 0"> {{ getSubtotal() }}€ </span></div>
             <button class="checkout-button" routerLink="/checkout">Checkout</button>  
           </div>
         </div>

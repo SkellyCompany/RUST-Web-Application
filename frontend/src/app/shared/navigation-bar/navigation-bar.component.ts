@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductCart } from '../models/productCart';
+import { CartService } from '../services/cart-service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -11,26 +12,30 @@ export class NavigationBarComponent implements OnInit {
   isCartVisible: boolean = false;
   productCarts: ProductCart[] = [];
 
-  constructor() {
-   }
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
   }
 
   addProductToCart(productCart: ProductCart){
-    this.productCarts.push(productCart);
+    this.cartService.addProductCart(productCart);
+    this.productCarts = this.cartService.getProductCarts();
   }
 
-  setProductCartQuantity(number: number){
-    if (number > 0){
-      if (this.productCarts[0].quantity < 10){
-        this.productCarts[0].quantity += number;
+  setProductCartQuantity(index: number, value: number){
+    if (value > 0){
+      if (this.productCarts[index].quantity < 10){
+        this.productCarts[index].quantity += value;
       }
     }
-    else  if (number < 0){
-      if (this.productCarts[0].quantity = 1){
+    else  if (value < 0){
+      if (this.productCarts[index].quantity == 1){
         event.stopPropagation();
-        this.productCarts.splice(0, 1);
+        this.cartService.removeProductCart(index);
+        this.productCarts = this.cartService.getProductCarts();
+      }
+      else{
+        this.productCarts[index].quantity += value;
       }
     }
   }
@@ -54,7 +59,12 @@ export class NavigationBarComponent implements OnInit {
     }
     else{
       event.stopPropagation();
+      this.productCarts = this.cartService.getProductCarts();
       this.isCartVisible = true;
     }
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 }
