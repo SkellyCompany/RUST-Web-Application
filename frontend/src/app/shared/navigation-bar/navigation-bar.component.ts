@@ -18,17 +18,7 @@ export class NavigationBarComponent implements OnInit {
   }
 
   addProductToCart(productCart: ProductCart){
-    console.log(productCart.name);
     this.productCarts.push(productCart);
-  }
-
-  setSubtotal(){
-    let subtotal;
-    for (var i = 0; i < this.productCarts.length; i++) {
-      subtotal = this.productCarts[i].price;
-    }
-    console.log(subtotal);
-    return subtotal;
   }
 
   setProductCartQuantity(number: number){
@@ -39,9 +29,18 @@ export class NavigationBarComponent implements OnInit {
     }
     else  if (number < 0){
       if (this.productCarts[0].quantity = 1){
+        event.stopPropagation();
         this.productCarts.splice(0, 1);
       }
     }
+  }
+
+  setSubtotal(){
+    let subtotal: number = 0;
+    for (var i = 0; i < this.productCarts.length; i++) {
+      subtotal += this.productCarts[i].price;
+    }
+    return subtotal;
   }
 
   setCartVisibility(){
