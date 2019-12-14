@@ -32,8 +32,8 @@ export class NavigationBarComponent implements OnInit {
     else  if (value < 0){
       if (this.productCarts[index].quantity == 1){
         event.stopPropagation();
+        this.productCarts.splice(index, 1);
         this.cartService.removeProductCart(index);
-        this.productCarts = this.cartService.getProductCarts();
       }
       else{
         this.productCarts[index].quantity += value;
