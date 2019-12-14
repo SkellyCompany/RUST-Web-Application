@@ -66,8 +66,12 @@ export class CheckoutComponent implements OnInit {
 
   addOrder(){
     const orderFromFields = this.orderForm.value;
-    console.log(orderFromFields.firstName);
-    // this.orderService.addOrder(orderFromFields)
-    // .subscribe(order => console.log(order.firstName, order.lastname));
+    var today = new Date()
+    orderFromFields.orderDate = today;
+    orderFromFields.deliveryDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, today.getHours(), today.getMinutes(), today.getSeconds(), 0);
+    
+    console.log(orderFromFields.orderDate, orderFromFields.deliveryDate);
+    this.orderService.addOrder(orderFromFields)
+    .subscribe(order => console.log(order.firstName, order.lastname));
   }
 }
