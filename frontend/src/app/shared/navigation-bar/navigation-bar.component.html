@@ -46,7 +46,12 @@
             </ul>
           <div >      
             <div id="cart-total">Subtotal:<span *ngIf="getSubtotal() > 0"> {{ getSubtotal() }}€ </span></div>
-            <button class="checkout-button" routerLink="/checkout">Checkout</button>  
+            <span *ngIf="getSubtotal() > 0">
+                <button class="checkout-button" routerLink="/checkout">Checkout</button>  
+            </span>
+            <span *ngIf="getSubtotal() == 0">
+                <button class="checkout-button">Empty Cart</button>  
+            </span>
           </div>
         </div>
       </div>
