@@ -1,61 +1,32 @@
 //Enter
-.test{
+.enter-container{
   position: absolute; 
   left: 0; 
   right: 0; 
-  margin-top: 40%;
+  margin-top: 35%;
   margin-left: auto; 
   margin-right: auto; 
-  width: 100px;
 }
-
-.glitch{
-  color:#000;
+.enter{
+  cursor: pointer;
+  outline: 0;
+  color:#fff;
+  background-color: rgba($color: #000, $alpha: 0.6);
+  border: 0;
   font-family: 'roman';
   font-weight: bold;;
-  font-size:120px;
+  font-size:46px;
   position:relative;
-  width:400px;
+  width:200px;
   margin:0 auto;
+  text-align: center;
+  transition: all .2s ease-in-out;
 }
-@keyframes noise-anim{
-  $steps:20;
-  @for $i from 0 through $steps{
-    #{percentage($i*(1/$steps))}{
-      clip:rect(random(100)+px,9999px,random(100)+px,0);
-    }
-  }
-}
-.glitch:after{
-  content:attr(data-text);
-  position:absolute;
-  left:2px;
-  text-shadow:-1px 0 #fff;
-  top:0;
-  color:#000;
-  overflow:hidden;
-  clip:rect(0,900px,0,0); 
-  animation:noise-anim 2s infinite linear alternate-reverse;
-}
-
-@keyframes noise-anim-2{
-  $steps:20;
-  @for $i from 0 through $steps{
-    #{percentage($i*(1/$steps))}{
-      clip:rect(random(100)+px,9999px,random(100)+px,0);
-    }
-  }
-}
-.glitch:before{
-  content:attr(data-text);
-  position:absolute;
-  left:-2px;
-  text-shadow:1px 0 #202016; 
-  top:0;
-  color:#000;
-  overflow:hidden;
-  clip:rect(0,900px,0,0); 
-  animation:noise-anim-2 3s infinite linear alternate-reverse;
+.enter:hover{
+  font-size: 46px;
+  transform: scale(1.03);
+  border-bottom: 2px solid #fff;
+  border-top: 2px solid #fff;
 }
 //Video
 .video-background{
@@ -92,4 +63,16 @@
   border: 1px solid red;
   border-radius: 50%;
   position: absolute;
+}
+//Copyright
+.copyright{
+  margin-top: 15%;
+  margin-left: 5%;
+  width: 250px;
+  color: #c4c4c4;
+  background-color: rgba($color: #000, $alpha: 0.15);
+  text-shadow: #000;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 26px;
 }

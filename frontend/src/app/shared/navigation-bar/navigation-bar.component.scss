@@ -51,7 +51,7 @@ header .flex-child{
   box-shadow:0 2px 10px rgba(255,255,255,.1);
 }
 .navigation-bar-wrap{
-  padding-left:40px;
+  padding-left:35px;
 }
 .navigation-bar-cart:hover{
   transform: scale(1.1);
@@ -102,10 +102,10 @@ header .flex-child{
   position:absolute;
   width:0;
   height:2px;
-  top:16px;
+  top:22px;
   bottom:0;
-  left:0;
-  right:5px;
+  left:0px;
+  right:10px;
   margin:0 auto;
   background-color:#fff;
   -webkit-transition:all 0.3s ease-in-out;
@@ -122,7 +122,7 @@ header .flex-child{
   right:20px;
   top:50%;
   -webkit-transform:translateY(-50%);
-  transform:translateY(-50%);
+  transform:translateY(-7%);
 }
 /*! Media */
 
@@ -196,7 +196,7 @@ header .flex-child{
       position:absolute;
       top:100%;
       left:0;
-      margin-top:18%;
+      margin-top:36%;
       padding:10px 0;
       z-index:1000;
       min-width:230px;
@@ -255,7 +255,8 @@ header .flex-child{
       transition:all 0.1s ease-in-out;
     }
     .navigation-bar-cart-menu>li>a{
-      color:#E5E5E5;padding:8px 22px;
+      color:#E5E5E5;
+      padding:8px 22px;
       font-size:14px;
       display:block;
     }
@@ -341,7 +342,7 @@ header .flex-child{
   height: 600px;
   border: 1px solid #fff;
   margin-top: 4.4%;
-  margin-right: 13.5%;
+  margin-right: 26.5vh;
   -webkit-animation-name: animateFade;
   -webkit-animation-duration: 0.5s;
   animation-name: animateFade;
