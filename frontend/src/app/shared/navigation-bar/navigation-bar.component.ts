@@ -35,12 +35,17 @@ export class NavigationBarComponent implements OnInit {
     }
   }
 
-  setSubtotal(){
+  getSubtotal(){
     let subtotal: number = 0;
     for (var i = 0; i < this.productCarts.length; i++) {
-      subtotal += this.productCarts[i].price;
+      if (this.productCarts[i] == this.productCarts[0]){
+        subtotal += this.productCarts[i].price;
+      }
+      else{
+        subtotal += this.productCarts[i].price + 0.01;
+      }
     }
-    return subtotal;
+    return subtotal.toFixed(2);
   }
 
   setCartVisibility(){
