@@ -24,6 +24,13 @@ export class CartService {
     let storedProductCarts = this.getProductCarts();
     storedProductCarts = this.productCarts;
     localStorage.setItem('productCarts', JSON.stringify(storedProductCarts));
+
+  }
+
+  updateProductCart(productCarts: ProductCart[]){
+    let storedProductCarts = this.getProductCarts();
+    storedProductCarts = productCarts;
+    localStorage.setItem('productCarts', JSON.stringify(storedProductCarts));
   }
 
   getProductCarts(): ProductCart[]{

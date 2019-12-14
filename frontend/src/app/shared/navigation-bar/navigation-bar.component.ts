@@ -26,6 +26,7 @@ export class NavigationBarComponent implements OnInit {
     if (value > 0){
       if (this.productCarts[index].quantity < 10){
         this.productCarts[index].quantity += value;
+        this.cartService.updateProductCart(this.productCarts);
       }
     }
     else  if (value < 0){
@@ -36,6 +37,7 @@ export class NavigationBarComponent implements OnInit {
       }
       else{
         this.productCarts[index].quantity += value;
+        this.cartService.updateProductCart(this.productCarts);
       }
     }
   }
