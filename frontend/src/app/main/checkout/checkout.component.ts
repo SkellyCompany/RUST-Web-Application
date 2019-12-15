@@ -18,6 +18,7 @@ export class CheckoutComponent implements OnInit {
   isOrderConfirmationVisible : boolean;
   productCarts: ProductCart[] = [];
   countries: Country[] = [];
+  currentCountry: Country;
   orderForm = new FormGroup({
     orderDate: new FormControl(''),
     deliveryDate: new FormControl(''),
@@ -68,6 +69,10 @@ export class CheckoutComponent implements OnInit {
     .subscribe(countries => this.countries = this.countries.concat(countries));
   }
 
+  setCurrentCountry(country: Country){
+    this.currentCountry = country;
+  }
+
   addOrder(){
     const orderFromFields = this.orderForm.value;
     var today = new Date()
@@ -81,7 +86,7 @@ export class CheckoutComponent implements OnInit {
       address: orderFromFields.address,
       city: orderFromFields.city,
       zipCode: orderFromFields.zipCode,
-      country: country,
+      country: this.currentCountry,
       firstName: orderFromFields.firstName,
       lastName: orderFromFields.lastName,
       email: orderFromFields.email,
@@ -89,6 +94,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.orderService.addOrder(order as Order)
-    .subscribe(order => console.log("success"));
+    .subscribe(order => this.setOrderConfirmationVisibility());
   }
 }

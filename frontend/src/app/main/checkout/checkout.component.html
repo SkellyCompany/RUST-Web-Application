@@ -14,7 +14,11 @@
             </p>
             <p class="form-row form-row-last"><label>Last name</label><input type="text" formControlName="lastName"/>
             </p>
-            <p class="form-row form-row-wide"><label>Country</label><select formControlName="country"><option hidden value="">Choose country</option><option *ngFor="let country of countries">{{ country.name }}</option></select>
+            <p class="form-row form-row-wide"><label>Country</label>
+              <select [(ngModel)] ="selectedCountry" [ngModelOptions]="{standalone: true}" (ngModelChange)="setCurrentCountry($event)">
+                <option hidden value="">Choose country</option>
+                <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+              </select>
             </p>
             <p class="form-row form-row-wide"><label>Address</label><input type="text" formControlName="address"/>
             </p>
@@ -49,7 +53,7 @@
         <div id="cart-total">Subtotal: {{ getSubtotal() }}€</div>
       </div>
       <div class="purchase-container">
-          <button type="submit" (click)="setOrderConfirmationVisibility()" >Purchase</button>
+          <button type="submit">Purchase</button>
         </div>
       </form>
 
