@@ -11,7 +11,10 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   addProductCart(productCart: ProductCart){
-    this.productCarts = this.getProductCarts();
+    if (this.getProductCarts() != null){
+      console.log("was null");
+      this.productCarts = this.getProductCarts();
+    }
     this.productCarts.push(productCart);
     localStorage.setItem('productCarts', JSON.stringify(this.productCarts));
   }
@@ -21,7 +24,11 @@ export class CartService {
     let storedProductCarts = this.getProductCarts();
     storedProductCarts = this.productCarts;
     localStorage.setItem('productCarts', JSON.stringify(storedProductCarts));
+  }
 
+  removeAllProductCart(){
+    this.productCarts = [];
+    localStorage.removeItem('productCarts')
   }
 
   updateProductCart(productCarts: ProductCart[]){

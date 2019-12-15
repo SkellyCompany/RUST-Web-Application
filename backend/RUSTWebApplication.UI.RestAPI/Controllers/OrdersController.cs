@@ -50,7 +50,6 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
 
 
 		// POST api/orders
-		[Authorize(Roles = "Administrator")]
 		[HttpPost]
         public ActionResult<Order> Post([FromBody] Order value)
         {
@@ -61,9 +60,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
-            }
-
-
+            }		
         }
 
 		// PUT api/orders/5

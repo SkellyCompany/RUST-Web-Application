@@ -6,74 +6,69 @@
       <div class="page-title">
         <h1>Checkout</h1>
       </div>
-      <form class="checkout-form">							
+      <form [formGroup]="orderForm" class="checkout-form" (ngSubmit)="addOrder()">							
         <div class="checkout-wrapper">
           <h3>Billing details</h3>
           <div class="field-wrapper">		
-            <p class="form-row form-row-first"><label>First name</label><input type="text"/>
+            <p class="form-row form-row-first"><label>First name</label><input type="text" formControlName="firstName"/>
             </p>
-            <p class="form-row form-row-last"><label>Last name</label><input type="text"/>
+            <p class="form-row form-row-last"><label>Last name</label><input type="text" formControlName="lastName"/>
             </p>
-            <p class="form-row form-row-wide"><label>Country</label><select><option>Select a country</option></select>
+            <p class="form-row form-row-wide"><label>Country</label>
+              <select [(ngModel)] ="selectedCountry" [ngModelOptions]="{standalone: true}" (ngModelChange)="setCurrentCountry($event)">
+                <option hidden value="">Choose country</option>
+                <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+              </select>
             </p>
-            <p class="form-row form-row-wide"><label>Street</label><input type="text"/>
+            <p class="form-row form-row-wide"><label>Address</label><input type="text" formControlName="address"/>
             </p>
-            <p class="form-row form-row-wide"><label>ZipCode</label><input type="text"/>
+            <p class="form-row form-row-wide"><label>ZipCode</label><input type="text" formControlName="zipCode"/>
             </p>
-            <p class="form-row form-row-wide"><label>City</label><input type="text"/>
+            <p class="form-row form-row-wide"><label>City</label><input type="text" formControlName="city"/>
             </p>
-            <p class="form-row form-row-wide"><label>Phone Number</label><input type="text"/>
+            <p class="form-row form-row-wide"><label>Phone Number</label><input type="text" formControlName="phone"/>
             </p>
-            <p class="form-row form-row-wide"><label>Email<address></address></label><input type="text"/>
+            <p class="form-row form-row-wide"><label>Email<address></address></label><input type="text" formControlName="email"/>
             </p>
           </div>
         </div>
         <div id="cart-title" class="sidebar-title">Cart</div>
         <ul class="cart-list">
-          <li>
+          <li *ngFor="let productCart of productCarts;let i = index">
             <div class="cart-list-product">
               <div>
-                <img src="https://i.imgur.com/ktK60Ge.png" height="125" width="125">       
+                <img [src]="productCart.imagePath" height="125" width="125">       
               </div>
               <div>
-                <div class="cart-list-name-primary">Greg suks shirt</div>
-                <div class="cart-list-name-secondary">White</div>  
+                <div class="cart-list-name-primary">{{ productCart.name }}</div>
+                <div class="cart-list-name-secondary">color: {{ productCart.color }}</div>  
+                <div class="cart-list-name-secondary">size: {{ productCart.size }}</div>  
+                <div class="cart-list-name-secondary">quantity: {{ productCart.quantity }}</div>  
               </div>
-              <div class="cart-list-price-primary">132.99€</div>
+              <div class="cart-list-price-primary">{{ productCart.price }}€</div>
             </div>                          
-          </li>       
-          <li>
-            <div class="cart-list-product">
-              <div>
-                <img src="https://i.imgur.com/ktK60Ge.png" height="125" width="125">       
-              </div>
-              <div>
-                <div class="cart-list-name-primary">Greg suks shirt</div>
-                <div class="cart-list-name-secondary">White</div>  
-              </div>
-              <div class="cart-list-price-primary">132.99€</div>
-            </div>                          
-          </li>        
+          </li>             
         </ul>
       <div>      
-        <div id="cart-total">Subtotal: 132.99€</div>
+        <div id="cart-total">Subtotal: {{ getSubtotal() }}€</div>
       </div>
-      </form>
       <div class="purchase-container">
-        <button (click)="setOrderConfirmationVisibility()" >Purchase</button>
-      </div>
+          <button type="submit">Purchase</button>
+        </div>
+      </form>
+
     </div>
   </div>
   <!-- Order Confirmation -->
   <div *ngIf="isOrderConfirmationVisible === true">
     <div class="orderConfirmation">
-      <div class="orderConfirmation-content" (clickOutside)="setOrderConfirmationVisibility()">
+      <div class="orderConfirmation-content">
         <div class="orderConfirmation-body">
           <h3 class="orderConfirmation-header">Order confirmed!</h3>
           <p>Thank you for your purchase. <br> We've sent an email to you with further details.</p>
         </div>
         <div class="orderConfirmation-container" style=" margin-top: 20%;">
-          <button (click)="setOrderConfirmationVisibility()">Ok</button>
+          <button (click)="setOrderConfirmationVisibility()" routerLink="/shop">Ok</button>
         </div>
       </div>
     </div>
