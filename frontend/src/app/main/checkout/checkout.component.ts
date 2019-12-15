@@ -5,6 +5,8 @@ import { CountryService } from 'src/app/shared/services/country.service';
 import { Country } from 'src/app/shared/models/order/country.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { OrderService } from 'src/app/shared/services/order-service';
+import { OrderLine } from 'src/app/shared/models/order/orderLine.model';
+import { Order } from 'src/app/shared/models/order/order.model';
 
 @Component({
   selector: 'app-checkout',
@@ -19,13 +21,14 @@ export class CheckoutComponent implements OnInit {
   orderForm = new FormGroup({
     orderDate: new FormControl(''),
     deliveryDate: new FormControl(''),
+    orderLines: new FormControl(''),
     address: new FormControl(''),
     city: new FormControl(''),
     zipCode: new FormControl(''),
     country: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    emai: new FormControl(''),
+    email: new FormControl(''),
     phone: new FormControl('')
   });
 
@@ -67,11 +70,23 @@ export class CheckoutComponent implements OnInit {
   addOrder(){
     const orderFromFields = this.orderForm.value;
     var today = new Date()
-    orderFromFields.orderDate = today;
-    orderFromFields.deliveryDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, today.getHours(), today.getMinutes(), today.getSeconds(), 0);
-    
-    console.log(orderFromFields.orderDate, orderFromFields.deliveryDate);
-    this.orderService.addOrder(orderFromFields)
-    .subscribe(order => console.log(order.firstName, order.lastname));
+    let orderLine: OrderLine = {orderId: null, productStockId: null, order: null, productStock: null, quantity: 1};
+    let country: Country = {id: 1, name: orderFromFields.country};
+    const order = {
+      orderDate: today,
+      deliveryDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, today.getHours(), today.getMinutes(), today.getSeconds(), 0),
+      orderLines: [],
+      address: orderFromFields.address,
+      city: orderFromFields.city,
+      zipCode: orderFromFields.zipCode,
+      country: country,
+      firstName: orderFromFields.firstName,
+      lastName: orderFromFields.lastName,
+      email: orderFromFields.email,
+      phone: orderFromFields.phone
+    }
+
+    this.orderService.addOrder(order as Order)
+    .subscribe(order => console.log("success"));
   }
 }

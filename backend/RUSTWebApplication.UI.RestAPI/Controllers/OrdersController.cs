@@ -60,7 +60,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
-            }
+            }		
         }
 
 		// PUT api/orders/5
