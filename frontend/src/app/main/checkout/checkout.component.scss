@@ -99,6 +99,7 @@ input,select,textarea{
   border-radius:0;
   transition:border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+
 //checkout cart
 #cart-title{
   padding: 5.90278vw 0 0;
@@ -129,7 +130,9 @@ input,select,textarea{
   overflow:hidden;
   overflow-y:auto;
   max-height:30vw;
-  color:#fff;
+}   
+.cart-list::-webkit-scrollbar{
+  background-color: #000;
 }
 .cart-list-product{
   width:100%;
