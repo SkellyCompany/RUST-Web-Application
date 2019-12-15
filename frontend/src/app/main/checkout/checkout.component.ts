@@ -3,7 +3,7 @@ import { ProductCart } from 'src/app/shared/models/productCart';
 import { CartService } from 'src/app/shared/services/cart-service';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { Country } from 'src/app/shared/models/order/country.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderService } from 'src/app/shared/services/order-service';
 import { OrderLine } from 'src/app/shared/models/order/orderLine.model';
 import { Order } from 'src/app/shared/models/order/order.model';
@@ -16,6 +16,7 @@ import { Order } from 'src/app/shared/models/order/order.model';
 export class CheckoutComponent implements OnInit {
 
   isOrderConfirmationVisible : boolean;
+  isErrorValidationVisible: boolean;
   productCarts: ProductCart[] = [];
   countries: Country[] = [];
   currentCountry: Country;
@@ -23,14 +24,14 @@ export class CheckoutComponent implements OnInit {
     orderDate: new FormControl(''),
     deliveryDate: new FormControl(''),
     orderLines: new FormControl(''),
-    address: new FormControl(''),
-    city: new FormControl(''),
-    zipCode: new FormControl(''),
-    country: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl('')
+    address: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    zipCode: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', Validators.required)
   });
 
   constructor(private cartService: CartService, private countryService: CountryService, private orderService: OrderService) { }
@@ -74,15 +75,20 @@ export class CheckoutComponent implements OnInit {
   }
 
   addOrder(){
+    this.isErrorValidationVisible = true;
+
     const orderFromFields = this.orderForm.value;
-    var today = new Date()
-    let orderLine: OrderLine = {orderId: null, productStockId: null, order: null, productStock: null, quantity: 1};
-    let country: Country = {id: 1, name: orderFromFields.country};
+    const today = new Date()
+    const orderLines: OrderLine[] = [];
+    for (var i = 0; i < this.productCarts.length; i++) {
+      var orderLine: OrderLine = {order: null, productStock: this.productCarts[i].productStock, quantity: this.productCarts[i].quantity};
+      orderLines.push(orderLine);
+    }
 
     const order = {
       orderDate: today,
       deliveryDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, today.getHours(), today.getMinutes(), today.getSeconds(), 0),
-      orderLines: [],
+      orderLines: orderLines,
       address: orderFromFields.address,
       city: orderFromFields.city,
       zipCode: orderFromFields.zipCode,
@@ -94,6 +100,13 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.orderService.addOrder(order as Order)
-    .subscribe(order => this.setOrderConfirmationVisibility());
+    .subscribe(
+    result => {
+      this.setOrderConfirmationVisibility()
+    },
+    error => {
+      window.scrollTo(0, 0)
+      }
+    )
   }
 }

@@ -30,7 +30,7 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 
         public IEnumerable<Order> ReadAll()
         {
-            return _ctx.Orders.AsNoTracking();
+			return _ctx.Orders.AsNoTracking().Include(o => o.OrderLines).Include(o => o.Country);
         }
 
         public Order Update(Order updatedOrder)

@@ -39,6 +39,7 @@ export class ProductListComponent implements OnInit {
     this.categoryType = categoryType;
     this.productModelService.getProductModels(currentPage, this.itemsPerPage, categoryType)
     .subscribe(filteredList => {this.productModels = filteredList.data; this.totalPages = filteredList.totalPages;});
+    window.scrollTo(0, 150);
   }
 
   counter(i: number) {
