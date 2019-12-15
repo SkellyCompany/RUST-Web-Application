@@ -58,13 +58,13 @@
   <!-- Order Confirmation -->
   <div *ngIf="isOrderConfirmationVisible === true">
     <div class="orderConfirmation">
-      <div class="orderConfirmation-content" (clickOutside)="setOrderConfirmationVisibility()">
+      <div class="orderConfirmation-content">
         <div class="orderConfirmation-body">
           <h3 class="orderConfirmation-header">Order confirmed!</h3>
           <p>Thank you for your purchase. <br> We've sent an email to you with further details.</p>
         </div>
         <div class="orderConfirmation-container" style=" margin-top: 20%;">
-          <button (click)="setOrderConfirmationVisibility()">Ok</button>
+          <button (click)="setOrderConfirmationVisibility()" routerLink="/shop">Ok</button>
         </div>
       </div>
     </div>

@@ -42,6 +42,7 @@ export class CheckoutComponent implements OnInit {
   setOrderConfirmationVisibility(){
     if (this.isOrderConfirmationVisible){
       this.isOrderConfirmationVisible = false;
+      this.cartService.removeAllProductCart();
     }
     else{
       event.stopPropagation();
@@ -72,6 +73,7 @@ export class CheckoutComponent implements OnInit {
     var today = new Date()
     let orderLine: OrderLine = {orderId: null, productStockId: null, order: null, productStock: null, quantity: 1};
     let country: Country = {id: 1, name: orderFromFields.country};
+
     const order = {
       orderDate: today,
       deliveryDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2, today.getHours(), today.getMinutes(), today.getSeconds(), 0),
