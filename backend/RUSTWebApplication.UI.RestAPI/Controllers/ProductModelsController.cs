@@ -11,7 +11,6 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
     [ApiController]
     public class ProductModelsController : ControllerBase
     {
-
         private readonly IProductModelService _productModelService;
 
         public ProductModelsController(IProductModelService productModelService)
@@ -62,8 +61,6 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             {
                 return BadRequest(e.Message);
             }
-
-
         }
 
 		// PUT api/productmodels/5
@@ -75,7 +72,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             {
                 if (id != value.Id)
                 {
-                    return BadRequest("Parameter ID does not match ProductModel id");
+                    return Conflict("Parameter ID does not match ProductModel id");
                 }
                 return Ok(_productModelService.Update(value));
             }
@@ -93,7 +90,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             ProductModel deletedProductModel = _productModelService.Delete(id);
             if (deletedProductModel == null)
             {
-                return StatusCode(404, $"Did not find ProductModel with ID: {id}");
+                return NotFound($"Did not find ProductModel with ID: {id}");
             }
             return Ok(deletedProductModel);
         }

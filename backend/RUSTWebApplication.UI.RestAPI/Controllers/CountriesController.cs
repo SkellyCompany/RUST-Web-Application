@@ -75,7 +75,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             {
                 if (id != value.Id)
                 {
-                    return BadRequest("Parameter ID does not match Country id");
+                    return Conflict("Parameter ID does not match Country id");
                 }
                 return Ok(_countryService.Update(value));
             }
@@ -93,7 +93,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             Country deletedCountry = _countryService.Delete(id);
             if (deletedCountry == null)
             {
-                return StatusCode(404, $"Did not find Country with ID: {id}");
+                return NotFound($"Did not find Country with ID: {id}");
             }
             return Ok(deletedCountry);
         }

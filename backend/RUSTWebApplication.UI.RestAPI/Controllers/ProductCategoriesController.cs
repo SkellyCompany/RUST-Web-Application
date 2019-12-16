@@ -31,7 +31,6 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             {
                 return BadRequest(e.Message);
             }
-
         }
 
         // GET api/productcategories/5
@@ -75,7 +74,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             {
                 if (id != value.Id)
                 {
-                    return BadRequest("Parameter ID does not match ProductCategory id");
+                    return Conflict("Parameter ID does not match ProductCategory id");
                 }
                 return Ok(_productCategoryService.Update(value));
             }
@@ -93,7 +92,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             ProductCategory deletedCountry = _productCategoryService.Delete(id);
             if (deletedCountry == null)
             {
-                return StatusCode(404, $"Did not find ProductCategory with ID: {id}");
+                return NotFound($"Did not find ProductCategory with ID: {id}");
             }
             return Ok(deletedCountry);
         }

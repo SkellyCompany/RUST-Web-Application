@@ -75,7 +75,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             {
                 if (id != value.Id)
                 {
-                    return BadRequest("Parameter ID does not match ProductMetric id");
+                    return Conflict("Parameter ID does not match ProductMetric id");
                 }
                 return Ok(_productMetricService.Update(value));
             }
@@ -93,7 +93,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             ProductMetric deletedProductMetric = _productMetricService.Delete(id);
             if (deletedProductMetric == null)
             {
-                return StatusCode(404, $"Did not find ProductMetric with ID: {id}");
+                return NotFound($"Did not find ProductMetric with ID: {id}");
             }
             return Ok(deletedProductMetric);
         }
