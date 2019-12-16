@@ -12,7 +12,6 @@ export class CartService {
 
   addProductCart(productCart: ProductCart){
     if (this.getProductCarts() != null){
-      console.log("was null");
       this.productCarts = this.getProductCarts();
     }
     this.productCarts.push(productCart);

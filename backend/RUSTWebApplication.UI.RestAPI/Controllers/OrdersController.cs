@@ -72,7 +72,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             {
                 if (id != value.Id)
                 {
-                    return BadRequest("Parameter ID does not match Order id");
+                    return Conflict("Parameter ID does not match Order id");
                 }
                 return Ok(_orderService.Update(value));
             }
@@ -90,7 +90,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
             Order deletedOrder = _orderService.Delete(id);
             if (deletedOrder == null)
             {
-                return StatusCode(404, $"Did not find Order with ID: {id}");
+                return NotFound($"Did not find Order with ID: {id}");
             }
             return Ok(deletedOrder);
         }
