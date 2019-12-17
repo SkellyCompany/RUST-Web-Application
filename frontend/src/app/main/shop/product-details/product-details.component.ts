@@ -62,7 +62,7 @@ export class ProductDetailsComponent implements OnInit {
 
   addProductToCart(){
     if (this.currentProductStockIndex > -1){
-      if (this.currentProduct.productStocks[this.currentProductStockIndex].quantity < 0){
+      if (this.currentProduct.productStocks[this.currentProductStockIndex].quantity > 0){
         this.cart.addProductToCart(this.getProductCart());
         this.cart.setCartVisibility();
       }

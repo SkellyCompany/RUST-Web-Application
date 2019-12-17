@@ -18,8 +18,23 @@ export class NavigationBarComponent implements OnInit {
   }
 
   addProductToCart(productCart: ProductCart){
-    this.cartService.addProductCart(productCart);
     this.productCarts = this.cartService.getProductCarts();
+    if (!this.isProductDuplicate(productCart)){
+      this.cartService.addProductCart(productCart);
+    }
+  }
+
+  isProductDuplicate(productCart: ProductCart): boolean{
+    for (var i = 0; i < this.productCarts.length; i++) {
+      if (this.productCarts[i].productStock.id === productCart.productStock.id){
+        if (this.productCarts[i].quantity < 10){
+          this.productCarts[i].quantity += 1;
+          this.cartService.updateProductCart(this.productCarts);
+        }
+        return true;
+      }
+    }
+    return false;
   }
 
   setProductCartQuantity(index: number, value: number){
