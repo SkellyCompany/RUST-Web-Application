@@ -25,6 +25,7 @@ export class NavigationBarComponent implements OnInit {
   }
 
   isProductDuplicate(productCart: ProductCart): boolean{
+  if (this.productCarts){
     for (var i = 0; i < this.productCarts.length; i++) {
       if (this.productCarts[i].productStock.id === productCart.productStock.id){
         if (this.productCarts[i].quantity < 10){
@@ -34,6 +35,7 @@ export class NavigationBarComponent implements OnInit {
         return true;
       }
     }
+  }
     return false;
   }
 
