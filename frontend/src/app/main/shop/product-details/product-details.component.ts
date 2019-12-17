@@ -62,16 +62,17 @@ export class ProductDetailsComponent implements OnInit {
 
   addProductToCart(){
     if (this.currentProductStockIndex > -1){
-      this.cart.addProductToCart(this.getProductCart());
-      this.cart.setCartVisibility();
+      if (this.currentProduct.productStocks[this.currentProductStockIndex].quantity > 0){
+        this.cart.addProductToCart(this.getProductCart());
+        this.cart.setCartVisibility();
+      }
+      else{
+        alert("There currently is no stock for this product.")
+      }
     }
-    // else if (this.currentProduct.productStocks[this.currentProductStockIndex].quantity > 0){
-    //   alert("There currently is no stock for this product.")
-    // }
     else{
       alert("Select a size before adding this product to your cart.")
     }
-
   }
 
 }

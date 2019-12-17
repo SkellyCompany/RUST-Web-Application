@@ -111,7 +111,7 @@ namespace RUSTWebApplication.Infrastructure
 
 			//ProductStocks
 			ProductStock blackHoodieSmallStock1 = context.ProductStocks.Add(new ProductStock() { Id = 1, Product = hoodieProduct1, ProductSize = sSizeHoodie, Quantity = 20 }).Entity;
-			ProductStock blackHoodieMediumStock1 = context.ProductStocks.Add(new ProductStock() { Id = 2, Product = hoodieProduct1, ProductSize = mSizeHoodie, Quantity = 25 }).Entity;
+			ProductStock blackHoodieMediumStock1 = context.ProductStocks.Add(new ProductStock() { Id = 2, Product = hoodieProduct1, ProductSize = mSizeHoodie, Quantity = 0 }).Entity;
 			ProductStock blackHoodieLargeStock1 = context.ProductStocks.Add(new ProductStock() { Id = 3, Product = hoodieProduct1, ProductSize = lSizeHoodie, Quantity = 12 }).Entity;
 			ProductStock blackHoodieExtraLargeStock1 = context.ProductStocks.Add(new ProductStock() { Id = 4, Product = hoodieProduct1, ProductSize = xlSizeHoodie, Quantity = 22 }).Entity;
 			ProductStock blackHoodieExtraExtraLargeStock1 = context.ProductStocks.Add(new ProductStock() { Id = 5, Product = hoodieProduct1, ProductSize = xxlSizeHoodie, Quantity = 5 }).Entity;

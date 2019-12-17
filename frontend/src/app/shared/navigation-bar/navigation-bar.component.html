@@ -35,7 +35,7 @@
                   </div>
                   <div>
                     <div class="cart-list-name-primary">{{ productCart.name }}</div>
-                    <div class="cart-list-name-secondary">{{ productCart.color }}</div>  
+                    <div class="cart-list-name-secondary">{{ productCart.color }} | {{ productCart.size }}</div>  
                     <div class="cart-list-quantity-container" onkeydown="return false">
                       <span class="cart-list-quantity-decrement" (click)="setProductCartQuantity(i, -1)">–</span><input class="cart-list-quantity" type="text" [value]="productCart.quantity" min="0" max="10"><span class="cart-list-quantity-increment" (click)="setProductCartQuantity(i, 1)">+</span>
                     </div>

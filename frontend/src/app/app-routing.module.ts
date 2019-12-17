@@ -14,11 +14,11 @@ const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent},
   { path: 'admin/login', component: AdminLoginComponent},
-  { path: 'vision', component: VisionComponent },
-  { path: 'shop', component: ProductListComponent },
-  { path: 'shop/:id', component: ProductDetailsComponent },
+  { path: 'vision', component: VisionComponent},
+  { path: 'shop', component: ProductListComponent},
+  { path: 'shop/:id', component: ProductDetailsComponent},
   { path: 'checkout', component: CheckoutComponent},
-  { path: 'credits', component: CreditsComponent, canActivate: [AuthGuard]},
+  { path: 'credits', component: CreditsComponent},
 ];
 
 @NgModule({
