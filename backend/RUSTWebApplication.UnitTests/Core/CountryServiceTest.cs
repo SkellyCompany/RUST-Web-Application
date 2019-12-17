@@ -1,16 +1,15 @@
 ﻿using System;
 using Moq;
+using Xunit;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.ApplicationService.Services;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Order;
-using Xunit;
 
 namespace RUSTWebApplication.UnitTests.Core
 {
     public class CountryServiceTest
     {
-
         [Fact]
         public void Create_CountryValid_ReturnsCreatedCountryWithId()
         {

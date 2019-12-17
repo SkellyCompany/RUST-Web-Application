@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RUSTWebApplication.Core.Entity.Authentication;
 using RUSTWebApplication.Core.Entity.Order;
 using RUSTWebApplication.Core.Entity.Product;
@@ -61,7 +58,6 @@ namespace RUSTWebApplication.Infrastructure
             modelBuilder.Entity<ProductSize>().
                 HasOne(ps => ps.ProductMetric).
                 WithMany();
-
         }
     }
 }

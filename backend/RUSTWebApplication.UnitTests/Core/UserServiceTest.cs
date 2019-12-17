@@ -1,11 +1,11 @@
 ﻿using System;
 using Moq;
+using Xunit;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.ApplicationService.Services;
 using RUSTWebApplication.Core.Authentication;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Authentication;
-using Xunit;
 
 namespace RUSTWebApplication.UnitTests.Core
 {

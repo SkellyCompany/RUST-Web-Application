@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -42,6 +42,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productCategoryRepository.Delete(productCategoryId);
         }
+
         private void ValidateCreate(ProductCategory productCategory)
         {
             ValidateNull(productCategory);

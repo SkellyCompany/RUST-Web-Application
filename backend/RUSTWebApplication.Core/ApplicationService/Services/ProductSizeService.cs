@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -10,6 +10,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 	{
 		private readonly IProductSizeRepository _productSizeRepository;
         private readonly IProductMetricRepository _productMetricRepository;
+
 
         public ProductSizeService(IProductSizeRepository productSizeRepository,
             IProductMetricRepository productMetricRepository)
@@ -44,6 +45,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productSizeRepository.Delete(productSizeId);
         }
+
         private void ValidateCreate(ProductSize productSize)
         {
             ValidateNull(productSize);

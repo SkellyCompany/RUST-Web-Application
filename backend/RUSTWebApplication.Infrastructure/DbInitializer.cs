@@ -1,9 +1,9 @@
-﻿using RUSTWebApplication.Core.Authentication;
+﻿using System;
+using System.Collections.Generic;
+using RUSTWebApplication.Core.Authentication;
 using RUSTWebApplication.Core.Entity.Authentication;
 using RUSTWebApplication.Core.Entity.Order;
 using RUSTWebApplication.Core.Entity.Product;
-using System;
-using System.Collections.Generic;
 
 namespace RUSTWebApplication.Infrastructure
 {

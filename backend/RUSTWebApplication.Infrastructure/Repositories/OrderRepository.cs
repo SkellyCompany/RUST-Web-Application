@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Order;
@@ -8,8 +8,8 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 {
     public class OrderRepository: IOrderRepository
     {
-
         private readonly RUSTWebApplicationContext _ctx;
+
 
         public OrderRepository(RUSTWebApplicationContext ctx)
         {

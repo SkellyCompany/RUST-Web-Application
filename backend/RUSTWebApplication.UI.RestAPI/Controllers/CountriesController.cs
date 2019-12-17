@@ -11,8 +11,8 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-
         private readonly ICountryService _countryService;
+
 
         public CountriesController(ICountryService countryService)
         {

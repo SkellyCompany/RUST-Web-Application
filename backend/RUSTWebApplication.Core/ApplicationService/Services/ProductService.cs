@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -70,8 +70,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             if (_productRepository.Read(product.Id) == null)
             {
                 throw new ArgumentException($"Cannot find a Product with the ID: {product.Id}");
-            }          
-            
+            }           
         }
 
         private void ValidateNull(Product product)
