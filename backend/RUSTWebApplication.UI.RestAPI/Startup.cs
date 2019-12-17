@@ -2,17 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using RUSTWebApplication.Core.Authentication;
 using RUSTWebApplication.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using RUSTWebApplication.Core.ApplicationService;
-using RUSTWebApplication.Core.ApplicationService.Services;
-using RUSTWebApplication.Infrastructure.Repositories;
 using RUSTWebApplication.Core.DomainService;
+using RUSTWebApplication.Core.Authentication;
+using RUSTWebApplication.Core.ApplicationService;
+using RUSTWebApplication.Infrastructure.Repositories;
+using RUSTWebApplication.Core.ApplicationService.Services;
 
 namespace RUSTWebApplication.UI.RestAPI
 {

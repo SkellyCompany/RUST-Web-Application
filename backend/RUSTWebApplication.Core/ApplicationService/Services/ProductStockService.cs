@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
-
 
 namespace RUSTWebApplication.Core.ApplicationService.Services
 {
@@ -50,6 +49,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productStockRepository.Delete(productStockId);
         }
+
         private void ValidateCreate(ProductStock productStock)
         {
             ValidateNull(productStock);
@@ -118,7 +118,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 throw new ArgumentException("Quantity cannot be negative.");
             }
-
         }
     }
 }

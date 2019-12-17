@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Filters;
 using RUSTWebApplication.Core.Entity.Product;
@@ -49,6 +47,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         {
             return _productModelRepository.Delete(productModelId);
         }
+
         private void ValidateCreate(ProductModel productModel)
         {
             ValidateNull(productModel);
@@ -77,9 +76,8 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
         }
 
-
         private void ValidateNull(ProductModel productModel) 
-	{ 
+		{ 
             if (productModel == null)
             {
                 throw new ArgumentNullException("ProductModel cannot be null");

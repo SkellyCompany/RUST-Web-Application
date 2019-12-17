@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using RUSTWebApplication.Core.Entity.Order;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
@@ -66,8 +66,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateZipCode(order);
             ValidateCountry(order);
 
-            //ValidateFirstName(order);
-            //ValidateLastName(order);
             ValidateEmail(order);
             ValidatePhone(order);
         }
@@ -87,8 +85,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             ValidateZipCode(order);
             ValidateCountry(order);
 
-            //ValidateFirstName(order);
-            //ValidateLastName(order);
             ValidateEmail(order);
             ValidatePhone(order);
             if (_orderRepository.Read(order.Id) == null)
@@ -184,20 +180,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             }
         }
 
-        private void ValidateFirstName(Order order)
-        {
-            if (string.IsNullOrEmpty(order.FirstName))
-            {
-                throw new ArgumentException("First Name is null or empty");
-            }
-        }
-        private void ValidateLastName(Order order)
-        {
-            if (string.IsNullOrEmpty(order.LastName))
-            {
-                throw new ArgumentException("Last Name is null or empty");
-            }
-        }
         private void ValidateEmail(Order order)
         {
             if (string.IsNullOrEmpty(order.Email))

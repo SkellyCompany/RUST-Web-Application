@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Moq;
+using Xunit;
 using RUSTWebApplication.Core.ApplicationService;
 using RUSTWebApplication.Core.ApplicationService.Services;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Order;
 using RUSTWebApplication.Core.Entity.Product;
-using Xunit;
 
 namespace RUSTWebApplication.UnitTests.Core
 {

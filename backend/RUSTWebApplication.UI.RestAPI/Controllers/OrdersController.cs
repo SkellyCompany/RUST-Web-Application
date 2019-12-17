@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RUSTWebApplication.Core.ApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using RUSTWebApplication.Core.Entity.Order;
+using RUSTWebApplication.Core.ApplicationService;
 
 namespace RUSTWebApplication.UI.RestAPI.Controllers
 {
@@ -11,8 +11,8 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-
         private readonly IOrderService _orderService;
+
 
         public OrdersController(IOrderService orderService)
         {

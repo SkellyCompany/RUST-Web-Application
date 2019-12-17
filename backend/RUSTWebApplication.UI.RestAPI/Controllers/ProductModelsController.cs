@@ -1,9 +1,9 @@
 ﻿using System;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RUSTWebApplication.Core.ApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using RUSTWebApplication.Core.Entity.Filters;
 using RUSTWebApplication.Core.Entity.Product;
+using RUSTWebApplication.Core.ApplicationService;
 
 namespace RUSTWebApplication.UI.RestAPI.Controllers
 {
@@ -12,6 +12,7 @@ namespace RUSTWebApplication.UI.RestAPI.Controllers
     public class ProductModelsController : ControllerBase
     {
         private readonly IProductModelService _productModelService;
+
 
         public ProductModelsController(IProductModelService productModelService)
         {

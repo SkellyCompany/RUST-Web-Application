@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using RUSTWebApplication.Core.DomainService;
 using RUSTWebApplication.Core.Entity.Product;
 
@@ -8,7 +8,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 {
     public class ProductMetricService : IProductMetricService
     {
-        
         private readonly IProductMetricRepository _productMetricRepository;
 
 
@@ -63,7 +62,6 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
             {
                 throw new ArgumentException($"Cannot find a Product Metric with the ID: {productMetric.Id}");
             }
-
         }
 
         private void ValidateNull(ProductMetric productSize)

@@ -8,8 +8,8 @@ namespace RUSTWebApplication.Infrastructure.Repositories
 {
     public class ProductModelRepository: IProductModelRepository
     {
-
         private readonly RUSTWebApplicationContext _ctx;
+
 
         public ProductModelRepository(RUSTWebApplicationContext ctx)
         {
