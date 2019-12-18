@@ -9,8 +9,8 @@
             <li><img routerLink="/vision" src="assets/images/vision.png"><a></a></li>
             <li class="navigation-bar-dropdown"><img routerLink="/shop" src="assets/images/shop.png"><a></a>
               <ul class="navigation-bar-dropdown-menu">
-                <li><a>top</a></li>
-                <li><a>bottom</a></li>
+                <li><a routerLink="/shop/top">top</a></li>
+                <li><a routerLink="/shop/bottom">bottom</a></li>
               </ul>
             </li>
           </ul>
@@ -47,10 +47,10 @@
           <div >      
             <div id="cart-total">Subtotal:<span *ngIf="getSubtotal() > 0"> {{ getSubtotal() }}€ </span></div>
             <span *ngIf="getSubtotal() > 0">
-                <button class="checkout-button" routerLink="/checkout">Checkout</button>  
+              <button class="checkout-button" routerLink="/checkout">Checkout</button>  
             </span>
             <span *ngIf="getSubtotal() == 0">
-                <button class="checkout-button">Empty Cart</button>  
+              <button class="checkout-button">Empty Cart</button>  
             </span>
           </div>
         </div>

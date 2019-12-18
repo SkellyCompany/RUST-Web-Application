@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from 'src/app/shared/models/product/productModel.model';
 import { ProductModelService } from 'src/app/shared/services/product-model.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,11 +13,11 @@ export class ProductListComponent implements OnInit {
 
   productModels: ProductModel[];
   totalPages: number;
-  categoryType: string = "Default";
+  categoryType: string;
   currentPage: number = 1;
   itemsPerPage: number = 6;
 
-  constructor(private productModelService: ProductModelService, private router: Router) {
+  constructor(private productModelService: ProductModelService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false; 
   }
@@ -31,6 +31,10 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categoryType = this.activatedRoute.snapshot.paramMap.get('category');
+    if (!this.categoryType){
+      this.categoryType = "Default";
+    }
     this.getProductModels(this.currentPage, this.categoryType);
   }
 
