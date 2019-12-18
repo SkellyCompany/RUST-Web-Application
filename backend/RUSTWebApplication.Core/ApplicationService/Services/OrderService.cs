@@ -16,8 +16,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
 		public OrderService(IOrderRepository orderRepository,
             ICountryRepository countryRepository,
-            IProductStockRepository productStockRepository,
-			IProductStockService productStockService)
+            IProductStockRepository productStockRepository)
 		{
 			_orderRepository = orderRepository;
             _countryRepository = countryRepository;
