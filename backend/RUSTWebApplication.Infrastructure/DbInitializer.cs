@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using RUSTWebApplication.Core.Authentication;
 using RUSTWebApplication.Core.Entity.Authentication;
 using RUSTWebApplication.Core.Entity.Order;
@@ -277,8 +278,8 @@ namespace RUSTWebApplication.Infrastructure
 			OrderLine yellowPantseSmallStockOrderLine = context.OrderLines.Add(new OrderLine() { Order = null, ProductStock = yellowPantseSmallStock2, Quantity = 1 }).Entity;
 
 			//Orders
-			context.Orders.Add(new Order() { Id = 1, OrderLines = new List<OrderLine>(){ blackHoodieExtraExtraLargeOrderLine}, Country = polandCountry, OrderDate = DateTime.Parse("07/05/2019"), DeliveryDate = DateTime.Parse("07/21/2019"), FirstName = "Grzegorz", LastName = "Charyszczak", Address = "Zelwerowicza 18/6", ZipCode = "54-238", City = "Warszawa", Phone = "+48509840123", Email = "schemaboi@gmail.com" });
-			context.Orders.Add(new Order() { Id = 2, OrderLines = new List<OrderLine>() { pinkHoodieExtraExtraLargeOrderLine, yellowPantseSmallStockOrderLine, yellowHoodieMediumOrderLine }, Country = denmarkCountry, OrderDate = DateTime.Parse("09/01/2019"), DeliveryDate = DateTime.Parse("09/10/2019"), FirstName = "David", LastName = "Kalatzis",Address = "Jyllandsgade 55st", ZipCode = "6700", City = "Esbjerg", Phone = "+45409720140", Email = "steven1995@gmail.com" });
+			context.Orders.Add(new Order() { Id = 1, OrderLines = new List<OrderLine>(){ blackHoodieExtraExtraLargeOrderLine}, Country = polandCountry, OrderDate = DateTime.ParseExact("07/05/2019", "M/d/yyyy", CultureInfo.InvariantCulture), DeliveryDate = DateTime.ParseExact("07/21/2019", "M/d/yyyy", CultureInfo.InvariantCulture), FirstName = "Grzegorz", LastName = "Charyszczak", Address = "Zelwerowicza 18/6", ZipCode = "54-238", City = "Warszawa", Phone = "+48509840123", Email = "schemaboi@gmail.com" });
+			context.Orders.Add(new Order() { Id = 2, OrderLines = new List<OrderLine>() { pinkHoodieExtraExtraLargeOrderLine, yellowPantseSmallStockOrderLine, yellowHoodieMediumOrderLine }, Country = denmarkCountry, OrderDate = DateTime.ParseExact("09/01/2019", "M/d/yyyy", CultureInfo.InvariantCulture), DeliveryDate = DateTime.ParseExact("09/10/2019", "M/d/yyyy", CultureInfo.InvariantCulture), FirstName = "David", LastName = "Kalatzis",Address = "Jyllandsgade 55st", ZipCode = "6700", City = "Esbjerg", Phone = "+45409720140", Email = "steven1995@gmail.com" });
 
             context.SaveChanges();
 		}
