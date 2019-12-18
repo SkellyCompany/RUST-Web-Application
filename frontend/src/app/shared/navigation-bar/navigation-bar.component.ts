@@ -29,8 +29,10 @@ export class NavigationBarComponent implements OnInit {
     for (var i = 0; i < this.productCarts.length; i++) {
       if (this.productCarts[i].productStock.id === productCart.productStock.id){
         if (this.productCarts[i].quantity < 10){
-          this.productCarts[i].quantity += 1;
-          this.cartService.updateProductCart(this.productCarts);
+          if (this.isProductStockAvailable(this.productCarts[i])){
+            this.productCarts[i].quantity += 1;
+            this.cartService.updateProductCart(this.productCarts);
+          }
         }
         return true;
       }
@@ -39,11 +41,20 @@ export class NavigationBarComponent implements OnInit {
     return false;
   }
 
+  isProductStockAvailable(savedProductCart: ProductCart): boolean{
+    if (savedProductCart.productStock.quantity > savedProductCart.quantity){
+      return true;
+    }
+    return false;
+  }
+
   setProductCartQuantity(index: number, value: number){
     if (value > 0){
       if (this.productCarts[index].quantity < 10){
-        this.productCarts[index].quantity += value;
-        this.cartService.updateProductCart(this.productCarts);
+        if (this.isProductStockAvailable(this.productCarts[index])){
+          this.productCarts[index].quantity += value;
+          this.cartService.updateProductCart(this.productCarts);
+        }
       }
     }
     else  if (value < 0){
