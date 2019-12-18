@@ -14,7 +14,7 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
         private readonly IProductStockRepository _productStockRepository;
 
 
-        public OrderService(IOrderRepository orderRepository,
+		public OrderService(IOrderRepository orderRepository,
             ICountryRepository countryRepository,
             IProductStockRepository productStockRepository)
 		{
@@ -26,7 +26,8 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 		public Order Create(Order newOrder)
         {
             ValidateCreate(newOrder);
-            return _orderRepository.Create(newOrder);
+			UpdateOrderProductStock(newOrder);
+			return _orderRepository.Create(newOrder);
         }
 
 		public Order Read(int orderId)
@@ -47,8 +48,18 @@ namespace RUSTWebApplication.Core.ApplicationService.Services
 
         public Order Delete(int orderId)
         {
-            return _orderRepository.Delete(orderId);
+			return _orderRepository.Delete(orderId);
         }
+
+		private void UpdateOrderProductStock(Order newOrder)
+		{
+			for (int i = 0; i < newOrder.OrderLines.Count; i++)
+			{
+				newOrder.OrderLines[i].ProductStock.Quantity -= newOrder.OrderLines[i].Quantity;
+				_productStockRepository.Update(newOrder.OrderLines[i].ProductStock);
+			}
+		}
+
         private void ValidateCreate(Order order)
         {
             ValidateNull(order);
