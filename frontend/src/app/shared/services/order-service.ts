@@ -10,6 +10,11 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
+  /* GET all orders */
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(environment.apiUrl + '/api/orders');
+  }
+
   /* POST order */
   addOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(environment.apiUrl + '/api/orders', order);
