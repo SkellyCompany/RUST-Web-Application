@@ -31,10 +31,12 @@
 //Video
 .video-background{
   z-index:-1;
-  font-size: 0;
-  display: block;
-  width:100%;
-  height:auto;
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
 }
 @media (min-aspect-ratio: 16/9){
   .video-background{
@@ -46,15 +48,6 @@
   .video-background{
     width:auto;
     height:100%;
-  }
-}
-@media (max-width: 767px){
-  .video-background{
-    display:none;
-  }
-  body{
-    //background:url('');
-    background-size:cover;
   }
 }
 .cursor{
