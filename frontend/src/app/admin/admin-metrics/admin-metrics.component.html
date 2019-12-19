@@ -1,1 +1,27 @@
-<p>admin-metrics works!</p>
+<app-admin-navigation-bar></app-admin-navigation-bar>
+<div id="main-container">
+  <h2 id="header">
+    {{title}}
+  </h2>
+  <div *ngIf="productMetrics">
+    <div>
+      <button>Add Metric</button>
+    </div>
+    <ul>
+      <li *ngFor="let productMetric of productMetrics">
+        <div class="product-metric-label-container">
+          <label> {{productMetric.id}}: {{productMetric.name}} </label>
+        </div>
+        <div>
+          <button>Update</button>
+        </div>
+        <div>
+          <button>Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!productMetrics">
+    <div>Loading...</div>
+  </div>
+</div>

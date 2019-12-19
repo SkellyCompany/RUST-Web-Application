@@ -1,0 +1,38 @@
+#main-container {
+  text-align: center;
+}
+
+#header {
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+
+ul {
+  display:flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  text-align: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display:flex;
+  flex-direction: row;
+  width: 20%;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 2px solid;
+  border-radius: 2px;
+}
+
+li:focus {
+  outline:none;
+}
+
+.product-category-label-container {
+  text-align: left;
+  width:80%;
+}
