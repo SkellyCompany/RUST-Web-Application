@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <ul>
+    <li (click)="setSubmenu(PRODUCTS_SUBMENU)">Products</li>
+    <li (click)="setSubmenu(ORDERS_SUBMENU)">Orders</li>
+  </ul>
+  <nav class="submenu">
+    <ul *ngIf="submenu === PRODUCTS_SUBMENU">
+      <li routerLink="/admin/products">Products</li>
+      <li routerLink="/admin/metrics">Metrics</li>
+      <li routerLink="/admin/categories">Categories</li>
+    </ul>
+    <ul *ngIf="submenu === ORDERS_SUBMENU">
+      <li routerLink="/admin/orders">Orders</li>
+      <li routerLink="/admin/countries">Countries</li>
+    </ul>
+  </nav>
+</nav>
