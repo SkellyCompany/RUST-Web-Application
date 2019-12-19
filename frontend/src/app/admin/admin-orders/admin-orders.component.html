@@ -1,1 +1,27 @@
-<p>admin-orders works!</p>
+<app-admin-navigation-bar></app-admin-navigation-bar>
+<div id="main-container">
+  <h2 id="header">
+    {{title}}
+  </h2>
+  <div *ngIf="orders">
+    <div>
+      <button>Add Order</button>
+    </div>
+    <ul>
+      <li *ngFor="let order of orders">
+        <div class="order-label-container">
+          <label> OrderNo: {{order.id}} </label>
+        </div>
+        <div>
+          <button>Update</button>
+        </div>
+        <div>
+          <button>Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!orders">
+    <div>Loading...</div>
+  </div>
+</div>
