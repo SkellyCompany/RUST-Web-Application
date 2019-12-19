@@ -1,1 +1,27 @@
-<p>admin-categories works!</p>
+<app-admin-navigation-bar></app-admin-navigation-bar>
+<div id="main-container">
+  <h2 id="header">
+    {{title}}
+  </h2>
+  <div *ngIf="productCategories">
+    <div>
+      <button>Add Category</button>
+    </div>
+    <ul>
+      <li *ngFor="let productCategory of productCategories">
+        <div class="product-category-label-container">
+          <label> {{productCategory.id}}: {{productCategory.name}} </label>
+        </div>
+        <div>
+          <button>Update</button>
+        </div>
+        <div>
+          <button>Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!productCategories">
+    <div>Loading...</div>
+  </div>
+</div>
