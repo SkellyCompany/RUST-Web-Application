@@ -27,7 +27,7 @@ export class AdminLoginComponent implements OnInit {
       this.authenticationService.login(userFormFields.username, userFormFields.password)
       .subscribe(
         success => {
-          this.router.navigate(['credits']);
+          this.router.navigate(['admin/products']);
         },
         error => {
           this.logInError = "User does not exist!";
