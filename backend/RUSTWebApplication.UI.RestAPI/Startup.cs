@@ -112,7 +112,8 @@ namespace RUSTWebApplication.UI.RestAPI
 					IDbInitializer dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
-                    dbInitializer.Seed(context);
+                    dbInitializer.SeedInMemory(context);
+                    
                 }
 				app.UseDeveloperExceptionPage();
             }
@@ -120,8 +121,10 @@ namespace RUSTWebApplication.UI.RestAPI
             {
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
-                    var ctx = scope.ServiceProvider.GetService<RUSTWebApplicationContext>();
-                    ctx.Database.EnsureCreated();
+                    RUSTWebApplicationContext context = scope.ServiceProvider.GetService<RUSTWebApplicationContext>();
+                    IDbInitializer dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+                    context.Database.EnsureCreated();
+                //    dbInitializer.SeedAzure(context);
                 }
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();

@@ -2,6 +2,8 @@
 {
 	public interface IDbInitializer
 	{
-		void Seed(RUSTWebApplicationContext context);
-	}
+		void SeedInMemory(RUSTWebApplicationContext context);
+        void SeedAzure(RUSTWebApplicationContext context);
+    }
+
 }
