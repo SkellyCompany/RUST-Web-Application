@@ -1,0 +1,27 @@
+<app-admin-navigation-bar></app-admin-navigation-bar>
+<div id="main-container">
+  <h2 id="header">
+    {{title}}
+  </h2>
+  <div *ngIf="countries">
+    <div>
+      <button>Add Country</button>
+    </div>
+    <ul>
+      <li *ngFor="let country of countries">
+        <div class="country-label-container">
+          <label> {{country.id}}: {{country.name}} </label>
+        </div>
+        <div>
+          <button>Update</button>
+        </div>
+        <div>
+          <button>Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="loading-container" *ngIf="!countries">
+    <div class="loading">Loading...</div>
+  </div>
+</div>

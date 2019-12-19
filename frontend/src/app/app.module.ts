@@ -17,6 +17,12 @@ import { CreditsComponent } from './main/credits/credits.component';
 import { CheckoutComponent } from './main/checkout/checkout.component';
 import { HomeComponent } from './main/home/home.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminNavigationBarComponent } from './admin/admin-navigation-bar/admin-navigation-bar.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { AdminMetricsComponent } from './admin/admin-metrics/admin-metrics.component';
+import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
+import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { AdminCountriesComponent } from './admin/admin-countries/admin-countries.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     CreditsComponent,
     CheckoutComponent,
     HomeComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    AdminNavigationBarComponent,
+    AdminProductsComponent,
+    AdminMetricsComponent,
+    AdminCategoriesComponent,
+    AdminOrdersComponent,
+    AdminCountriesComponent
   ],
   imports: [
     HttpClientModule,
