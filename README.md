@@ -1,7 +1,7 @@
 # RUST-Web-Application
 [![Build Status](https://travis-ci.org/Skelly-Co/RUST-Web-Application.svg?branch=master)](https://travis-ci.org/Skelly-Co/RUST-Web-Application)
 
-The **RUST Web Application** is a website made to promote, and sell the brand products of the RUST fashion company.
+The **RUST Web Application** is a website made to promote, and sell the brand products of the RUST fashion company. Repository contains PDF file with full description and documentation of the project.
 
 It was made in *4 weeks* as part of a school exam project. Written in **C#** and using the **Angular** framework, this application has the following base characteristics.
 
